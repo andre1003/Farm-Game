@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Store
   - Workbench
+  - Plantable
   layers:
   - Default
   - TransparentFX

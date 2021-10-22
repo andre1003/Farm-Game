@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 [CreateAssetMenu(fileName = "Plant", menuName = "ScriptableObjects/Plant", order = 1)]
 public class Plant : ScriptableObject {
@@ -16,7 +17,7 @@ public class Plant : ScriptableObject {
     public int maxHarvest;
     public int minHarvest;
     public int levelRequired;
+    public int xp;
 
-    public Texture2D icon;
-
+    public Sprite icon;
 }

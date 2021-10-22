@@ -11,14 +11,10 @@ public class Workbench : MonoBehaviour {
 
     // Method for closing the workbench canvas
     public void Close() {
-        InGameSaves.ChangeCanMove();
-        InGameSaves.ChangeIsBusy();
         workbenchCanvas.SetActive(false);
     }
 
     private void OnTriggerEnter(Collider other) {
-        InGameSaves.ChangeCanMove();
-        InGameSaves.ChangeIsBusy();
         workbenchCanvas.SetActive(true);
         myAgent = other.GetComponent<NavMeshAgent>();
         myAgent.SetDestination(frontSpot.position);

@@ -15,4 +15,5 @@ MonoBehaviour:
   name: Dufwine
   level: 1
   xp: 0
+  nextLvlXp: 50
   money: 100

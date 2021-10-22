@@ -1,19 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
+using UnityEngine;
 
 public class InGameSaves {
     private static bool canMove = true;
     private static bool isBusy = false;
-
-    // Change canMove, so player can or cannot move
-    public static void ChangeCanMove() {
-        canMove = !canMove;
-    }
-
-    // Get canMove value
-    public static bool GetCanMove() {
-        return canMove;
-    }
+    private static GameObject plantationZone = null;
 
     // Change isBusy, so the game can detect if player is doing something or not
     // This will help to don't open store when crafting or vice-versa
@@ -24,5 +14,13 @@ public class InGameSaves {
     // Get isBusy value
     public static bool GetIsBusy() {
         return isBusy;
+    }
+    
+    public static void SetPlantationZone(GameObject zone) {
+        plantationZone = zone;
+    }
+
+    public static GameObject GetPlantationZone() {
+        return plantationZone;
     }
 }

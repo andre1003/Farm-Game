@@ -1,11 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.EventSystems;
 
 public class MovementController : MonoBehaviour {
     public LayerMask clickableArea;
-    
+
     private NavMeshAgent myAgent;
 
     private void Start() {
@@ -13,7 +12,10 @@ public class MovementController : MonoBehaviour {
     }
 
     private void Update() {
-        if(InGameSaves.GetCanMove() && Input.GetButtonDown("Fire1")) {
+        if(EventSystem.current.IsPointerOverGameObject())
+            return;
+
+        if(Input.GetButtonDown("Fire1")) {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hitInfo;
 
@@ -22,6 +24,4 @@ public class MovementController : MonoBehaviour {
             }
         }
     }
-
-    
 }

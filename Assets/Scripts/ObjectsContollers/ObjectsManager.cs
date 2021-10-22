@@ -1,26 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class ObjectsManager : MonoBehaviour {
     public GameObject spawnableObject;
     public GameObject spawnSpot;
+    public GameObject inventory;
 
     public Texture2D normalCursor;
     public Texture2D buyCursor;
     public Texture2D craftCursor;
+    public Texture2D plantCursor;
 
     public Vector2 hotSpot = Vector2.zero;
-
-    public PlayerData playerData;
-
-    public Text moneyText;
-
-    private void Awake() {
-        PlayerDataManager.SetPlayerData(playerData);
-        moneyText.text = PlayerDataManager.GetMoney();
-    }
 
     // Start is called before the first frame update
     void Start() {
@@ -29,12 +22,13 @@ public class ObjectsManager : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-        if(Input.GetKeyDown(KeyCode.S)) {
-            Instantiate(spawnableObject, spawnSpot.transform.position, spawnSpot.transform.rotation);
+        if(EventSystem.current.IsPointerOverGameObject()) {
+            Cursor.SetCursor(normalCursor, Vector3.zero, CursorMode.Auto);
+            return;
         }
-        if(!InGameSaves.GetIsBusy()) {
-            CheckCursorChange();
-        }
+            
+
+        CheckCursorChange();
     }
 
     // Method for checking is cursor needs to change
@@ -48,6 +42,14 @@ public class ObjectsManager : MonoBehaviour {
             }
             else if(hit.collider.gameObject.tag == "Workbench") {
                 Cursor.SetCursor(craftCursor, Vector3.zero, CursorMode.Auto);
+            }
+            else if(hit.collider.gameObject.tag == "Plantable") {
+                Cursor.SetCursor(plantCursor, Vector3.zero, CursorMode.Auto);
+                if(Input.GetButtonDown("Fire2")) {
+                    inventory.SetActive(true);
+                    InGameSaves.SetPlantationZone(hit.collider.gameObject);
+                }
+                    
             }
             else {
                 Cursor.SetCursor(normalCursor, Vector3.zero, CursorMode.Auto);

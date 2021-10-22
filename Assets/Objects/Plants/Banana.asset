@@ -21,4 +21,5 @@ MonoBehaviour:
   maxHarvest: 20
   minHarvest: 5
   levelRequired: 1
-  icon: {fileID: 0}
+  xp: 10
+  icon: {fileID: 21300000, guid: c0db9a66afd43284c8197f1157882ac0, type: 3}

@@ -8,6 +8,7 @@ public class PlayerData : ScriptableObject {
 
     public int level;
     public int xp;
+    public int nextLvlXp;
 
     public float money;
 }
