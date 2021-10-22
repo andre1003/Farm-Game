@@ -13,19 +13,21 @@ public class InventoryUI : MonoBehaviour {
         inventory.onItemChangeCallback += UpdateUI;
 
         slots = itemsParent.GetComponentsInChildren<InventorySlot>();
+        UpdateUI();
     }
 
     // Update is called once per frame
     void Update() {
         if(Input.GetKeyDown(KeyCode.I)) {
             inventoryCanvas.SetActive(!inventoryCanvas.activeSelf);
+            UpdateUI();
         }
     }
 
     private void UpdateUI() {
         for(int i = 0; i < slots.Length; i++) {
-            if(i < inventory.plants.Count)
-                slots[i].AddPlant(inventory.plants[i]);
+            if(i < inventory.inventory.plants.Count)
+                slots[i].AddPlant(inventory.inventory.plants[i].plant, inventory.inventory.plants[i].amount);
             else
                 slots[i].ClearSlot();
         }

@@ -22,6 +22,6 @@ public class Store : MonoBehaviour {
     }
 
     public void Buy(Plant plant) {
-        PlayerDataManager.instance.Buy(plant);
+        PlayerDataManager.instance.Buy(plant, 1);
     }
 }

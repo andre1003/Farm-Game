@@ -20,27 +20,22 @@ public class Inventory : MonoBehaviour {
     }
     #endregion
 
-    public List<Plant> plants = new List<Plant>();
-    public int slots = 10;
+    //public List<Plant> plants = new List<Plant>();
+    //public int slots = 10;
+    public InventoryObject inventory;
 
-    public bool Add(Plant plant) {
-        if(plants.Count >= slots) {
-            Debug.Log("No slots available!");
-            return false;
-        }
-        else {
-            plants.Add(plant);
-
+    // Method for adding plant and amount to inventory
+    public bool Add(Plant plant, int amount) {
+        bool added = inventory.AddPlant(plant, amount);
+        if(added)
             if(onItemChangeCallback != null)
                 onItemChangeCallback.Invoke();
 
-            return true;
-        }
-            
+        return added;            
     }
 
     public void Remove(Plant plant) {
-        plants.Remove(plant);
+        //inventory.RemovePlant(plant, 1);
 
         if(onItemChangeCallback != null)
             onItemChangeCallback.Invoke();

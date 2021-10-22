@@ -21,10 +21,10 @@ public class PlayerDataManager : MonoBehaviour {
 
     #endregion
 
-
+    
     // Method for buy a plant
-    public void Buy(Plant plant) {
-        bool canAdd = Inventory.instance.Add(plant);
+    public void Buy(Plant plant, int amount) {
+        bool canAdd = Inventory.instance.Add(plant, amount);
 
         // Check if player have money and slots enough to buy
         if(plant.buyValue <= playerData.money && canAdd) {

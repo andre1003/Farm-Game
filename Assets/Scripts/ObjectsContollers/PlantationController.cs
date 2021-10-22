@@ -22,7 +22,7 @@ public class PlantationController : MonoBehaviour {
     // Method for planting
     public void Plant(Plant plant) {
         // Plants only if player have in Inventory
-        if(Inventory.instance.plants.Contains(plant) && planted == null) {
+        if(planted == null) { // Remove for tests -> Inventory.instance.inventory.plants.Contains(plant) && 
             Inventory.instance.Remove(plant);
             PlayerDataManager.instance.SetXp(plant.xp);
             planted = plant;
