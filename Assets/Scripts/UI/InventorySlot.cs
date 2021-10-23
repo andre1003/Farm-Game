@@ -3,22 +3,31 @@ using UnityEngine.UI;
 
 public class InventorySlot : MonoBehaviour {
     public Image icon;
+    public Image amountImage;
+
     public Text text;
     
     private Plant plant;
 
     public void AddPlant(Plant plant, int amount) {
         this.plant = plant;
+
         icon.sprite = plant.icon;
-        text.text = amount.ToString();
+        amountImage.enabled = true;
         icon.enabled = true;
+
+        text.enabled = true;
+        text.text = amount.ToString();
     }
 
     public void ClearSlot() {
         plant = null;
+
         icon.sprite = null;
-        text.text = "0";
         icon.enabled = false;
+        amountImage.enabled = false;
+        
+        text.enabled = false;
     }
 
     public void Plant() {

@@ -6,6 +6,8 @@ using UnityEngine.UI;
 public class PlayerDataManager : MonoBehaviour {
     public PlayerData playerData;
     public Text moneyText;
+    public Text levelText;
+    public Text xpText;
 
     #region Singleton
     public static PlayerDataManager instance;
@@ -16,7 +18,7 @@ public class PlayerDataManager : MonoBehaviour {
         }
 
         instance = this;
-        UpdateMoneyText();
+        UpdateHUD();
     }
 
     #endregion
@@ -24,23 +26,31 @@ public class PlayerDataManager : MonoBehaviour {
     
     // Method for buy a plant
     public void Buy(Plant plant, int amount) {
-        bool canAdd = Inventory.instance.Add(plant, amount);
+        if(plant.levelRequired <= playerData.level) {
+            bool canAdd = Inventory.instance.Add(plant, amount);
 
-        // Check if player have money and slots enough to buy
-        if(plant.buyValue <= playerData.money && canAdd) {
-            playerData.money -= plant.buyValue;
-            UpdateMoneyText();
+            // Check if player have money and slots enough to buy
+            if(plant.buyValue <= playerData.money && canAdd) {
+                playerData.money -= plant.buyValue;
+                UpdateHUD();
+            }
         }
+        else {
+            Debug.Log("Not available for your level");
+        }        
     }
 
     // Method for update money text
-    private void UpdateMoneyText() {
+    private void UpdateHUD() {
         moneyText.text = "Dinheiro: " + playerData.money.ToString();
+        levelText.text = "Level: " + playerData.level;
+        xpText.text = playerData.xp + " / " + playerData.nextLvlXp;
     }
 
     // Method for adding money
     public void SetMoney(float moneyToAdd) {
         playerData.money += moneyToAdd;
+        UpdateHUD();
     }
 
     // Method for adding XP
@@ -52,5 +62,7 @@ public class PlayerDataManager : MonoBehaviour {
             playerData.level++;
             playerData.nextLvlXp += 10;
         }
+
+        UpdateHUD();
     }
 }

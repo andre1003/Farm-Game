@@ -22,16 +22,25 @@ public class PlantationController : MonoBehaviour {
     // Method for planting
     public void Plant(Plant plant) {
         // Plants only if player have in Inventory
-        if(planted == null) { // Remove for tests -> Inventory.instance.inventory.plants.Contains(plant) && 
-            Inventory.instance.Remove(plant);
-            PlayerDataManager.instance.SetXp(plant.xp);
-            planted = plant;
-            Debug.Log(plant.name + " plantado com sucesso");
+        if(planted == null) {
+            bool hasRemoved = Inventory.instance.Remove(plant);
+            if(hasRemoved) {
+                PlayerDataManager.instance.SetXp(plant.xp);
+                planted = plant;
+                Debug.Log(plant.name + " plantado com sucesso");
+            }
+            else {
+                Debug.Log("Você não possui nenhum(a) " + plant.name);
+            }
+            
         }
     }
 
     // Test function
     private void OnTriggerEnter(Collider other) {
-        Debug.Log("Aqui está plantado " + planted.name);
+        if(planted != null)
+            Debug.Log("Aqui está plantado " + planted.name);
+        else
+            Debug.Log("Área vazia!");
     }
 }

@@ -20,8 +20,6 @@ public class Inventory : MonoBehaviour {
     }
     #endregion
 
-    //public List<Plant> plants = new List<Plant>();
-    //public int slots = 10;
     public InventoryObject inventory;
 
     // Method for adding plant and amount to inventory
@@ -34,10 +32,13 @@ public class Inventory : MonoBehaviour {
         return added;            
     }
 
-    public void Remove(Plant plant) {
-        //inventory.RemovePlant(plant, 1);
+    // Method for removing a plant from inventory
+    public bool Remove(Plant plant) {
+        bool hasRemoved = inventory.RemovePlant(plant, 1);
 
         if(onItemChangeCallback != null)
             onItemChangeCallback.Invoke();
+
+        return hasRemoved;
     }
 }
