@@ -17,6 +17,8 @@ public class PlantationController : MonoBehaviour {
     }
     #endregion
 
+    public Transform front;
+
     private Plant planted;
 
     // Method for planting
@@ -27,12 +29,12 @@ public class PlantationController : MonoBehaviour {
             if(hasRemoved) {
                 PlayerDataManager.instance.SetXp(plant.xp);
                 planted = plant;
+                MovementController.instance.SendTo(front.position, gameObject.transform);
                 Debug.Log(plant.name + " plantado com sucesso");
             }
             else {
                 Debug.Log("Você não possui nenhum(a) " + plant.name);
             }
-            
         }
     }
 

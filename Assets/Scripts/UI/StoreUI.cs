@@ -15,11 +15,6 @@ public class StoreUI : MonoBehaviour {
         UpdateUI();
     }
 
-    // Update is called once per frame
-    void Update() {
-        //UpdateUI();
-    }
-
     public void UpdateUI() {
         for(int i = 0; i < slots.Length; i++) {
             if(i < store.storePlants.Length)

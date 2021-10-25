@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -32,7 +33,7 @@ public class InventorySlot : MonoBehaviour {
 
     public void Plant() {
         GameObject plantationZone = InGameSaves.GetPlantationZone();
-        
+        InventoryUI.instance.inventoryCanvas.SetActive(false);
         if(plant != null && plantationZone != null) {
             plantationZone.GetComponent<PlantationController>().Plant(plant);
         }

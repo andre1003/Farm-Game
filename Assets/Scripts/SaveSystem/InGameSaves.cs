@@ -16,10 +16,12 @@ public class InGameSaves {
         return isBusy;
     }
     
+    // Set current plantation zone
     public static void SetPlantationZone(GameObject zone) {
         plantationZone = zone;
     }
 
+    // Get current plantation zone
     public static GameObject GetPlantationZone() {
         return plantationZone;
     }

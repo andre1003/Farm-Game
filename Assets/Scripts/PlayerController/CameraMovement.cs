@@ -16,6 +16,18 @@ public class CameraMovement : MonoBehaviour {
         newtrans = transform.position;
     }
 
+    private void Update() {
+        // Zoom handler
+        if(Input.GetAxis("Mouse ScrollWheel") < 0f) {
+            Camera.main.orthographicSize++;
+            if(Camera.main.orthographicSize > 14f)
+                Camera.main.orthographicSize = 14f;
+        }
+        else if(Input.GetAxis("Mouse ScrollWheel") > 0f) {
+            Camera.main.orthographicSize--;
+        }
+    }
+    
     void FixedUpdate() {
         // Set new transform position
         newtrans.x = player.transform.position.x + offset.x;
@@ -26,5 +38,7 @@ public class CameraMovement : MonoBehaviour {
 
         // Change position
         transform.position = smoothPosition;
+
+        
     }
 }

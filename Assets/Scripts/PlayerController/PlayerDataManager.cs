@@ -1,14 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class PlayerDataManager : MonoBehaviour {
-    public PlayerData playerData;
-    public Text moneyText;
-    public Text levelText;
-    public Text xpText;
-
     #region Singleton
     public static PlayerDataManager instance;
     private void Awake() {
@@ -18,12 +14,20 @@ public class PlayerDataManager : MonoBehaviour {
         }
 
         instance = this;
+        playerNameText.text = playerData.name;
         UpdateHUD();
     }
 
     #endregion
 
-    
+    public PlayerData playerData;
+
+    public Text moneyText;
+    public Text levelText;
+    public Text xpText;
+
+    public TextMeshProUGUI playerNameText;
+
     // Method for buy a plant
     public void Buy(Plant plant, int amount) {
         if(plant.levelRequired <= playerData.level) {
