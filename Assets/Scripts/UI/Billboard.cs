@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Billboard : MonoBehaviour {
+    private static Transform gameTransform;
 
     // Update is called once per frame
     void Update() {

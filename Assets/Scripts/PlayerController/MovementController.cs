@@ -50,6 +50,7 @@ public class MovementController : MonoBehaviour {
         // Dance button
         if(Input.GetKeyDown(KeyCode.D)) {
             animator.SetBool("isDancing", !animator.GetBool("isDancing"));
+
         }
 
         // Movement button

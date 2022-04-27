@@ -1,7 +1,7 @@
 using UnityEngine;
 
 public class InGameSaves {
-    private static bool canMove = true;
+    //private static bool canMove = true;
     private static bool isBusy = false;
     private static GameObject plantationZone = null;
 

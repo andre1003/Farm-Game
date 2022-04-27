@@ -6,6 +6,8 @@ public class PlantZoneSpawner : MonoBehaviour {
     public GameObject plantationZonePrefab;
 
     public LayerMask groundMask;
+    public LayerMask fenceMask;
+
     public float groundDistance = 0.4f;
 
     // Start is called before the first frame update
@@ -22,14 +24,22 @@ public class PlantZoneSpawner : MonoBehaviour {
             if(Physics.Raycast(ray, out hit)) {
                 if(hit.collider.gameObject.tag != "Plantable")
                     Instantiate(plantationZonePrefab, hit.point, Quaternion.identity);
+                
                 else {
-                    GameObject plantationZone = hit.collider.gameObject;
-                    Vector3 spawnPosition = new Vector3(plantationZone.transform.position.x + 3, plantationZone.transform.position.y, plantationZone.transform.position.z);
-                    Vector3 size = plantationZonePrefab.GetComponent<BoxCollider>().size + new Vector3(-1, -1, -1);
-                    //bool canSpawn = Physics.CheckSphere(spawnPosition, groundMask);
-                    bool canSpawn = PreventSpawnOverlap(spawnPosition);
-                    if(canSpawn)
-                        Instantiate(plantationZonePrefab, spawnPosition, Quaternion.identity);
+                    Debug.Log("This Game Object is a Platation Zone!\nX: " + hit.collider.gameObject.transform.position.x + " Y: " + hit.collider.gameObject.transform.position.y + " Z: " + hit.collider.gameObject.transform.position.z);
+
+                    // Its getting the correct location for the platation zone. Now we just have to spawn it correctly
+                    Vector3 location = new Vector3(hit.collider.gameObject.transform.position.x + 5, hit.collider.gameObject.transform.position.y, hit.collider.gameObject.transform.position.z);
+                    Vector3 location2 = new Vector3(hit.collider.gameObject.transform.position.x, hit.collider.gameObject.transform.position.y, hit.collider.gameObject.transform.position.z + 5);
+                    bool canSpawn = Physics.CheckSphere(location, 5f, fenceMask);
+
+                    // It doesn't place at left nor back
+                    if(!canSpawn) {
+                        if(location.x - hit.point.x < location2.z - hit.point.z)
+                            Instantiate(plantationZonePrefab, location, Quaternion.identity);
+                        else
+                            Instantiate(plantationZonePrefab, location2, Quaternion.identity);
+                    }                    
                 }
             }
         }
@@ -55,7 +65,7 @@ public class PlantZoneSpawner : MonoBehaviour {
                 }
             }
 
-            
+
         }
         return true;
     }
