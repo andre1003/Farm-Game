@@ -9,6 +9,7 @@ TagManager:
   - Plantable
   - Front
   - Fence
+  - Cell
   layers:
   - Default
   - TransparentFX
