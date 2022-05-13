@@ -5,6 +5,10 @@ using UnityEngine;
 public class GridController : MonoBehaviour {
     public Vector3 spawn;
 
+    public Material gridMaterial;
+    public Material canPlaceMaterial;
+    public Material canNotPlaceMaterial;
+
     public Transform gridCellPrefab;
     [SerializeField] private Transform objectToPlace;
 
@@ -40,8 +44,10 @@ public class GridController : MonoBehaviour {
                 plane = new Plane(Vector3.up, transform.position);
                 isGridCreated = true;
 
-                if(onMousePrefab == null && enabled)
+                if(onMousePrefab == null && enabled) {
                     onMousePrefab = Instantiate(objectToPlace, mousePosition, Quaternion.identity);
+                    onMousePrefab.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+                }
             }
             else {
                 groundMeshRenderer.enabled = true;
@@ -60,11 +66,11 @@ public class GridController : MonoBehaviour {
         nodes = new Node[width, height];
         int name = 0;
 
-        float realI = spawn.x + 1f;
-        float realJ = spawn.z + 1f;
+        float realI = spawn.x;
+        float realJ = spawn.z;
 
-        for(int i = 0; i < width; i++, realI++) {
-            for(int j = 0; j < height; j++, realJ++) {
+        for(int i = 0; i < width; i++, realI+=3) {
+            for(int j = 0; j < height; j++, realJ+=3) {
                 Vector3 worldPosition = new Vector3(realI, 0, realJ);
                 Transform obj = Instantiate(gridCellPrefab, worldPosition, Quaternion.identity);
                 obj.GetComponent<MeshCollider>().enabled = false;
@@ -72,7 +78,7 @@ public class GridController : MonoBehaviour {
                 nodes[i, j] = new Node(true, worldPosition, obj);
                 name++;
             }
-            realJ = spawn.z + 1f;
+            realJ = spawn.z;
         }
     }
 
@@ -96,15 +102,22 @@ public class GridController : MonoBehaviour {
 
             foreach(Node node in nodes) {
                 if(node.cellPosition == mousePosition && node.isPlaceable) {
+                    node.obj.gameObject.GetComponent<Renderer>().material = canPlaceMaterial;
+
                     if(Input.GetKeyDown(KeyCode.O) && onMousePrefab != null) {
                         Debug.Log("PLACING OBJECT");
                         node.isPlaceable = false;
                         onMousePrefab.GetComponent<FollowMouse>().isOnGrid = true;
                         onMousePrefab.position = node.cellPosition;
+                        onMousePrefab.transform.localScale = Vector3.one;
                         onMousePrefab = null;
 
                         onMousePrefab = Instantiate(objectToPlace, mousePosition, Quaternion.identity);
+                        onMousePrefab.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
                     }
+                }
+                else {
+                    node.obj.gameObject.GetComponent<Renderer>().material = gridMaterial;
                 }
             }
         }

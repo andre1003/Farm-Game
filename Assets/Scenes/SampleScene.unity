@@ -8153,13 +8153,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1edd9eb63b74cfa468c95d26ba8569c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawn: {x: -25, y: 0, z: -25}
+  spawn: {x: -23, y: 0, z: -23}
+  gridMaterial: {fileID: 2100000, guid: b314341730869e14ea54b6c0df83a26d, type: 2}
+  canPlaceMaterial: {fileID: 2100000, guid: 129f91ddb1fa1f943baa84073d213771, type: 2}
+  canNotPlaceMaterial: {fileID: 2100000, guid: e8c0bb6690a329549a252b2ebaf9a619, type: 2}
   gridCellPrefab: {fileID: 448547801824581763, guid: 2b25dde1c9e43284797d45354f6638ef, type: 3}
   objectToPlace: {fileID: 262699646981873015, guid: e003262729c199048bd5335c22319404, type: 3}
   onMousePrefab: {fileID: 0}
   smoothMousePosition: {x: 0, y: 0, z: 0}
-  height: 50
-  width: 50
+  height: 17
+  width: 17
   groundMeshRenderer: {fileID: 597473264}
 --- !u!1 &848668767
 GameObject:
