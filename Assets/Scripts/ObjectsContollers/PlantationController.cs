@@ -9,7 +9,7 @@ public class PlantationController : MonoBehaviour {
 
     private void Awake() {
         if(instance != null) {
-            Debug.LogWarning("More than one instance of Inventory found!");
+            Debug.LogWarning("More than one instance of Plantation Controller found!");
             return;
         }
 

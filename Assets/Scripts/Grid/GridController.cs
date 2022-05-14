@@ -17,6 +17,8 @@ public class GridController : MonoBehaviour {
     public Transform onMousePrefab;
     public Vector3 smoothMousePosition;
 
+    public PlantationZones zones;
+
     [SerializeField] private int height;
     [SerializeField] private int width;
 
@@ -26,9 +28,6 @@ public class GridController : MonoBehaviour {
     private Vector3 mousePosition;
     private bool isGridCreated = false;
 
-    void Awake() {
-
-    }
 
     // Start is called before the first frame update
     void Start() {
@@ -45,7 +44,8 @@ public class GridController : MonoBehaviour {
                 isGridCreated = true;
 
                 if(onMousePrefab == null && enabled) {
-                    onMousePrefab = Instantiate(objectToPlace, mousePosition, Quaternion.identity);
+                    onMousePrefab = Instantiate(objectToPlace, smoothMousePosition, Quaternion.identity);
+                    onMousePrefab.GetComponent<FollowMouse>().enabled = true;
                     onMousePrefab.GetComponent<BoxCollider>().enabled = false;
                 }
             }
@@ -61,7 +61,10 @@ public class GridController : MonoBehaviour {
         if(isGridCreated)
             GetMousePostitionOnGrid();
     }
-
+    
+    /// <summary>
+    /// Create edit mode grid when player press P key.
+    /// </summary>
     public void CreateGrid() {
         nodes = new Node[width, height];
         int name = 0;
@@ -80,8 +83,25 @@ public class GridController : MonoBehaviour {
             }
             realJ = spawn.z;
         }
+
+        CheckLoadedObjects();
     }
 
+    private void CheckLoadedObjects() {
+        List<Vector3> positions = zones.GetPositions();
+
+        foreach(var node in nodes) {
+            foreach(var position in positions) {
+                if(node.cellPosition == position) {
+                    node.isPlaceable = false;
+                }
+            }
+        }
+    }
+
+    /// <summary>
+    /// Destroy edit mode grid when player hit P again.
+    /// </summary>
     public void DestroyGrid() {
         GameObject[] cells = GameObject.FindGameObjectsWithTag("Cell");
         int length = cells.Length;
@@ -92,6 +112,9 @@ public class GridController : MonoBehaviour {
         nodes = null;
     }
 
+    /// <summary>
+    /// Cast a raycast to check where the player's mouse is and place or remove an object at that position.
+    /// </summary>
     private void GetMousePostitionOnGrid() {
         RaycastHit hit;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -104,12 +127,15 @@ public class GridController : MonoBehaviour {
                     if(node.cellPosition == hit.transform.position && node.isPlaceable) {
                         node.obj.gameObject.GetComponent<Renderer>().material = canPlaceMaterial;
 
-                        if(Input.GetKeyDown(KeyCode.O) && onMousePrefab != null) {
+                        if(Input.GetKeyDown(KeyCode.O) || Input.GetButtonDown("Fire2") && onMousePrefab != null) {
                             Debug.Log("PLACING OBJECT");
                             node.isPlaceable = false;
                             onMousePrefab.GetComponent<FollowMouse>().isOnGrid = true;
                             onMousePrefab.position = node.cellPosition;
                             onMousePrefab.GetComponent<BoxCollider>().enabled = true;
+
+                            // Save at scriptable object
+                            zones.AddZone(onMousePrefab.position, null);
                             onMousePrefab = null;
 
                             onMousePrefab = Instantiate(objectToPlace, mousePosition, Quaternion.identity);
@@ -118,6 +144,10 @@ public class GridController : MonoBehaviour {
                     }
                     else if(node.cellPosition == hit.transform.position && !node.isPlaceable) {
                         node.obj.gameObject.GetComponent<Renderer>().material = canNotPlaceMaterial;
+                        if(Input.GetKeyDown(KeyCode.O) || Input.GetButtonDown("Fire2")) {
+                            node.isPlaceable = true;
+                            Destroy(hit.transform.gameObject);
+                        }
                     }
                     else {
                         node.obj.gameObject.GetComponent<Renderer>().material = gridMaterial;
