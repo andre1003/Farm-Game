@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 
 public class ObjectsManager : MonoBehaviour {
-    public GameObject spawnableObject;
+    public Transform player;
     public GameObject spawnSpot;
     public GameObject inventory;
 
@@ -14,6 +14,10 @@ public class ObjectsManager : MonoBehaviour {
     public Texture2D plantCursor;
 
     public Vector2 hotSpot = Vector2.zero;
+
+    void Awake() {
+        Instantiate(player, spawnSpot.transform.position, Quaternion.Euler(0, 90, 0));
+    }
 
     // Start is called before the first frame update
     void Start() {

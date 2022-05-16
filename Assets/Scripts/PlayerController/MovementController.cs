@@ -98,4 +98,15 @@ public class MovementController : MonoBehaviour {
         yield return new WaitForSeconds(seconds);
         InGameSaves.ChangeIsBusy();
     }
+
+    public void StopPlayer() {
+        myAgent.isStopped = true;
+        animator.SetBool("isWalking", false);
+    }
+
+    public void ResumePlayer() {
+        myAgent.isStopped = false;
+        if(myAgent.hasPath)
+            animator.SetBool("isWalking", true);
+    }
 }

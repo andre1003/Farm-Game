@@ -3,11 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class CameraMovement : MonoBehaviour {
-    public GameObject player;
+    private GameObject player;
     public float smoothSpeed = 0.125f;
 
     private Vector3 offset;
     private Vector3 newtrans;
+
+    private void Awake() {
+        player = GameObject.FindGameObjectWithTag("Player");
+    }
 
     void Start() {
         // Setting start position
