@@ -10,6 +10,11 @@ public class InventorySlot : MonoBehaviour {
     
     private Plant plant;
 
+    /// <summary>
+    /// Add a certain type of plant to the inventory slot.
+    /// </summary>
+    /// <param name="plant">Plant to be added to inventory slot.</param>
+    /// <param name="amount">Amount of plant to be added.</param>
     public void AddPlant(Plant plant, int amount) {
         this.plant = plant;
 
@@ -21,6 +26,9 @@ public class InventorySlot : MonoBehaviour {
         text.text = amount.ToString();
     }
 
+    /// <summary>
+    /// Clear the slot
+    /// </summary>
     public void ClearSlot() {
         plant = null;
 
@@ -31,6 +39,9 @@ public class InventorySlot : MonoBehaviour {
         text.enabled = false;
     }
 
+    /// <summary>
+    /// Plant the selected item in inventory at the selected plantation zone
+    /// </summary>
     public void Plant() {
         GameObject plantationZone = InGameSaves.GetPlantationZone();
         InventoryUI.instance.inventoryCanvas.SetActive(false);

@@ -12,6 +12,12 @@ public class PlantationZones : ScriptableObject {
         plants.Add(plant);
     }
 
+    public void RemoveZone(Vector3 position) {
+        int index = positions.IndexOf(position);
+        positions.Remove(position);
+        plants.RemoveAt(index);
+    }
+
     public List<Vector3> GetPositions() {
         return positions;
     }

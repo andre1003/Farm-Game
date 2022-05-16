@@ -31,21 +31,23 @@ public class ObjectsManager : MonoBehaviour {
         CheckCursorChange();
     }
 
-    // Method for checking is cursor needs to change
+    /// <summary>
+    /// Check if cursor needs to be changed
+    /// </summary>
     private void CheckCursorChange() {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
 
         if(Physics.Raycast(ray, out hit)) {
-            if(hit.collider.gameObject.tag == "Store") {
+            if(hit.collider.gameObject.tag == "Store") {                                        // Store
                 Cursor.SetCursor(buyCursor, Vector3.zero, CursorMode.Auto);
             }
-            else if(hit.collider.gameObject.tag == "Workbench") {
+            else if(hit.collider.gameObject.tag == "Workbench") {                               // Workbench
                 Cursor.SetCursor(craftCursor, Vector3.zero, CursorMode.Auto);
             }
-            else if(hit.collider.gameObject.tag == "Plantable") {
+            else if(hit.collider.gameObject.tag == "Plantable") {                               // Plantation zone
                 Cursor.SetCursor(plantCursor, Vector3.zero, CursorMode.Auto);
-                if(Input.GetButtonDown("Fire2")) {
+                if(Input.GetButtonDown("Fire2") && !PlayerDataManager.instance.GetEditMode()) { // If Fire2 at a plantation zone
                     inventory.SetActive(true);
                     InGameSaves.SetPlantationZone(hit.collider.gameObject);
                 }

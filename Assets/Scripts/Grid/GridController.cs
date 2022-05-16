@@ -26,39 +26,35 @@ public class GridController : MonoBehaviour {
 
     private Plane plane;
     private Vector3 mousePosition;
-    private bool isGridCreated = false;
+    //private bool isGridCreated = false;
 
 
     // Start is called before the first frame update
     void Start() {
-
+        
     }
 
     // Update is called once per frame
     void Update() {
         if(Input.GetKeyDown(KeyCode.P)) {
-            if(!isGridCreated) {
-                //groundMeshRenderer.enabled = false;
+            if(!PlayerDataManager.instance.GetEditMode()) { // CHANGE TO PLAYERDATAMANAGER EDIT MODE VARIABLE
                 CreateGrid();
                 plane = new Plane(Vector3.up, transform.position);
-                isGridCreated = true;
+                PlayerDataManager.instance.SetEditMode(true);
 
                 if(onMousePrefab == null && enabled) {
-                    onMousePrefab = Instantiate(objectToPlace, smoothMousePosition, Quaternion.identity);
-                    onMousePrefab.GetComponent<FollowMouse>().enabled = true;
-                    onMousePrefab.GetComponent<BoxCollider>().enabled = false;
+                    InstantiateObjectOnMouse();
                 }
             }
             else {
-                //groundMeshRenderer.enabled = true;
                 DestroyGrid();
-                isGridCreated = false;
+                PlayerDataManager.instance.SetEditMode(false);
                 onMousePrefab.GetComponent<FollowMouse>().DestroyMe();
                 onMousePrefab = null;
             }
 
         }
-        if(isGridCreated)
+        if(PlayerDataManager.instance.GetEditMode())
             GetMousePostitionOnGrid();
     }
     
@@ -138,14 +134,14 @@ public class GridController : MonoBehaviour {
                             zones.AddZone(onMousePrefab.position, null);
                             onMousePrefab = null;
 
-                            onMousePrefab = Instantiate(objectToPlace, mousePosition, Quaternion.identity);
-                            onMousePrefab.GetComponent<BoxCollider>().enabled = false;
+                            InstantiateObjectOnMouse();
                         }
                     }
                     else if(node.cellPosition == hit.transform.position && !node.isPlaceable) {
                         node.obj.gameObject.GetComponent<Renderer>().material = canNotPlaceMaterial;
                         if(Input.GetKeyDown(KeyCode.O) || Input.GetButtonDown("Fire2")) {
                             node.isPlaceable = true;
+                            zones.RemoveZone(node.cellPosition);
                             Destroy(hit.transform.gameObject);
                         }
                     }
@@ -155,6 +151,15 @@ public class GridController : MonoBehaviour {
                 }
             }
         }
+    }
+
+    /// <summary>
+    /// Instantiates the desirable object on mouse position.
+    /// </summary>
+    private void InstantiateObjectOnMouse() {
+        onMousePrefab = Instantiate(objectToPlace, mousePosition, Quaternion.identity);
+        onMousePrefab.GetComponent<BoxCollider>().enabled = false;
+        onMousePrefab.GetComponent<FollowMouse>().enabled = true;
     }
 }
 

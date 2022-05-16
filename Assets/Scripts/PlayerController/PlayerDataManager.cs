@@ -14,7 +14,6 @@ public class PlayerDataManager : MonoBehaviour {
         }
 
         instance = this;
-        playerNameText.text = playerData.name;
         UpdateHUD();
     }
 
@@ -26,7 +25,12 @@ public class PlayerDataManager : MonoBehaviour {
     public Text levelText;
     public Text xpText;
 
-    public TextMeshProUGUI playerNameText;
+
+    private bool editMode = false;
+
+    void Start() {
+        editMode = false;
+    }
 
     // Method for buy a plant
     public void Buy(Plant plant, int amount) {
@@ -68,5 +72,14 @@ public class PlayerDataManager : MonoBehaviour {
         }
 
         UpdateHUD();
+    }
+
+
+    public void SetEditMode(bool editMode) { 
+        this.editMode = editMode;
+    }
+
+    public bool GetEditMode() {
+        return editMode;
     }
 }
