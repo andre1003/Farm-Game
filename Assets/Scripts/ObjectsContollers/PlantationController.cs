@@ -18,6 +18,9 @@ public class PlantationController : MonoBehaviour {
     #endregion
 
     public Transform front;
+    public List<Transform> spawns;
+
+    public PlantationZones zones;
 
     private Plant planted;
 
@@ -28,13 +31,20 @@ public class PlantationController : MonoBehaviour {
             bool hasRemoved = Inventory.instance.Remove(plant);
             if(hasRemoved) {
                 PlayerDataManager.instance.SetXp(plant.xp);
-                planted = plant;
+                
                 MovementController.instance.SendTo(front.position, gameObject.transform);
-                Debug.Log(plant.name + " plantado com sucesso");
+                
+                zones.SetPlant(transform.position, plant);
             }
-            else {
-                Debug.Log("Você não possui nenhum(a) " + plant.name);
-            }
+
+            planted = plant;
+            SpawnPlants(plant.plantPrefab);
+        }
+    }
+
+    private void SpawnPlants(Transform plantPrefab) {
+        foreach(var spawn in spawns) {
+            Instantiate(plantPrefab, spawn.transform.position, Quaternion.identity);
         }
     }
 

@@ -20,4 +20,6 @@ public class Plant : ScriptableObject {
     public int xp;
 
     public Sprite icon;
+
+    public Transform plantPrefab;
 }

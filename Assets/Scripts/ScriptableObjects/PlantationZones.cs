@@ -25,4 +25,9 @@ public class PlantationZones : ScriptableObject {
     public List<Plant> GetPlants() {
         return plants;
     }
+
+    public void SetPlant(Vector3 position, Plant plant) {
+        int index = positions.IndexOf(position);
+        plants[index] = plant;
+    }
 }
