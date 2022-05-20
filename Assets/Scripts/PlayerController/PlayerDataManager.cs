@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Localization.Components;
 using UnityEngine.UI;
 
 public class PlayerDataManager : MonoBehaviour {
@@ -14,23 +15,28 @@ public class PlayerDataManager : MonoBehaviour {
         }
 
         instance = this;
-        UpdateHUD();
+        //UpdateHUD();
     }
 
     #endregion
 
     public PlayerData playerData;
 
-    public Text moneyText;
+    //public Text moneyText;
     public Text levelText;
     public Text xpText;
 
+    //public string cash;
+
+    public LocalizeStringEvent moneyTextEvent;
+    public LocalizeStringEvent levelTextEvent;
 
     private bool editMode = false;
 
     void Start() {
         editMode = false;
     }
+
 
     // Method for buy a plant
     public void Buy(Plant plant, int amount) {
@@ -50,8 +56,8 @@ public class PlayerDataManager : MonoBehaviour {
 
     // Method for update money text
     private void UpdateHUD() {
-        moneyText.text = "Dinheiro: " + playerData.money.ToString();
-        levelText.text = "Level: " + playerData.level;
+        moneyTextEvent.RefreshString();
+        levelTextEvent.RefreshString();
         xpText.text = playerData.xp + " / " + playerData.nextLvlXp;
     }
 
@@ -73,7 +79,6 @@ public class PlayerDataManager : MonoBehaviour {
 
         UpdateHUD();
     }
-
 
     public void SetEditMode(bool editMode) { 
         this.editMode = editMode;

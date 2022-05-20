@@ -849,6 +849,7 @@ GameObject:
   - component: {fileID: 30344678}
   - component: {fileID: 30344677}
   - component: {fileID: 30344679}
+  - component: {fileID: 30344680}
   m_Layer: 0
   m_Name: LevelText
   m_TagString: Untagged
@@ -933,6 +934,53 @@ MonoBehaviour:
   m_EffectColor: {r: 1, g: 1, b: 1, a: 0.3764706}
   m_EffectDistance: {x: 1, y: -1}
   m_UseGraphicAlpha: 1
+--- !u!114 &30344680
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 30344675}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56eb0353ae6e5124bb35b17aff880f16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_StringReference:
+    m_TableReference:
+      m_TableCollectionName: GUID:de201cef09dc3e242938d2371979b845
+    m_TableEntryReference:
+      m_KeyId: 9849980518400
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables:
+    - name: playerdata
+      variable:
+        rid: 2896074513485398039
+  m_FormatArguments: []
+  m_UpdateString:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 30344677}
+        m_TargetAssemblyTypeName: UnityEngine.UI.Text, UnityEngine.UI
+        m_MethodName: set_text
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  references:
+    version: 2
+    RefIds:
+    - rid: 2896074513485398039
+      type: {class: ObjectVariable, ns: UnityEngine.Localization.SmartFormat.PersistentVariables, asm: Unity.Localization}
+      data:
+        m_Value: {fileID: 11400000, guid: 3156cc3cbb3f60341aea7a8a59c1c968, type: 2}
 --- !u!1001 &36028416
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3062,9 +3110,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerData: {fileID: 11400000, guid: 3156cc3cbb3f60341aea7a8a59c1c968, type: 2}
-  moneyText: {fileID: 786513725}
   levelText: {fileID: 30344677}
   xpText: {fileID: 555315926}
+  cash: 
+  moneyTextEvent: {fileID: 786513728}
+  levelTextEvent: {fileID: 30344680}
 --- !u!4 &117029798
 Transform:
   m_ObjectHideFlags: 0
@@ -11983,7 +12033,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Loja
+  m_Text: 
 --- !u!222 &519909556
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -17205,6 +17255,7 @@ GameObject:
   - component: {fileID: 786513726}
   - component: {fileID: 786513725}
   - component: {fileID: 786513727}
+  - component: {fileID: 786513728}
   m_Layer: 0
   m_Name: MoneyText
   m_TagString: Untagged
@@ -17265,7 +17316,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Dinheiro: 00000,00'
+  m_Text: '[Cash information]'
 --- !u!222 &786513726
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -17289,6 +17340,53 @@ MonoBehaviour:
   m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
   m_EffectDistance: {x: 0, y: -0.64}
   m_UseGraphicAlpha: 1
+--- !u!114 &786513728
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 786513723}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56eb0353ae6e5124bb35b17aff880f16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_StringReference:
+    m_TableReference:
+      m_TableCollectionName: GUID:de201cef09dc3e242938d2371979b845
+    m_TableEntryReference:
+      m_KeyId: 56754634752
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables:
+    - name: playerdata
+      variable:
+        rid: 2896074513485398038
+  m_FormatArguments: []
+  m_UpdateString:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 786513725}
+        m_TargetAssemblyTypeName: UnityEngine.UI.Text, UnityEngine.UI
+        m_MethodName: set_text
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  references:
+    version: 2
+    RefIds:
+    - rid: 2896074513485398038
+      type: {class: ObjectVariable, ns: UnityEngine.Localization.SmartFormat.PersistentVariables, asm: Unity.Localization}
+      data:
+        m_Value: {fileID: 11400000, guid: 3156cc3cbb3f60341aea7a8a59c1c968, type: 2}
 --- !u!1 &787465303
 GameObject:
   m_ObjectHideFlags: 0
@@ -18739,6 +18837,7 @@ GameObject:
   - component: {fileID: 838378900}
   - component: {fileID: 838378902}
   - component: {fileID: 838378901}
+  - component: {fileID: 838378903}
   m_Layer: 0
   m_Name: Text
   m_TagString: Untagged
@@ -18799,7 +18898,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "Invent\xE1rio"
+  m_Text: '[Inventory Title]'
 --- !u!222 &838378902
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -18808,6 +18907,46 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 838378899}
   m_CullTransparentMesh: 1
+--- !u!114 &838378903
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 838378899}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56eb0353ae6e5124bb35b17aff880f16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_StringReference:
+    m_TableReference:
+      m_TableCollectionName: GUID:314f9387bb3cd2643a25c928b76a3af8
+    m_TableEntryReference:
+      m_KeyId: 573828431872
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  m_FormatArguments: []
+  m_UpdateString:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 838378901}
+        m_TargetAssemblyTypeName: UnityEngine.UI.Text, UnityEngine.UI
+        m_MethodName: set_text
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  references:
+    version: 2
+    RefIds: []
 --- !u!1 &846526276
 GameObject:
   m_ObjectHideFlags: 0
