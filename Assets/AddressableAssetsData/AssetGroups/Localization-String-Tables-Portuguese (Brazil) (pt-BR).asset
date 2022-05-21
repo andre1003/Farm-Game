@@ -29,6 +29,24 @@ MonoBehaviour:
     m_SerializedLabels:
     - Locale-pt-BR
     - Preload
+  - m_GUID: 3a41d870f83721b4398d8086cb88b75f
+    m_Address: Store Text_pt-BR
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-pt-BR
+    - Preload
+  - m_GUID: 49d9f82314c89d248bfb993c7dd7ca56
+    m_Address: Workbench Text_pt-BR
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-pt-BR
+    - Preload
+  - m_GUID: 433e7f92555137040b1557642f46a33a
+    m_Address: Pause Menu Text_pt-BR
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-pt-BR
+    - Preload
   m_ReadOnly: 1
   m_Settings: {fileID: 11400000, guid: ef5026b9b1b0d014b8ac5aa922080ff5, type: 2}
   m_SchemaSet:
