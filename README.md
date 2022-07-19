@@ -15,10 +15,10 @@ For now, to install Farm Game, you have to add the project to Unity HUB and use 
 ## ☕ Building Farm Game
 To build Farm Game, do the following steps:
 
-1. Ope the project with Unity
+1. Open the project with Unity
 2. Access the tab `File` and click `Build and Run`
 
-Done! You will run the application in your computer.
+Done! You will run the application on your computer.
 
 *Obs.: The Farm Game has not been officially builded by the developer, so building it may not work as desirable.*
 
