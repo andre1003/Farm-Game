@@ -23,8 +23,8 @@ public class Inventory : MonoBehaviour {
     public InventoryObject inventory;
 
     // Method for adding plant and amount to inventory
-    public bool Add(Plant plant, int amount) {
-        bool added = inventory.AddPlant(plant, amount);
+    public bool Add(Plant plant, int amount, bool harvested) {
+        bool added = inventory.AddPlant(plant, amount, harvested);
         if(added)
             if(onItemChangeCallback != null)
                 onItemChangeCallback.Invoke();

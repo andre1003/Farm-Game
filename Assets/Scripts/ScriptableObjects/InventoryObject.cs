@@ -7,7 +7,7 @@ public class InventoryObject : ScriptableObject {
     public int slots = 20;
     public List<InventorySlotObject> plants = new List<InventorySlotObject>();
 
-    public bool AddPlant(Plant plant, int amount) {
+    public bool AddPlant(Plant plant, int amount, bool harvested) {
         for(int i = 0; i < plants.Count; i++) {
             if(plants[i].plant == plant) {
                 plants[i].AddAmount(amount);
@@ -17,7 +17,7 @@ public class InventoryObject : ScriptableObject {
 
         if(slots > 0) {
             slots--;
-            plants.Add(new InventorySlotObject(plant, amount));
+            plants.Add(new InventorySlotObject(plant, amount, harvested));
             return true;
         }
 
@@ -46,10 +46,12 @@ public class InventoryObject : ScriptableObject {
 public class InventorySlotObject {
     public Plant plant;
     public int amount;
+    public bool harvested;
 
-    public InventorySlotObject(Plant plant, int amount) {
+    public InventorySlotObject(Plant plant, int amount, bool harvested) {
         this.plant = plant;
         this.amount = amount;
+        this.harvested = harvested;
     }
 
     public void AddAmount(int value) {

@@ -14,11 +14,16 @@ public class InventoryUI : MonoBehaviour {
 
     #endregion
 
+    // UI elements references
     public Transform itemsParent;
     public GameObject inventoryCanvas;
     
+    // Inventory references
     Inventory inventory;
     InventorySlot[] slots;
+
+    // Tab controller
+    private bool harvested = false;
 
     // Start is called before the first frame update
     void Start() {
@@ -40,10 +45,16 @@ public class InventoryUI : MonoBehaviour {
     // Method for update inventory UI
     private void UpdateUI() {
         for(int i = 0; i < slots.Length; i++) {
-            if(i < inventory.inventory.plants.Count)
+            if(i < inventory.inventory.plants.Count && inventory.inventory.plants[i].harvested == harvested)
                 slots[i].AddPlant(inventory.inventory.plants[i].plant, inventory.inventory.plants[i].amount);
             else
                 slots[i].ClearSlot();
         }
+    }
+
+    public void SetHarvested(bool harvested) {
+        this.harvested = harvested;
+
+        UpdateUI();
     }
 }

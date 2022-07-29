@@ -23,6 +23,10 @@ MonoBehaviour:
     m_Key: Level Text
     m_Metadata:
       m_Items: []
+  - m_Id: 25425120693186560
+    m_Key: Time Text
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

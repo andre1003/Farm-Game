@@ -41,7 +41,7 @@ public class PlayerDataManager : MonoBehaviour {
     // Method for buy a plant
     public void Buy(Plant plant, int amount) {
         if(plant.levelRequired <= playerData.level) {
-            bool canAdd = Inventory.instance.Add(plant, amount);
+            bool canAdd = Inventory.instance.Add(plant, amount, false);
 
             // Check if player have money and slots enough to buy
             if(plant.buyValue <= playerData.money && canAdd) {

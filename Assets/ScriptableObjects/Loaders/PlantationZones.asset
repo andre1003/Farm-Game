@@ -12,5 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3510e37e3405664190fc7978d24993f, type: 3}
   m_Name: PlantationZones
   m_EditorClassIdentifier: 
-  positions: []
+  positions:
+  - {x: 1, y: 0, z: -5}
   plants: []
+  times: 01000000
