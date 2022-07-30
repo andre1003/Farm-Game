@@ -3,6 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class StoreUI : MonoBehaviour {
+    #region Singleton
+    public static StoreUI instance;
+
+    void Awake() {
+        if(instance != null)
+            return;
+
+        instance = this;
+    }
+    #endregion
+
     public Transform itemsParent;
     public bool isOnBuyMenu = true;
 
@@ -36,7 +47,7 @@ public class StoreUI : MonoBehaviour {
 
     public void SellMenu() {
         // Set tab controller
-        isOnBuyMenu = true;
+        isOnBuyMenu = false;
 
         // Auxiliar variables
         List<Plant> plants = new List<Plant>();

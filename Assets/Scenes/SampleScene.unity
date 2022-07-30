@@ -35145,7 +35145,7 @@ MonoBehaviour:
   day: 1
   daysToChangeSeason: 2
   baseClockSeconds: 2
-  season: 1
+  season: 0
   seasons: {fileID: 1722462551}
 --- !u!114 &1722462551
 MonoBehaviour:
@@ -41817,6 +41817,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1486324951}
     m_Modifications:
+    - target: {fileID: 2665889076372435945, guid: 96e7514946058554bb183c905be6ec75, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2665889076372435945, guid: 96e7514946058554bb183c905be6ec75, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2665889077397641184, guid: 96e7514946058554bb183c905be6ec75, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5

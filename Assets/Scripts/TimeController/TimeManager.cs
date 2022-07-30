@@ -44,25 +44,40 @@ public class TimeManager : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
+        // Set time text
         time.text = time.text.Split(' ')[0] + " " + hour.ToString("00");
+
+        // Decrease clock
         clockSeconds -= Time.deltaTime;
 
+        // If a clock cycle has been completed
         if(clockSeconds < 0) {
+            // Reset clockSeconds
             clockSeconds = baseClockSeconds;
+            
+            // Increase hour
             hour++;
 
+            // If hour is bigger then 23
             if(hour > 23) {
+                // Increase day
                 day++;
+
+                // Check season change
                 if(day % daysToChangeSeason == 0)
                     season++;
+
+                // Reset hour
                 hour = 0;
             }
                 
         }
 
+        // Set season
         SetSeason();
     }
 
+    // Set season accordingly to season variable
     private void SetSeason() {
         switch(season) {
             case 0:

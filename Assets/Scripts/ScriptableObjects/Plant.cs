@@ -19,6 +19,8 @@ public class Plant : ScriptableObject {
     public int levelRequired;
     public int xp;
 
+    public List<int> seasons;
+
     public Sprite icon;
 
     public Transform plantPrefab;

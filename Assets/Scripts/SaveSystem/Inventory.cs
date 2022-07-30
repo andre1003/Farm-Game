@@ -33,8 +33,8 @@ public class Inventory : MonoBehaviour {
     }
 
     // Method for removing a plant from inventory
-    public bool Remove(Plant plant) {
-        bool hasRemoved = inventory.RemovePlant(plant, 1);
+    public bool Remove(Plant plant, int amount) {
+        bool hasRemoved = inventory.RemovePlant(plant, amount);
 
         if(onItemChangeCallback != null)
             onItemChangeCallback.Invoke();

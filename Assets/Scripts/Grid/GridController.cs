@@ -124,11 +124,15 @@ public class GridController : MonoBehaviour {
                         node.obj.gameObject.GetComponent<Renderer>().material = canPlaceMaterial;
 
                         if(Input.GetKeyDown(KeyCode.O) || Input.GetButtonDown("Fire2") && onMousePrefab != null) {
-                            Debug.Log("PLACING OBJECT");
                             node.isPlaceable = false;
                             onMousePrefab.GetComponent<FollowMouse>().isOnGrid = true;
                             onMousePrefab.position = node.cellPosition;
                             onMousePrefab.GetComponent<BoxCollider>().enabled = true;
+                            
+                            try {
+                                onMousePrefab.gameObject.GetComponent<PlantationController>().time = 0;
+                            }
+                            catch { }
 
                             // Save at scriptable object
                             zones.AddZone(onMousePrefab.position, null);
@@ -142,6 +146,12 @@ public class GridController : MonoBehaviour {
                         if(Input.GetKeyDown(KeyCode.O) || Input.GetButtonDown("Fire2")) {
                             node.isPlaceable = true;
                             zones.RemoveZone(node.cellPosition);
+
+                            try {
+                                hit.transform.gameObject.GetComponent<PlantationController>().DestroyMe();
+                            }
+                            catch { }
+
                             Destroy(hit.transform.gameObject);
                         }
                     }

@@ -23,16 +23,16 @@ public class ObjectsLoader : MonoBehaviour {
         
         // Load all objects saved at zones variable
         for (int i = 0; i < plant.Count; i++) {
-            print(positions[i]);
             Transform instance = Instantiate(plantationZone);
             instance.GetComponent<FollowMouse>().enabled = false;
             instance.position = positions[i];
+            PlantationController controller = instance.GetComponent<PlantationController>();
+            controller.SetTimeAndId(times[i], i);
 
             // Setup plant, if there was any
             if(plant[i] != null) {
-                PlantationController controller = instance.GetComponent<PlantationController>();
                 controller.Plant(plant[i]);
-                controller.SetTimeAndId(times[i], i);
+                
             }
         }
     }

@@ -4,7 +4,6 @@ using UnityEngine;
 
 [CreateAssetMenu(fileName = "NewInventory", menuName = "Inventory System/Inventory")]
 public class InventoryObject : ScriptableObject {
-    public int slots = 20;
     public List<InventorySlotObject> plants = new List<InventorySlotObject>();
 
     public bool AddPlant(Plant plant, int amount, bool harvested) {
@@ -15,13 +14,8 @@ public class InventoryObject : ScriptableObject {
             }
         }
 
-        if(slots > 0) {
-            slots--;
-            plants.Add(new InventorySlotObject(plant, amount, harvested));
-            return true;
-        }
-
-        return false;
+        plants.Add(new InventorySlotObject(plant, amount, harvested));
+        return true;
     }
 
     public bool RemovePlant(Plant plant, int amount) {
@@ -32,7 +26,6 @@ public class InventoryObject : ScriptableObject {
                 if(canRemoveFromList)
                     plants.RemoveAt(i);
 
-                slots++;
                 return true;
             }
         }

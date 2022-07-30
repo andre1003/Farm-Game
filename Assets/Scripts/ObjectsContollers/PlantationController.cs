@@ -1,20 +1,18 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PlantationController : MonoBehaviour {
+    // PlantationZone variable
+    public PlantationZones zones;
 
     #region Singleton
     private float clockSeconds;
     public static PlantationController instance;
 
     private void Awake() {
-        clockSeconds = TimeManager.instance.baseClockSeconds;
-        id = zones.AddTime(0, -1);
-
-        if(instance != null) {
-            Debug.LogWarning("More than one instance of Plantation Controller found!");
+        if(instance != null)
             return;
-        }
 
         instance = this;
     }
@@ -24,11 +22,8 @@ public class PlantationController : MonoBehaviour {
     public Transform front;
     public List<Transform> spawns;
 
-    // PlantationZone variable
-    public PlantationZones zones;
-
     // Time counter
-    public int time = 0;
+    public int time = -1;
 
 
     // Planted plant
@@ -44,7 +39,16 @@ public class PlantationController : MonoBehaviour {
     private int id = -1;
 
 
+    void Start() {
+        if(id == -1)
+            id = zones.AddTime(0, -1);
+        clockSeconds = TimeManager.instance.baseClockSeconds;
+    }
+
     void Update() {
+        if(time == -1)
+            return;
+
         clockSeconds -= Time.deltaTime;
         if(clockSeconds < 0) {
             clockSeconds = TimeManager.instance.baseClockSeconds;
@@ -57,7 +61,7 @@ public class PlantationController : MonoBehaviour {
         // Plants only if player have in Inventory
         if(planted == null) {
             // Try to remove one plant from inventory
-            bool hasRemoved = Inventory.instance.Remove(plant);
+            bool hasRemoved = Inventory.instance.Remove(plant, 1);
 
             // If removed
             if(hasRemoved) {
@@ -110,9 +114,14 @@ public class PlantationController : MonoBehaviour {
         }
     }
 
+    public void SetId(int id) {
+        this.id = id;
+    }
+
     public void SetTimeAndId(int time, int id) {
         this.time = time;
         this.id = id;
+        //Debug.Log("Time: " + this.time + " ID: " + this.id);
     }
 
     public bool HasPlant() {
@@ -146,6 +155,12 @@ public class PlantationController : MonoBehaviour {
         }
     }
 
+    public void DestroyMe() {
+        Debug.Log("DestroyMe called!");
+        DestroyPlants();
+        zones.RemoveTime(id);
+    }
+
     public void DestroyPlants() {
         // Loop spawned plants to clear
         foreach(var spawn in spawned) {
@@ -173,6 +188,7 @@ public class PlantationController : MonoBehaviour {
     }
 
     private void OnDestroy() {
-        zones.RemoveTime(id);
+        if(time == -1)
+            zones.RemoveTime(id);
     }
 }

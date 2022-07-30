@@ -133,6 +133,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74be1cf08c8f466408b44c6499a869d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  zones: {fileID: 11400000, guid: de6bddc39361ff242acd78bdbd6c3217, type: 2}
   front: {fileID: 1554834722557461675}
   spawns:
   - {fileID: 4050943260625338846}
@@ -144,7 +145,7 @@ MonoBehaviour:
   - {fileID: 5996218796191731995}
   - {fileID: 231243454998256710}
   - {fileID: 2952629554676682138}
-  zones: {fileID: 11400000, guid: de6bddc39361ff242acd78bdbd6c3217, type: 2}
+  time: -1
 --- !u!114 &-9076032803118601929
 MonoBehaviour:
   m_ObjectHideFlags: 0

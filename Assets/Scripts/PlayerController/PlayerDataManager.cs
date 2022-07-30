@@ -54,6 +54,13 @@ public class PlayerDataManager : MonoBehaviour {
         }        
     }
 
+    public void Sell(Plant plant, int amount, float multiplier=1f) {
+        if(Inventory.instance.Remove(plant, amount)) {
+            playerData.money += plant.baseSellValue * multiplier;
+            UpdateHUD();
+        }
+    }
+
     // Method for update money text
     private void UpdateHUD() {
         moneyTextEvent.RefreshString();
