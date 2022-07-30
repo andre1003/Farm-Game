@@ -33,10 +33,26 @@ MonoBehaviour:
     m_Localized: 'Hora: '
     m_Metadata:
       m_Items: []
+  - m_Id: 25492518876082176
+    m_Localized: Verao
+    m_Metadata:
+      m_Items: []
+  - m_Id: 25493815452889088
+    m_Localized: Inverno
+    m_Metadata:
+      m_Items: []
+  - m_Id: 25493819714301952
+    m_Localized: Outono
+    m_Metadata:
+      m_Items: []
+  - m_Id: 25493822646120448
+    m_Localized: Primavera
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds:
     - rid: 2896074513485398034
       type: {class: SmartFormatTag, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
       data:
-        m_Entries: 0000d7360d00000000009760f508000000f009df8f4f5a0000f04984dc4f5a0000f089b209525a00
+        m_Entries: 0000d7360d00000000009760f508000000f009df8f4f5a0000f04984dc4f5a0000f089b209525a0000f0c929be935a00

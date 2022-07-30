@@ -19,39 +19,18 @@ public class ObjectsManager : MonoBehaviour {
     // Hot spot
     public Vector2 hotSpot = Vector2.zero;
 
-    // Time
-    public TextMeshProUGUI time;
-    public int hour = 12;
-
-
-    // Time settings
-    private float clockSeconds;
-
 
     void Awake() {
         Instantiate(player, spawnSpot.transform.position, Quaternion.Euler(0, 90, 0));
-        clockSeconds = InGameSaves.GetClockSeconds();
     }
 
     // Start is called before the first frame update
     void Start() {
         Cursor.SetCursor(normalCursor, hotSpot, CursorMode.Auto);
-        time.text += hour.ToString("00");
     }
 
     // Update is called once per frame
     void Update() {
-        time.text = time.text.Split(' ')[0] + " " + hour.ToString("00");
-        clockSeconds -= Time.deltaTime;
-
-        if(clockSeconds < 0) {
-            clockSeconds = InGameSaves.GetClockSeconds();
-            hour++;
-            
-            if(hour > 23)
-                hour = 0;
-        }
-
         if(EventSystem.current.IsPointerOverGameObject()) {
             Cursor.SetCursor(normalCursor, Vector3.zero, CursorMode.Auto);
             return;

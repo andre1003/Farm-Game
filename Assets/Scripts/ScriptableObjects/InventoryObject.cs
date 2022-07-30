@@ -9,7 +9,7 @@ public class InventoryObject : ScriptableObject {
 
     public bool AddPlant(Plant plant, int amount, bool harvested) {
         for(int i = 0; i < plants.Count; i++) {
-            if(plants[i].plant == plant) {
+            if(plants[i].plant == plant && plants[i].harvested == harvested) {
                 plants[i].AddAmount(amount);
                 return true;
             }

@@ -52,9 +52,15 @@ public class InventoryUI : MonoBehaviour {
         }
     }
 
+    // Set harvested variable value
     public void SetHarvested(bool harvested) {
         this.harvested = harvested;
 
         UpdateUI();
+    }
+
+    // Get harvested variable value
+    public bool GetHarvested() {
+        return harvested;
     }
 }

@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class LightingManager : MonoBehaviour {
-    public ObjectsManager manager;
-
     [SerializeField] private Light directionalLight;
     [SerializeField] private LightPreset preset;
     [SerializeField, Range(0, 24)] private float timeOfDay;
@@ -35,10 +33,9 @@ public class LightingManager : MonoBehaviour {
         // This formula was achieved solving the following condition:
         // The clock seconds was defined by 10, so each hour have 10 seconds
         // So te best time to update 0.05 unit of light is after 0.5 seconds
-        baseClock = (0.5f * InGameSaves.GetClockSeconds()) / 10f;
-        Debug.Log(baseClock);
+        baseClock = (0.5f * TimeManager.instance.baseClockSeconds) / 10f;
         clock = baseClock;
-        timeOfDay = (float)manager.hour;
+        timeOfDay = (float)TimeManager.instance.hour;
     }
 
     // Update is called once per frame
@@ -47,7 +44,7 @@ public class LightingManager : MonoBehaviour {
             return;
         
         // Time set
-        hour = (float)manager.hour;
+        hour = (float)TimeManager.instance.hour;
         clock -= Time.deltaTime;
 
         // If a clock has completed, update light

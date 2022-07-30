@@ -47,6 +47,10 @@ public class PlantationZones : ScriptableObject {
         }
     }
 
+    public void RemoveTime(int index) {
+        times.RemoveAt(index);
+    }
+
     public List<int> GetTimes() {
         return times;
     }

@@ -8,7 +8,8 @@ public class PlantationController : MonoBehaviour {
     public static PlantationController instance;
 
     private void Awake() {
-        clockSeconds = InGameSaves.GetClockSeconds();
+        clockSeconds = TimeManager.instance.baseClockSeconds;
+        id = zones.AddTime(0, -1);
 
         if(instance != null) {
             Debug.LogWarning("More than one instance of Plantation Controller found!");
@@ -46,7 +47,7 @@ public class PlantationController : MonoBehaviour {
     void Update() {
         clockSeconds -= Time.deltaTime;
         if(clockSeconds < 0) {
-            clockSeconds = InGameSaves.GetClockSeconds();
+            clockSeconds = TimeManager.instance.baseClockSeconds;
             AddTime(1);
         }
     }
@@ -62,9 +63,12 @@ public class PlantationController : MonoBehaviour {
             if(hasRemoved) {
                 // Set XP
                 PlayerDataManager.instance.SetXp(plant.xp);
-                
-                // Move player to front spot to plant
-                MovementController.instance.SendTo(front.position, gameObject.transform);
+
+                try {
+                    // Move player to front spot to plant
+                    MovementController.instance.SendTo(front.position, gameObject.transform);
+                }
+                catch { }
                 
                 // Add the platnt to zones variable
                 zones.SetPlant(transform.position, plant);
@@ -127,7 +131,7 @@ public class PlantationController : MonoBehaviour {
     }
 
     public void Harvest() {
-        Inventory.instance.Add(planted, 1, true);
+        Inventory.instance.Add(planted, Random.Range(planted.minHarvest, planted.maxHarvest), true);
 
         DestroyPlants();
     }
@@ -153,8 +157,8 @@ public class PlantationController : MonoBehaviour {
         id = zones.AddTime(time, id);
 
         // Clear planted plant
+        zones.SetPlant(transform.position, null);
         planted = null;
-        zones.RemovePlant(id);
 
         // Clear spawned list
         spawned.Clear();
@@ -166,5 +170,9 @@ public class PlantationController : MonoBehaviour {
             Debug.Log("Aqui está plantado " + planted.name);
         else
             Debug.Log("Área vazia!");
+    }
+
+    private void OnDestroy() {
+        zones.RemoveTime(id);
     }
 }

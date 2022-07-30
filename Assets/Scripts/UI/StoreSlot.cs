@@ -45,8 +45,22 @@ public class StoreSlot : MonoBehaviour {
         //costText.text = "000,00";
     }
 
+
+    public void AddPlantToSell(Plant plant, int amount) {
+        this.plant = plant;
+        icon.sprite = plant.icon;
+
+        levelText.enabled = true;
+        costText.enabled = true;
+
+        levelText.text = amount.ToString();
+        costText.text = plant.baseSellValue.ToString();
+
+        icon.enabled = true;
+        levelImage.enabled = true;
+        costImage.enabled = true;
+    }
     public void Buy() {
-        Debug.Log("Buy called!");
         if(plant != null)
             PlayerDataManager.instance.Buy(plant, 1);
     }

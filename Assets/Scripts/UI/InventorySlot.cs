@@ -44,8 +44,8 @@ public class InventorySlot : MonoBehaviour {
     /// </summary>
     public void Plant() {
         GameObject plantationZone = InGameSaves.GetPlantationZone();
-        InventoryUI.instance.inventoryCanvas.SetActive(false);
-        if(plant != null && plantationZone != null) {
+        if(plant != null && plantationZone != null && !InventoryUI.instance.GetHarvested()) {
+            InventoryUI.instance.inventoryCanvas.SetActive(false);
             plantationZone.GetComponent<PlantationController>().Plant(plant);
         }
     }

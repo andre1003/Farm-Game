@@ -27,6 +27,22 @@ MonoBehaviour:
     m_Key: Time Text
     m_Metadata:
       m_Items: []
+  - m_Id: 25492518876082176
+    m_Key: Summer
+    m_Metadata:
+      m_Items: []
+  - m_Id: 25493815452889088
+    m_Key: Winter
+    m_Metadata:
+      m_Items: []
+  - m_Id: 25493819714301952
+    m_Key: Autumn
+    m_Metadata:
+      m_Items: []
+  - m_Id: 25493822646120448
+    m_Key: Spring
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
