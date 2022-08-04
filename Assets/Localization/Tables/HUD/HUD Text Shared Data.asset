@@ -43,6 +43,10 @@ MonoBehaviour:
     m_Key: Spring
     m_Metadata:
       m_Items: []
+  - m_Id: 26061312858124288
+    m_Key: Drive Text
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

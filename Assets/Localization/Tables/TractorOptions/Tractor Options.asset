@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5be51871efa6c3e4eae1703925c8f5ac, type: 3}
+  m_Name: Tractor Options
+  m_EditorClassIdentifier: 
+  m_SharedTableData: {fileID: 11400000, guid: 034b3e51a5b2e3841935de4cf8825fa6, type: 2}
+  m_Tables:
+  - {fileID: 11400000, guid: 7fed6e58ee3c33a4d8552333c8e6af15, type: 2}
+  - {fileID: 11400000, guid: 988bf45e3804d444a93f0a28706a880b, type: 2}
+  m_Extensions: []
+  m_Group: String Table
+  references:
+    version: 2
+    RefIds: []

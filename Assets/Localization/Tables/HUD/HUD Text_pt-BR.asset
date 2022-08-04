@@ -49,6 +49,10 @@ MonoBehaviour:
     m_Localized: Primavera
     m_Metadata:
       m_Items: []
+  - m_Id: 26061312858124288
+    m_Localized: Pressione E para dirigir
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds:

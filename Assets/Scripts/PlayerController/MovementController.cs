@@ -32,6 +32,9 @@ public class MovementController : MonoBehaviour {
     }
 
     private void Update() {
+        if(!myAgent.enabled)
+            return;
+
         if(EventSystem.current.IsPointerOverGameObject())
             return;
 
@@ -40,6 +43,9 @@ public class MovementController : MonoBehaviour {
     }
 
     private void LateUpdate() {
+        if(!myAgent.enabled)
+            return;
+
         if(myAgent.velocity.sqrMagnitude > Mathf.Epsilon) {
             transform.rotation = Quaternion.LookRotation(myAgent.velocity.normalized);
         }
@@ -85,6 +91,10 @@ public class MovementController : MonoBehaviour {
         }
     }
 
+    private void StopMovement() {
+        animator.SetBool("isWalking", false);
+    }
+
     // Method for send to plantation zone
     public void SendTo(Vector3 target, Transform gameObject) {
         lookAt = gameObject;
@@ -100,13 +110,26 @@ public class MovementController : MonoBehaviour {
     }
 
     public void StopPlayer() {
-        myAgent.isStopped = true;
-        animator.SetBool("isWalking", false);
+        if(myAgent.enabled) {
+            myAgent.isStopped = true;
+            animator.SetBool("isWalking", false);
+        }
     }
 
     public void ResumePlayer() {
-        myAgent.isStopped = false;
-        if(myAgent.hasPath)
-            animator.SetBool("isWalking", true);
+        if(myAgent.enabled) {
+            myAgent.isStopped = false;
+            if(myAgent.hasPath)
+                animator.SetBool("isWalking", true);
+        }
+    }
+
+    public void SetMyAgentActive(bool value) {
+        StopMovement();
+        myAgent.enabled = value;
+    }
+
+    public void SetAnimation(string animation, bool value) {
+        animator.SetBool(animation, value);
     }
 }
