@@ -13,6 +13,7 @@ public class GridController : MonoBehaviour {
 
     // Grid prefab and object to be placed
     public Transform gridCellPrefab;
+    public List<Transform> grassPrefab;
     [SerializeField] private Transform objectToPlace;
 
     // Nodes matrix
@@ -34,6 +35,45 @@ public class GridController : MonoBehaviour {
 
     // Current mouse position
     private Vector3 mousePosition;
+
+
+
+
+    // THIS IS A WORK IN PROGRESS TO ADD GRASS TO THE FARM
+    void Start ()
+    {
+        // Initial configuration
+        int name = 0;
+        float realI = spawn.x;
+        float realJ = spawn.z;
+
+        // Iterate the 'nodes' matrix
+        for(int i = 0; i < width; i++, realI += 3)
+        {
+            for(int j = 0; j < height; j++, realJ += 3)
+            {
+                // Instantiate the grid cell object
+                Vector3 worldPosition = new Vector3(realI, 0, realJ);
+                int index = Random.Range(0, grassPrefab.Count);
+                Transform obj = Instantiate(grassPrefab[index], worldPosition, Quaternion.identity);
+
+                // Set the grid cell collision to false
+                obj.GetComponent<MeshCollider>().enabled = false;
+
+                // Set the grid cell name
+                obj.name = "Grass_" + name;
+
+                // Increase the name auxiliar variable
+                name++;
+            }
+
+            // Set the real column to spawn.z
+            realJ = spawn.z;
+        }
+    }
+    
+
+
 
 
     // Update is called once per frame
@@ -177,7 +217,8 @@ public class GridController : MonoBehaviour {
                                 }
 
                                 // Change plantation zone time to 0
-                                onMousePrefab.gameObject.GetComponent<PlantationController>().time = 0;
+                                onMousePrefab.gameObject.GetComponent<PlantationController>().InitialSetup();
+
                             }
                             catch { }
 

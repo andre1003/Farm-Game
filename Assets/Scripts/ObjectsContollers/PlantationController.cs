@@ -7,7 +7,7 @@ public class PlantationController : MonoBehaviour {
     public PlantationZones zones;
 
     #region Singleton
-    private float clockSeconds;
+    
     public static PlantationController instance;
 
     private void Awake() {
@@ -25,6 +25,9 @@ public class PlantationController : MonoBehaviour {
     // Time counter
     public int time = -1;
 
+    // Initial planted day
+    public int initialDay = 0;
+
 
     // Planted plant
     private Plant planted;
@@ -39,21 +42,9 @@ public class PlantationController : MonoBehaviour {
     private int id = -1;
 
 
-    void Start() {
-        if(id == -1)
-            id = zones.AddTime(0, -1);
-        clockSeconds = TimeManager.instance.baseClockSeconds;
-    }
-
-    void Update() {
-        if(time == -1)
-            return;
-
-        clockSeconds -= Time.deltaTime;
-        if(clockSeconds < 0) {
-            clockSeconds = TimeManager.instance.baseClockSeconds;
-            AddTime(1);
-        }
+    void Update() 
+    {
+        AddTime();
     }
 
     // Method for planting
@@ -81,29 +72,42 @@ public class PlantationController : MonoBehaviour {
             // Set plant to planted plant and spawn the objects
             planted = plant;
             SpawnPlants(plant.plantPrefab);
+
+            // Setup initial plant day
+            if(initialDay == 0)
+            {
+                initialDay = TimeManager.instance.day;
+                id = zones.AddTime(initialDay, id);
+                Debug.Log("Planted in day: " + initialDay);
+            }
         }
     }
 
-    public void AddTime(int time) {
+    public void InitialSetup()
+    {
+        id = zones.AddTime(initialDay, id);
+        time = 0;
+    }
+
+    public void AddTime() {
         if(planted != null) {
             // Add time
-            this.time += time;
-            id = zones.AddTime(this.time, id);
-            Debug.Log("Time added! Current time: " + this.time);
+            time = TimeManager.instance.day - initialDay;
+            //id = zones.AddTime(time, id);
 
             // If time is between grow and rot, player can harvest
-            if(this.time >= planted.timeToGrow && this.time < planted.timeToRot) {
+            if(time >= planted.timeToGrow && time < planted.timeToRot) {
                 Debug.Log("Ready to harvest!");
                 isReadyToHarvest = true;
                 isRotten = false;
             }
             // Else, if time is bigger or equal to time to rot, player can no longer harvest
-            else if(this.time >= planted.timeToRot) {
+            else if(time >= planted.timeToRot) {
                 Debug.Log("Rotten!");
                 isReadyToHarvest = false;
                 isRotten = true;
 
-                if(this.time >= planted.timeToRot + 10) {
+                if(time >= planted.timeToRot + 10) {
                     // Set XP
                     PlayerDataManager.instance.SetXp(-planted.xp);
 
@@ -119,7 +123,7 @@ public class PlantationController : MonoBehaviour {
     }
 
     public void SetTimeAndId(int time, int id) {
-        this.time = time;
+        this.initialDay = time;
         this.id = id;
         //Debug.Log("Time: " + this.time + " ID: " + this.id);
     }
@@ -151,6 +155,7 @@ public class PlantationController : MonoBehaviour {
         // For each spawn point, spawn a seed
         foreach(var spawn in spawns) {
             Transform newPlant = Instantiate(plantPrefab, spawn.transform.position, Quaternion.identity);
+            newPlant.parent = transform;
             spawned.Add(newPlant);
         }
     }
@@ -169,7 +174,8 @@ public class PlantationController : MonoBehaviour {
 
         // Clear time
         time = 0;
-        id = zones.AddTime(time, id);
+        id = zones.AddTime(0, id);
+        initialDay = -1;
 
         // Clear planted plant
         zones.SetPlant(transform.position, null);
@@ -188,7 +194,8 @@ public class PlantationController : MonoBehaviour {
     }
 
     private void OnDestroy() {
-        if(time == -1)
-            zones.RemoveTime(id);
+        //Debug.Log("Plantation Zone Destroyed");
+        //if(initialDay == 0)
+        //    zones.RemoveTime(id);
     }
 }

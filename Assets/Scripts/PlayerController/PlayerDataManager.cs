@@ -35,6 +35,7 @@ public class PlayerDataManager : MonoBehaviour {
 
     void Start() {
         editMode = false;
+        UpdateHUD();
     }
 
 

@@ -28,6 +28,7 @@ public class ObjectsLoader : MonoBehaviour {
             instance.position = positions[i];
             PlantationController controller = instance.GetComponent<PlantationController>();
             controller.SetTimeAndId(times[i], i);
+            controller.InitialSetup();
 
             // Setup plant, if there was any
             if(plant[i] != null) {

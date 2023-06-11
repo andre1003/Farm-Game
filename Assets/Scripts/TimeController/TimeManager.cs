@@ -5,14 +5,27 @@ using TMPro;
 
 public class TimeManager : MonoBehaviour {
     #region Singleton
+    public TimeSystem timeSystem;
     public static TimeManager instance;
 
     void Awake() {
-        if(instance != null) {
+        if(instance != null)
+        {
             return;
         }
 
         instance = this;
+
+        // Load saved time
+        if(timeSystem != null)
+        {
+            day = timeSystem.day;
+            hour = timeSystem.hour;
+            daysToChangeSeason = timeSystem.daysToChangeSeason;
+            baseClockSeconds = timeSystem.baseClockSeconds;
+            season = timeSystem.season;
+        }
+        
     }
     #endregion
 
@@ -22,7 +35,7 @@ public class TimeManager : MonoBehaviour {
     // Date
     public int hour = 12;
     public int day = 1;
-    public int daysToChangeSeason = 10;
+    public List<int> daysToChangeSeason;
 
     // Clock
     public float baseClockSeconds = 10f;
@@ -64,8 +77,8 @@ public class TimeManager : MonoBehaviour {
                 day++;
 
                 // Check season change
-                if(day % daysToChangeSeason == 0)
-                    season++;
+                if(day % daysToChangeSeason[season] == 0)
+                    season = season >= 3 ? 0 : season + 1;
 
                 // Reset hour
                 hour = 0;
@@ -96,5 +109,23 @@ public class TimeManager : MonoBehaviour {
                 seasons.tableName = "Autumn";
                 break;
         }
+    }
+
+    /// <summary>
+    /// Called when quit application.
+    /// </summary>
+    void OnApplicationQuit()
+    {
+        // If there is no time system, quit
+        if(timeSystem == null)
+        {
+            return;
+        }
+
+        // Save current time
+        timeSystem.day = day;
+        timeSystem.hour = hour;
+        timeSystem.daysToChangeSeason = daysToChangeSeason;
+        timeSystem.season = season;
     }
 }
