@@ -6,18 +6,22 @@ using UnityEngine.UI;
 
 public class MainMenuManager : MonoBehaviour {
     public Slider progressBar;
+    
+    public AudioSource audioSource;
+    public AudioClip click;
+    public AudioClip hover;
 
-    // Start is called before the first frame update
-    void Start() {
 
-    }
+    // Cursors
+    public Texture2D normalCursor;
+    public Texture2D hoverCursor;
 
-    // Update is called once per frame
-    void Update() {
+    // Hot spot
+    public Vector2 hotSpot = Vector2.zero;
 
-    }
 
     public void Play() {
+        ClickSound();
         int index = SceneManager.GetActiveScene().buildIndex + 1;
         StartCoroutine(LoadAsyncScene(index));
     }
@@ -37,5 +41,32 @@ public class MainMenuManager : MonoBehaviour {
 
             yield return null;
         }
+    }
+
+    /// <summary>
+    /// Quit the game.
+    /// </summary>
+    public void QuitGame()
+    {
+        ClickSound();
+        Application.Quit();
+    }
+
+    public void HoverCursor()
+    {
+        Cursor.SetCursor(hoverCursor, hotSpot, CursorMode.Auto);
+        audioSource.clip = hover;
+        audioSource.Play();
+    }
+
+    public void NormalCursor()
+    {
+        Cursor.SetCursor(normalCursor, hotSpot, CursorMode.Auto);
+    }
+
+    private void ClickSound()
+    {
+        audioSource.clip = click;
+        audioSource.Play();
     }
 }
