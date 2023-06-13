@@ -9,7 +9,7 @@ public class MainMenuCamera : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        StartCoroutine(Wait(25f));
+        StartCoroutine(Wait(30f));
     }
 
     IEnumerator Wait(float seconds)
