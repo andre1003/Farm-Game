@@ -23,7 +23,7 @@ MonoBehaviour:
     m_SerializedLabels:
     - Locale
   - m_GUID: 05e092a4b36655f4fb47f1616d991dd7
-    m_Address: Portuguese (Brazil) (pt-BR)
+    m_Address: "Portugu\xEAs (Brasil)"
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale

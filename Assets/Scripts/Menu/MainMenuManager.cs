@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.Localization.Settings;
 using UnityEngine.Rendering.PostProcessing;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -32,6 +33,7 @@ public class MainMenuManager : MonoBehaviour
     // Settings
     public TextMeshProUGUI resolutionText;
     public TextMeshProUGUI graphicsText;
+    public TextMeshProUGUI languageText;
     public Toggle fullscreenToggle;
     public Toggle additionalResourcesToggle;
 
@@ -61,6 +63,7 @@ public class MainMenuManager : MonoBehaviour
     // Settings
     private int selectedResolution;
     private int selectedGraphics;
+    private int selectedLanguage;
 
     // Options
     private List<string> resolutionOptions;
@@ -87,11 +90,8 @@ public class MainMenuManager : MonoBehaviour
             gameSettings.refreshRate = Screen.currentResolution.refreshRate;
         }
 
-        // If the game settings are configured, apply them
-        else
-        {
-            gameSettings.ApplySettings();
-        }
+        // Apply game settings
+        gameSettings.ApplySettings();
 
         // Add all possible resolutions to an list
         Resolution[] resolutions = Screen.resolutions;
@@ -116,7 +116,10 @@ public class MainMenuManager : MonoBehaviour
 
         // Get the graphics preset and update settings text
         selectedGraphics = gameSettings.graphicsPreset;
-        graphicsText.text = graphicsOptions[selectedGraphics];
+        StringLocalizer.instance.Localize("Graphics Text", graphicsOptions[selectedGraphics], graphicsText);
+
+        // Get all localization locales
+        StringLocalizer.instance.GetLocales();
     }
 
     /// <summary>
@@ -312,8 +315,13 @@ public class MainMenuManager : MonoBehaviour
         // Update graphics in game settings
         gameSettings.graphicsPreset = selectedGraphics;
 
+        gameSettings.languageIndex = selectedLanguage;
+
         // Apply the settings
         gameSettings.ApplySettings();
+
+        // Update all localized strings via C#
+        UpdateLocalizedStrings();
 
         // Play click sound
         ClickSound();
@@ -376,7 +384,7 @@ public class MainMenuManager : MonoBehaviour
         }
 
         // Update graphics text
-        graphicsText.text = graphicsOptions[selectedGraphics];
+        StringLocalizer.instance.Localize("Graphics Text", graphicsOptions[selectedGraphics], graphicsText);
     }
 
     /// <summary>
@@ -396,7 +404,47 @@ public class MainMenuManager : MonoBehaviour
         }
 
         // Update graphics text
-        graphicsText.text = graphicsOptions[selectedGraphics];
+        StringLocalizer.instance.Localize("Graphics Text", graphicsOptions[selectedGraphics], graphicsText);
+    }
+
+    /// <summary>
+    /// Select next language available.
+    /// If the current selected language is the last, it goes back to beginning.
+    /// </summary>
+    public void NextLanguage()
+    {
+        // Play click sound
+        ClickSound();
+
+        // Increase the selected language and check if it is out of bounds. If it is, go back to beginning
+        selectedLanguage++;
+        if(selectedLanguage >= StringLocalizer.instance.options.Count)
+        {
+            selectedLanguage = 0;
+        }
+
+        // Update language text
+        languageText.text = StringLocalizer.instance.options[selectedLanguage];
+    }
+
+    /// <summary>
+    /// Select previous language available.
+    /// If the current selected language is the first, it goes back to the ending.
+    /// </summary>
+    public void PrevLanguage()
+    {
+        // Play click sound
+        ClickSound();
+
+        // Decrease the selected language and check if it is out of bounds. If it is, go back to the ending
+        selectedLanguage--;
+        if(selectedLanguage < 0)
+        {
+            selectedLanguage = StringLocalizer.instance.options.Count - 1;
+        }
+
+        // Update language text
+        languageText.text = StringLocalizer.instance.options[selectedLanguage];
     }
 
     /// <summary>
@@ -415,6 +463,37 @@ public class MainMenuManager : MonoBehaviour
     public void ChangeUseAdditionalResource(bool useAdditionalResource)
     {
         gameSettings.useAdditionalResource = useAdditionalResource;
+    }
+
+    /// <summary>
+    /// Update all localized strings via C# script.
+    /// This method waits for localization settings initialize,
+    /// so it can work propertly.
+    /// </summary>
+    public void UpdateLocalizedStrings()
+    {
+        StartCoroutine(UpdateStrings());
+    }
+
+    /// <summary>
+    /// Wait localization settings initialization and update strings.
+    /// </summary>
+    /// <returns></returns>
+    private IEnumerator UpdateStrings()
+    {
+        // Wait for the localization system to initialize
+        yield return LocalizationSettings.InitializationOperation;
+        StringLocalizer.instance.Localize("Graphics Text", graphicsOptions[selectedGraphics], graphicsText);
+    }
+
+    /// <summary>
+    /// Update the current language based on game settings.
+    /// </summary>
+    public void UpdateLanguage()
+    {
+        // Change language
+        selectedLanguage = gameSettings.languageIndex;
+        languageText.text = StringLocalizer.instance.options[selectedLanguage];
     }
     #endregion
 }

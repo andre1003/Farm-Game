@@ -15,20 +15,28 @@ public class GameSettings : ScriptableObject
     // Audio volume
     public float generalVolume;
 
-    // Graphics preset (low, medium, high, ultra)
+    // Graphics preset (very low, low, medium, high, very high, ultra)
     [Range(0, 5)] public int graphicsPreset;
 
-    // Use grass
+    // Use additional resource
     public bool useAdditionalResource;
+
+    // Selected language
+    public int languageIndex;
     
 
     /// <summary>
-    /// Apply the saved settings
+    /// Apply the saved settings.
     /// </summary>
     public void ApplySettings()
     {
-        // Set resolution and quality
+        // Set resolution
         Screen.SetResolution(resolutionWidth, resolutionHeight, fullscreen, refreshRate);
+
+        // Set quality
         QualitySettings.SetQualityLevel(graphicsPreset);
+
+        // Set game language
+        StringLocalizer.instance.ChangeLanguage(languageIndex);
     }
 }

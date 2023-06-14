@@ -59,6 +59,10 @@ MonoBehaviour:
     m_Key: Graphics Label
     m_Metadata:
       m_Items: []
+  - m_Id: 115553129429774336
+    m_Key: Language Text
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

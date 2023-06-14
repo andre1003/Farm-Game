@@ -1,0 +1,52 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
+  m_Name: Graphics Text Shared Data
+  m_EditorClassIdentifier: 
+  m_TableCollectionName: Graphics Text
+  m_TableCollectionNameGuidString: 11126fd762806bf4396d319df71152b8
+  m_Entries:
+  - m_Id: 28854235136
+    m_Key: Very Low
+    m_Metadata:
+      m_Items: []
+  - m_Id: 122081030144
+    m_Key: Low
+    m_Metadata:
+      m_Items: []
+  - m_Id: 128657698816
+    m_Key: Medium
+    m_Metadata:
+      m_Items: []
+  - m_Id: 132826836992
+    m_Key: High
+    m_Metadata:
+      m_Items: []
+  - m_Id: 136157114368
+    m_Key: Very High
+    m_Metadata:
+      m_Items: []
+  - m_Id: 139613220864
+    m_Key: Ultra
+    m_Metadata:
+      m_Items: []
+  m_Metadata:
+    m_Items: []
+  m_KeyGenerator:
+    rid: 8023874453509767168
+  references:
+    version: 2
+    RefIds:
+    - rid: 8023874453509767168
+      type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables, asm: Unity.Localization}
+      data:
+        m_CustomEpoch: 1686762738608
