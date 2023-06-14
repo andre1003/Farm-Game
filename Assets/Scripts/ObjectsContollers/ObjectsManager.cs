@@ -4,7 +4,8 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using TMPro;
 
-public class ObjectsManager : MonoBehaviour {
+public class ObjectsManager : MonoBehaviour
+{
     // Player spawn settings
     public Transform player;
     public GameObject spawnSpot;
@@ -20,62 +21,105 @@ public class ObjectsManager : MonoBehaviour {
     public Vector2 hotSpot = Vector2.zero;
 
 
-    void Awake() {
+    void Awake()
+    {
         Instantiate(player, spawnSpot.transform.position, Quaternion.Euler(0, 90, 0));
     }
 
     // Start is called before the first frame update
-    void Start() {
+    void Start()
+    {
         Cursor.SetCursor(normalCursor, hotSpot, CursorMode.Auto);
     }
 
     // Update is called once per frame
-    void Update() {
-        if(EventSystem.current.IsPointerOverGameObject()) {
+    void Update()
+    {
+        // Check if mouse is over an game object
+        if(EventSystem.current.IsPointerOverGameObject())
+        {
+            // If it is, set cursor to normal
             Cursor.SetCursor(normalCursor, Vector3.zero, CursorMode.Auto);
             return;
         }
 
+        // Check for any cursor change
         CheckCursorChange();
     }
 
     /// <summary>
-    /// Check if cursor needs to be changed
+    /// Check if cursor needs to be changed.
     /// </summary>
-    private void CheckCursorChange() {
+    private void CheckCursorChange()
+    {
+        // Get ray from mouse
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
 
-        if(Physics.Raycast(ray, out hit)) {
-            if(hit.collider.gameObject.tag == "Store") {                                        // Store
+        // If the ray hits something
+        if(Physics.Raycast(ray, out hit))
+        {
+            // Store
+            if(hit.collider.gameObject.tag == "Store")
+            {
+                // Set cursor to buyCursor
                 Cursor.SetCursor(buyCursor, Vector3.zero, CursorMode.Auto);
             }
-            else if(hit.collider.gameObject.tag == "Workbench") {                               // Workbench
+
+            // Workbench
+            else if(hit.collider.gameObject.tag == "Workbench")
+            {
+                // Set cursor to craftCursor
                 Cursor.SetCursor(craftCursor, Vector3.zero, CursorMode.Auto);
             }
-            else if(hit.collider.gameObject.tag == "Plantable") {                               // Plantation zone
+
+            // Plantation zone
+            else if(hit.collider.gameObject.tag == "Plantable")
+            {
+                // Set cursor to plantCursor
                 Cursor.SetCursor(plantCursor, Vector3.zero, CursorMode.Auto);
-                if(Input.GetButtonDown("Fire2") && !PlayerDataManager.instance.GetEditMode()) { // If Fire2 at a plantation zone
+
+                // If Fire2 at a plantation zone and player is not in edit mode
+                if(Input.GetButtonDown("Fire2") && !PlayerDataManager.instance.GetEditMode())
+                {
+                    // Get PlantationController component
                     PlantationController controller = hit.collider.gameObject.GetComponent<PlantationController>();
 
                     // If there is a plant on this platation zone
-                    if(controller.HasPlant()) {
+                    if(controller.HasPlant())
+                    {
+                        // Check if can harvest and if it is rotten
                         bool canHarvest = controller.CanHarvest();
                         bool isRotten = controller.IsRotten();
 
+                        // If the plant can be harvested and it is not rotten, harvest
                         if(canHarvest && !isRotten)
+                        {
                             controller.Harvest();
+                        }
+
+                        // If it is rotten or not ready to harvert, destroy it
                         else
+                        {
                             controller.DestroyPlants();
+                        }
+
                     }
+
+                    // If there is no plant planted, open inventory
                     else
+                    {
                         inventory.SetActive(true);
-                    
+                    }
+
+                    // Set current plantation zone
                     InGameSaves.SetPlantationZone(hit.collider.gameObject);
                 }
-                    
             }
-            else {
+
+            // If it's not an special location, set cursor to normal
+            else
+            {
                 Cursor.SetCursor(normalCursor, Vector3.zero, CursorMode.Auto);
             }
         }

@@ -30,6 +30,38 @@ MonoBehaviour:
     m_Localized: Loading...
     m_Metadata:
       m_Items: []
+  - m_Id: 115241245178638336
+    m_Localized: Apply
+    m_Metadata:
+      m_Items: []
+  - m_Id: 115286965365551104
+    m_Localized: Use additional resources?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 115290647469535232
+    m_Localized: Fullscreen
+    m_Metadata:
+      m_Items: []
+  - m_Id: 115292206693658624
+    m_Localized: Back
+    m_Metadata:
+      m_Items: []
+  - m_Id: 115294593848225792
+    m_Localized: Settings
+    m_Metadata:
+      m_Items: []
+  - m_Id: 115306085570097152
+    m_Localized: 'Resolution:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 115306244681019392
+    m_Localized: 'Volume:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 115311058131398656
+    m_Localized: 'Graphics:'
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

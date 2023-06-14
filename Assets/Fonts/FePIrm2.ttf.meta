@@ -1,0 +1,23 @@
+fileFormatVersion: 2
+guid: dda3e6a846a2aef44bf8924b2738350f
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - IM FELL DW Pica
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: d3735d3c5830c34429d78fae34c723c1, type: 3}
+  - {fileID: 12800000, guid: ed1c08a2a1ea42a459b0ca8559a14ed6, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

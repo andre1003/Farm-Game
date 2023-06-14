@@ -66,6 +66,9 @@ providers = {
 objectSelectors = {
 }
 recentSearches = [
+	"st:Apply Button"
+	"st:m"
+	"st:apply{}"
 	"st:alias{}"
 ]
 searchItemFavorites = [
