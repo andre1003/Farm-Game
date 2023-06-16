@@ -1,10 +1,13 @@
 using UnityEngine;
 
-public class InventoryUI : MonoBehaviour {
+public class InventoryUI : MonoBehaviour
+{
     #region Singleton
     public static InventoryUI instance;
-    private void Awake() {
-        if(instance != null) {
+    private void Awake()
+    {
+        if(instance != null)
+        {
             Debug.LogWarning("More than one instance of InventoryUI found!");
             return;
         }
@@ -17,50 +20,79 @@ public class InventoryUI : MonoBehaviour {
     // UI elements references
     public Transform itemsParent;
     public GameObject inventoryCanvas;
-    
+
+
     // Inventory references
-    Inventory inventory;
-    InventorySlot[] slots;
+    private Inventory inventory;
+    private InventorySlot[] slots;
 
     // Tab controller
     private bool harvested = false;
 
+
     // Start is called before the first frame update
-    void Start() {
+    void Start()
+    {
+        // Get inventory and add UpdateUI method to On Item Change Callback delegate
         inventory = Inventory.instance;
         inventory.onItemChangeCallback += UpdateUI;
 
+        // Get slots
         slots = itemsParent.GetComponentsInChildren<InventorySlot>();
+
+        // Update UI
         UpdateUI();
     }
 
     // Update is called once per frame
-    void Update() {
-        if(Input.GetKeyDown(KeyCode.I) && !InGameSaves.GetIsBusy()) {
+    void Update()
+    {
+        // If player press I ky and isBusy is false, change inventory visibility and update UI
+        if(Input.GetKeyDown(KeyCode.I) && !InGameSaves.GetIsBusy())
+        {
             inventoryCanvas.SetActive(!inventoryCanvas.activeSelf);
             UpdateUI();
         }
     }
 
-    // Method for update inventory UI
-    private void UpdateUI() {
-        for(int i = 0; i < slots.Length; i++) {
+    /// <summary>
+    /// Method for update inventory UI.
+    /// </summary>
+    private void UpdateUI()
+    {
+        // Loop slots
+        for(int i = 0; i < slots.Length; i++)
+        {
+            // If its the correct inventory tab, add it to slot
             if(i < inventory.inventory.plants.Count && inventory.inventory.plants[i].harvested == harvested)
+            {
                 slots[i].AddPlant(inventory.inventory.plants[i].plant, inventory.inventory.plants[i].amount);
+            }
+
+            // Else, clear slot
             else
+            {
                 slots[i].ClearSlot();
+            } 
         }
     }
 
-    // Set harvested variable value
-    public void SetHarvested(bool harvested) {
+    /// <summary>
+    /// Set harvested variable value.
+    /// </summary>
+    /// <param name="harvested">Harvasted value.</param>
+    public void SetHarvested(bool harvested)
+    {
         this.harvested = harvested;
-
         UpdateUI();
     }
 
-    // Get harvested variable value
-    public bool GetHarvested() {
+    /// <summary>
+    /// Get harvested variable value.
+    /// </summary>
+    /// <returns>Harvested value.</returns>
+    public bool GetHarvested()
+    {
         return harvested;
     }
 }

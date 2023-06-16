@@ -1,8 +1,9 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class Drive : MonoBehaviour {
+
+public class Drive : MonoBehaviour
+{
     // Canvases
     public GameObject driveCanvas;
     public GameObject tractorOptions;
@@ -19,21 +20,21 @@ public class Drive : MonoBehaviour {
     private GameObject player = null;
 
 
-    // Start is called before the first frame update
-    void Start() {
-
-    }
-
     // Update is called once per frame
-    void Update() {
+    void Update()
+    {
         // If not driving and drive canvas is not active, exti Update method
         if(!isDriving && !driveCanvas.activeSelf)
+        {
             return;
+        }
 
         // If player is not driving
-        if(!isDriving) {
+        if(!isDriving)
+        {
             // If E key pressed
-            if(Input.GetKeyDown(KeyCode.E)) {
+            if(Input.GetKeyDown(KeyCode.E))
+            {
                 // Close drive canvas
                 driveCanvas.SetActive(false);
 
@@ -46,7 +47,7 @@ public class Drive : MonoBehaviour {
 
                 // Set player rotation
                 player.transform.rotation = driveSpot.transform.rotation;
-                
+
                 // Open tractor options canvas
                 tractorOptions.SetActive(true);
 
@@ -57,10 +58,13 @@ public class Drive : MonoBehaviour {
                 isDriving = true;
             }
         }
+
         // If player is driving
-        else {
+        else
+        {
             // If E key pressed
-            if(Input.GetKeyDown(KeyCode.E)) {
+            if(Input.GetKeyDown(KeyCode.E))
+            {
                 // Open tractor options canvas
                 tractorOptions.SetActive(false);
 
@@ -80,17 +84,12 @@ public class Drive : MonoBehaviour {
         }
     }
 
-    // Wait for seconds and then change player position method
-    private IEnumerator Wait(float seconds) {
-        yield return new WaitForSeconds(seconds);
-
-        player.transform.position = driveSpot.transform.position;
-    }
-
     // On trigger enter event method
-    private void OnTriggerEnter(Collider other) {
+    private void OnTriggerEnter(Collider other)
+    {
         // If collides with player
-        if(other.gameObject.tag == "Player") {
+        if(other.gameObject.tag == "Player")
+        {
             // Set drive canvas to true and player to other.gameObject
             driveCanvas.SetActive(true);
             player = other.gameObject;
@@ -98,15 +97,31 @@ public class Drive : MonoBehaviour {
     }
 
     // On trigger exit event method
-    private void OnTriggerExit(Collider other) {
+    private void OnTriggerExit(Collider other)
+    {
         // If collides with player
-        if(other.gameObject.tag == "Player") {
+        if(other.gameObject.tag == "Player")
+        {
             // Set drive canvas to false
             driveCanvas.SetActive(false);
         }
     }
 
-    public void Harvest() {
+    /// <summary>
+    /// Wait for seconds and then change player position method.
+    /// </summary>
+    /// <param name="seconds">Seconds to wait.</param>
+    private IEnumerator Wait(float seconds)
+    {
+        yield return new WaitForSeconds(seconds);
+        player.transform.position = driveSpot.transform.position;
+    }
+
+    /// <summary>
+    /// Harvest plants with the vehicle.
+    /// </summary>
+    public void Harvest()
+    {
         // Maybe it could be a good idea to use Dijkstra algorithm to find the best path to harvest.
     }
 }

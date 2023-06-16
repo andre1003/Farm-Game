@@ -17225,6 +17225,7 @@ GameObject:
   - component: {fileID: 702135588}
   - component: {fileID: 702135589}
   - component: {fileID: 702135590}
+  - component: {fileID: 702135591}
   m_Layer: 0
   m_Name: UIManager
   m_TagString: Untagged
@@ -17275,6 +17276,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemsParent: {fileID: 1486324951}
   isOnBuyMenu: 1
+--- !u!114 &702135591
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 702135587}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6039593337d3bde4f8da3fe4d9b60eaa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  options: []
 --- !u!1 &704630063
 GameObject:
   m_ObjectHideFlags: 0
@@ -36140,7 +36154,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1722462549}
   - component: {fileID: 1722462550}
-  - component: {fileID: 1722462551}
   m_Layer: 0
   m_Name: TimeManager
   m_TagString: Untagged
@@ -36182,25 +36195,8 @@ MonoBehaviour:
   daysToChangeSeason: 
   baseClockSeconds: 2
   season: 0
-  seasons: {fileID: 1722462551}
---- !u!114 &1722462551
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1722462548}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 704cee81042804f4a8441691b20b7e72, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tableName: 
-  season: 
+  tableName: HUD Text
   seasonText: {fileID: 649863433}
-  _localizedStringTable:
-    m_TableReference:
-      m_TableCollectionName: GUID:de201cef09dc3e242938d2371979b845
 --- !u!1001 &1723841306
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -9,14 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 27d6e0843a112eb42b5ad2edda865cc3, type: 3}
-  m_Name: DefaultSettings
+  m_Script: {fileID: 11500000, guid: b9e25e760be008249b479d9eaa32e1f3, type: 3}
+  m_Name: DefaultTime
   m_EditorClassIdentifier: 
-  resolutionWidth: 0
-  resolutionHeight: 0
-  refreshRate: 0
-  fullscreen: 1
-  generalVolume: 0
-  graphicsPreset: 5
-  useAdditionalResource: 0
-  languageIndex: 0
+  hour: 10
+  day: 1
+  daysToChangeSeason: 0f0000000f0000000f0000000f000000
+  baseClockSeconds: 10
+  season: 0

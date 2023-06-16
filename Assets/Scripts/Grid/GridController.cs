@@ -2,7 +2,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class GridController : MonoBehaviour {
+public class GridController : MonoBehaviour
+{
     // Spawn vector
     public Vector3 spawn;
 
@@ -40,7 +41,7 @@ public class GridController : MonoBehaviour {
 
 
     // THIS IS A WORK IN PROGRESS TO ADD GRASS TO THE FARM
-    void Start ()
+    void Start()
     {
         // Initial configuration
         int name = 0;
@@ -71,29 +72,34 @@ public class GridController : MonoBehaviour {
             realJ = spawn.z;
         }
     }
-    
+
 
 
 
 
     // Update is called once per frame
-    void Update() {
+    void Update()
+    {
         // If player hits P key
-        if(Input.GetKeyDown(KeyCode.P)) {
+        if(Input.GetKeyDown(KeyCode.P))
+        {
             // If player is not on edit mode
-            if(!PlayerDataManager.instance.GetEditMode()) {
+            if(!PlayerDataManager.instance.GetEditMode())
+            {
                 // Create the grid and set player data to edit mode
                 CreateGrid();
                 PlayerDataManager.instance.SetEditMode(true);
 
                 // If there is not a plantation zone attached to mouse, create it
-                if(onMousePrefab == null && enabled) {
+                if(onMousePrefab == null && enabled)
+                {
                     InstantiateObjectOnMouse();
                 }
             }
 
             // If player IS on edit mode
-            else {
+            else
+            {
                 // Destroy the grid and set the player data to edit mode to false
                 DestroyGrid();
                 PlayerDataManager.instance.SetEditMode(false);
@@ -109,11 +115,12 @@ public class GridController : MonoBehaviour {
         if(PlayerDataManager.instance.GetEditMode())
             GetMousePostitionOnGrid();
     }
-    
+
     /// <summary>
     /// Create edit mode grid when player press P key.
     /// </summary>
-    public void CreateGrid() {
+    public void CreateGrid()
+    {
         // Create nodes
         nodes = new Node[width, height];
 
@@ -123,8 +130,10 @@ public class GridController : MonoBehaviour {
         float realJ = spawn.z;
 
         // Iterate the 'nodes' matrix
-        for(int i = 0; i < width; i++, realI += 3) {
-            for(int j = 0; j < height; j++, realJ += 3) {
+        for(int i = 0; i < width; i++, realI += 3)
+        {
+            for(int j = 0; j < height; j++, realJ += 3)
+            {
                 // Instantiate the grid cell object
                 Vector3 worldPosition = new Vector3(realI, 0, realJ);
                 Transform obj = Instantiate(gridCellPrefab, worldPosition, Quaternion.identity);
@@ -153,14 +162,18 @@ public class GridController : MonoBehaviour {
     /// <summary>
     /// Check for objects that need to be loaded on grid.
     /// </summary>
-    private void CheckLoadedObjects() {
+    private void CheckLoadedObjects()
+    {
         // Get all plantation zones positions that need to be loaded
         List<Vector3> positions = zones.GetPositions();
 
         // Create the plantation zone at the corresponding grid cell
-        foreach(var node in nodes) {
-            foreach(var position in positions) {
-                if(node.cellPosition == position) {
+        foreach(var node in nodes)
+        {
+            foreach(var position in positions)
+            {
+                if(node.cellPosition == position)
+                {
                     node.isPlaceable = false;
                 }
             }
@@ -170,7 +183,8 @@ public class GridController : MonoBehaviour {
     /// <summary>
     /// Destroy edit mode grid when player hit P again.
     /// </summary>
-    public void DestroyGrid() {
+    public void DestroyGrid()
+    {
         GameObject[] cells = GameObject.FindGameObjectsWithTag("Cell");
         int length = cells.Length;
 
@@ -183,32 +197,39 @@ public class GridController : MonoBehaviour {
     /// <summary>
     /// Cast a raycast to check where the player's mouse is and place or remove an object at that position.
     /// </summary>
-    private void GetMousePostitionOnGrid() {
+    private void GetMousePostitionOnGrid()
+    {
         RaycastHit hit;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
         // Check mouse hover hit event
-        if(Physics.Raycast(ray, out hit)) {
-            if(hit.transform.gameObject.tag == "Cell" || hit.transform.gameObject.tag == "Plantable") {
+        if(Physics.Raycast(ray, out hit))
+        {
+            if(hit.transform.gameObject.tag == "Cell" || hit.transform.gameObject.tag == "Plantable")
+            {
                 smoothMousePosition = hit.transform.position;
 
                 // Iterate all grid cell nodes
-                foreach(Node node in nodes) {
+                foreach(Node node in nodes)
+                {
                     // If this is the cell that player's mouse is over and this cell is placeable
-                    if(node.cellPosition == hit.transform.position && node.isPlaceable) {
+                    if(node.cellPosition == hit.transform.position && node.isPlaceable)
+                    {
                         // Change the grid cell color to green (canPlaceMaterial)
                         node.obj.gameObject.GetComponent<Renderer>().material = canPlaceMaterial;
 
                         // If player hits O key or right mouse button, place the plantation zone on this grid cell
-                        if(Input.GetKeyDown(KeyCode.O) || Input.GetButtonDown("Fire2") && onMousePrefab != null) {
+                        if(Input.GetKeyDown(KeyCode.O) || Input.GetButtonDown("Fire2") && onMousePrefab != null)
+                        {
                             // Configure the plantation zone prefab
                             node.isPlaceable = false;
                             onMousePrefab.GetComponent<FollowMouse>().isOnGrid = true;
                             onMousePrefab.position = node.cellPosition;
                             onMousePrefab.GetComponent<BoxCollider>().enabled = true;
-                            
+
                             // Try to configure plantation zone material and time
-                            try {
+                            try
+                            {
                                 // Change plantation zone material
                                 foreach(var renderer in onMousePrefab.GetComponentsInChildren<Renderer>())
                                 {
@@ -232,16 +253,19 @@ public class GridController : MonoBehaviour {
                     }
 
                     // If player's mouse is over this grid cell, but the cell is NOT placeable
-                    else if(node.cellPosition == hit.transform.position && !node.isPlaceable) {
+                    else if(node.cellPosition == hit.transform.position && !node.isPlaceable)
+                    {
                         // Change grid cell color to red (canNotPlaceMaterial)
                         node.obj.gameObject.GetComponent<Renderer>().material = canNotPlaceMaterial;
 
                         // If player clicks, remove the plantation zone at this grid cell
-                        if(Input.GetKeyDown(KeyCode.O) || Input.GetButtonDown("Fire2")) {
+                        if(Input.GetKeyDown(KeyCode.O) || Input.GetButtonDown("Fire2"))
+                        {
                             node.isPlaceable = true;
                             zones.RemoveZone(node.cellPosition);
 
-                            try {
+                            try
+                            {
                                 hit.transform.gameObject.GetComponent<PlantationController>().DestroyMe();
                             }
                             catch { }
@@ -251,7 +275,8 @@ public class GridController : MonoBehaviour {
                     }
 
                     // If this cell is not being hovered, just apply the default grid material
-                    else {
+                    else
+                    {
                         node.obj.gameObject.GetComponent<Renderer>().material = gridMaterial;
                     }
                 }
@@ -262,7 +287,8 @@ public class GridController : MonoBehaviour {
     /// <summary>
     /// Instantiates the desirable object on mouse position.
     /// </summary>
-    private void InstantiateObjectOnMouse() {
+    private void InstantiateObjectOnMouse()
+    {
         // Instatiate the plantation zone prefab
         onMousePrefab = Instantiate(objectToPlace, mousePosition, Quaternion.identity);
 
@@ -280,12 +306,17 @@ public class GridController : MonoBehaviour {
 }
 
 
-public class Node {
+/// <summary>
+/// Grid node class.
+/// </summary>
+public class Node
+{
     public bool isPlaceable;
     public Vector3 cellPosition;
     public Transform obj;
 
-    public Node(bool isPlaceable, Vector3 cellPosition, Transform obj) {
+    public Node(bool isPlaceable, Vector3 cellPosition, Transform obj)
+    {
         this.isPlaceable = isPlaceable;
         this.cellPosition = cellPosition;
         this.obj = obj;

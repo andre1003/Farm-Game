@@ -2,15 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlantationController : MonoBehaviour {
+public class PlantationController : MonoBehaviour
+{
     // PlantationZone variable
     public PlantationZones zones;
 
     #region Singleton
-    
+
     public static PlantationController instance;
 
-    private void Awake() {
+    private void Awake()
+    {
         if(instance != null)
             return;
 
@@ -42,29 +44,33 @@ public class PlantationController : MonoBehaviour {
     private int id = -1;
 
 
-    void Update() 
+    void Update()
     {
         AddTime();
     }
 
     // Method for planting
-    public void Plant(Plant plant) {
+    public void Plant(Plant plant)
+    {
         // Plants only if player have in Inventory
-        if(planted == null) {
+        if(planted == null)
+        {
             // Try to remove one plant from inventory
             bool hasRemoved = Inventory.instance.Remove(plant, 1);
 
             // If removed
-            if(hasRemoved) {
+            if(hasRemoved)
+            {
                 // Set XP
                 PlayerDataManager.instance.SetXp(plant.xp);
 
-                try {
+                try
+                {
                     // Move player to front spot to plant
                     MovementController.instance.SendTo(front.position, gameObject.transform);
                 }
                 catch { }
-                
+
                 // Add the platnt to zones variable
                 zones.SetPlant(transform.position, plant);
             }
@@ -89,25 +95,30 @@ public class PlantationController : MonoBehaviour {
         time = 0;
     }
 
-    public void AddTime() {
-        if(planted != null) {
+    public void AddTime()
+    {
+        if(planted != null)
+        {
             // Add time
             time = TimeManager.instance.day - initialDay;
             //id = zones.AddTime(time, id);
 
             // If time is between grow and rot, player can harvest
-            if(time >= planted.timeToGrow && time < planted.timeToRot) {
+            if(time >= planted.timeToGrow && time < planted.timeToRot)
+            {
                 Debug.Log("Ready to harvest!");
                 isReadyToHarvest = true;
                 isRotten = false;
             }
             // Else, if time is bigger or equal to time to rot, player can no longer harvest
-            else if(time >= planted.timeToRot) {
+            else if(time >= planted.timeToRot)
+            {
                 Debug.Log("Rotten!");
                 isReadyToHarvest = false;
                 isRotten = true;
 
-                if(time >= planted.timeToRot + 10) {
+                if(time >= planted.timeToRot + 10)
+                {
                     // Set XP
                     PlayerDataManager.instance.SetXp(-planted.xp);
 
@@ -118,57 +129,67 @@ public class PlantationController : MonoBehaviour {
         }
     }
 
-    public void SetId(int id) {
+    public void SetId(int id)
+    {
         this.id = id;
     }
 
-    public void SetTimeAndId(int time, int id) {
+    public void SetTimeAndId(int time, int id)
+    {
         this.initialDay = time;
         this.id = id;
-        //Debug.Log("Time: " + this.time + " ID: " + this.id);
     }
 
-    public bool HasPlant() {
+    public bool HasPlant()
+    {
         if(planted != null)
             return true;
         else
             return false;
     }
 
-    public bool CanHarvest() {
+    public bool CanHarvest()
+    {
         return isReadyToHarvest;
     }
 
-    public bool IsRotten() {
+    public bool IsRotten()
+    {
         return isRotten;
     }
 
-    public void Harvest() {
+    public void Harvest()
+    {
         Inventory.instance.Add(planted, Random.Range(planted.minHarvest, planted.maxHarvest), true);
 
         DestroyPlants();
     }
 
-    private void SpawnPlants(Transform plantPrefab) {
+    private void SpawnPlants(Transform plantPrefab)
+    {
         spawned = new List<Transform>();
 
         // For each spawn point, spawn a seed
-        foreach(var spawn in spawns) {
+        foreach(var spawn in spawns)
+        {
             Transform newPlant = Instantiate(plantPrefab, spawn.transform.position, Quaternion.identity);
             newPlant.parent = transform;
             spawned.Add(newPlant);
         }
     }
 
-    public void DestroyMe() {
+    public void DestroyMe()
+    {
         Debug.Log("DestroyMe called!");
         DestroyPlants();
         zones.RemoveTime(id);
     }
 
-    public void DestroyPlants() {
+    public void DestroyPlants()
+    {
         // Loop spawned plants to clear
-        foreach(var spawn in spawned) {
+        foreach(var spawn in spawned)
+        {
             Destroy(spawn.gameObject);
         }
 
@@ -186,16 +207,11 @@ public class PlantationController : MonoBehaviour {
     }
 
     // Test function
-    private void OnTriggerEnter(Collider other) {
+    private void OnTriggerEnter(Collider other)
+    {
         if(planted != null)
             Debug.Log("Aqui está plantado " + planted.name);
         else
             Debug.Log("Área vazia!");
-    }
-
-    private void OnDestroy() {
-        //Debug.Log("Plantation Zone Destroyed");
-        //if(initialDay == 0)
-        //    zones.RemoveTime(id);
     }
 }

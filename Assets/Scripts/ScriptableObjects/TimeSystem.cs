@@ -1,6 +1,6 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
 
 [CreateAssetMenu(fileName = "Time", menuName = "ScriptableObjects/TimeSystem")]
 public class TimeSystem : ScriptableObject

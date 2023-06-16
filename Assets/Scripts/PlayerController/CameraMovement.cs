@@ -1,48 +1,67 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class CameraMovement : MonoBehaviour {
-    private GameObject player;
+
+public class CameraMovement : MonoBehaviour
+{
+    // Smooth speed
     public float smoothSpeed = 0.125f;
 
-    private Vector3 offset;
-    private Vector3 newtrans;
 
-    private void Awake() {
+    // Player reference
+    private GameObject player;
+
+    // Offset
+    private Vector3 offset;
+
+    // New transform
+    private Vector3 newTrans;
+
+
+    // Awake method
+    private void Awake()
+    {
         player = GameObject.FindGameObjectWithTag("Player");
     }
 
-    void Start() {
+    // Start method
+    void Start()
+    {
         // Setting start position
         offset.x = transform.position.x - player.transform.position.x;
         offset.z = transform.position.z - player.transform.position.z;
-        newtrans = transform.position;
+        newTrans = transform.position;
     }
 
-    private void Update() {
-        // Zoom handler
-        if(Input.GetAxis("Mouse ScrollWheel") < 0f) {
+    private void Update()
+    {
+        // Zoom down
+        if(Input.GetAxis("Mouse ScrollWheel") < 0f)
+        {
             Camera.main.orthographicSize++;
             if(Camera.main.orthographicSize > 14f)
+            {
                 Camera.main.orthographicSize = 14f;
+            }
         }
-        else if(Input.GetAxis("Mouse ScrollWheel") > 0f) {
+
+        // Zoom up
+        else if(Input.GetAxis("Mouse ScrollWheel") > 0f)
+        {
             Camera.main.orthographicSize--;
         }
     }
-    
-    void FixedUpdate() {
+
+    // Fixed update method
+    void FixedUpdate()
+    {
         // Set new transform position
-        newtrans.x = player.transform.position.x + offset.x;
-        newtrans.z = player.transform.position.z + offset.z;
+        newTrans.x = player.transform.position.x + offset.x;
+        newTrans.z = player.transform.position.z + offset.z;
 
         // Smoothly change position
-        Vector3 smoothPosition = Vector3.Lerp(transform.position, newtrans, smoothSpeed * Time.deltaTime);
+        Vector3 smoothPosition = Vector3.Lerp(transform.position, newTrans, smoothSpeed * Time.deltaTime);
 
         // Change position
         transform.position = smoothPosition;
-
-        
     }
 }

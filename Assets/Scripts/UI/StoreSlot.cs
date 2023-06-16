@@ -1,9 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class StoreSlot : MonoBehaviour {
+
+public class StoreSlot : MonoBehaviour
+{
     // Slot icon
     public Image icon;
 
@@ -21,8 +21,12 @@ public class StoreSlot : MonoBehaviour {
     private int amount = -1;
 
 
-    // Add a plant to a slot
-    public void AddPlant(Plant plant) {
+    /// <summary>
+    /// Add plant to slot.
+    /// </summary>
+    /// <param name="plant">Plant reference.</param>
+    public void AddPlant(Plant plant)
+    {
         // Plant setup
         this.plant = plant;
         icon.sprite = plant.icon;
@@ -41,8 +45,11 @@ public class StoreSlot : MonoBehaviour {
         costImage.enabled = true;
     }
 
-    // Clear the slot
-    public void ClearSlot() {
+    /// <summary>
+    /// Clear the slot.
+    /// </summary>
+    public void ClearSlot()
+    {
         // Clear plant
         plant = null;
         icon.sprite = null;
@@ -59,8 +66,13 @@ public class StoreSlot : MonoBehaviour {
         icon.enabled = false;
     }
 
-    // Add a plant to sell
-    public void AddPlantToSell(Plant plant, int amount) {
+    /// <summary>
+    /// Add a plant to sell.
+    /// </summary>
+    /// <param name="plant">Plant reference.</param>
+    /// <param name="amount">Amount.</param>
+    public void AddPlantToSell(Plant plant, int amount)
+    {
         // Plant setup
         this.plant = plant;
         icon.sprite = plant.icon;
@@ -83,15 +95,25 @@ public class StoreSlot : MonoBehaviour {
         costImage.enabled = true;
     }
 
-    // Buy a plant
-    public void Buy() {
+    /// <summary>
+    /// Buy a plant.
+    /// </summary>
+    public void Buy()
+    {
         if(plant != null)
+        {
             PlayerDataManager.instance.Buy(plant, 1);
+        }
     }
 
-    // Sell a plant
-    public void Sell() {
-        if(plant != null) {
+    /// <summary>
+    /// Sell a plant.
+    /// </summary>
+    public void Sell()
+    {
+        // If there is a plant
+        if(plant != null)
+        {
             // Calculate multiplier and sell plant
             float multiplier = 2f / (plant.seasons.IndexOf(TimeManager.instance.season) + 1);
             PlayerDataManager.instance.Sell(plant, 1, multiplier);
@@ -101,19 +123,33 @@ public class StoreSlot : MonoBehaviour {
 
             // If amount is less or equal to 0, clear the slot
             if(amount <= 0)
+            {
                 ClearSlot();
+            }
+
             // Else, update the slot
             else
+            {
                 AddPlantToSell(plant, amount);
-            
+            }
         }
     }
 
-    // Store handler
-    public void StoreActionHandler() {
+    /// <summary>
+    /// Store handler.
+    /// </summary>
+    public void StoreActionHandler()
+    {
+        // Buy
         if(StoreUI.instance.isOnBuyMenu)
+        {
             Buy();
+        }
+
+        // Sell
         else
+        {
             Sell();
+        }
     }
 }

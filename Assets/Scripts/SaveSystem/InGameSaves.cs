@@ -1,28 +1,48 @@
 using UnityEngine;
 
-public class InGameSaves {
-    //private static bool canMove = true;
+
+public class InGameSaves
+{
+    // Is busy?
     private static bool isBusy = false;
+
+    // Plantation zone reference
     private static GameObject plantationZone = null;
 
-    // Change isBusy, so the game can detect if player is doing something or not
-    // This will help to don't open store when crafting or vice-versa
-    public static void ChangeIsBusy() {
+
+    /// <summary>
+    /// Change isBusy, so the game can detect if player is doing something or not.
+    /// This will help to not open store when crafting or paused, for example.
+    /// </summary>
+    public static void ChangeIsBusy()
+    {
         isBusy = !isBusy;
     }
 
-    // Get isBusy value
-    public static bool GetIsBusy() {
+    /// <summary>
+    /// Get isBusy value.
+    /// </summary>
+    /// <returns>isBusy value.</returns>
+    public static bool GetIsBusy()
+    {
         return isBusy;
     }
-    
-    // Set current plantation zone
-    public static void SetPlantationZone(GameObject zone) {
+
+    /// <summary>
+    /// Set current plantation zone.
+    /// </summary>
+    /// <param name="zone">Plantation zone reference.</param>
+    public static void SetPlantationZone(GameObject zone)
+    {
         plantationZone = zone;
     }
 
-    // Get current plantation zone
-    public static GameObject GetPlantationZone() {
+    /// <summary>
+    /// Get current plantation zone.
+    /// </summary>
+    /// <returns>Current plantation zone.</returns>
+    public static GameObject GetPlantationZone()
+    {
         return plantationZone;
     }
 }

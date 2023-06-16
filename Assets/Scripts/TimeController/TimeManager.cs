@@ -1,7 +1,7 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+
 
 public class TimeManager : MonoBehaviour {
     #region Singleton
@@ -25,7 +25,6 @@ public class TimeManager : MonoBehaviour {
             baseClockSeconds = timeSystem.baseClockSeconds;
             season = timeSystem.season;
         }
-        
     }
     #endregion
 
@@ -42,8 +41,9 @@ public class TimeManager : MonoBehaviour {
 
     // Seasons
     [Range(0, 3)] public int season = 0;
-    public SeasonsLocalizedStrings seasons;
-    
+    public string tableName;
+    public TextMeshProUGUI seasonText;
+
 
     // Clock sencods
     private float clockSeconds;
@@ -94,19 +94,19 @@ public class TimeManager : MonoBehaviour {
     private void SetSeason() {
         switch(season) {
             case 0:
-                seasons.tableName = "Winter";
+                StringLocalizer.instance.Localize(tableName, "Winter", seasonText);
                 break;
 
             case 1:
-                seasons.tableName = "Spring";
+                StringLocalizer.instance.Localize(tableName, "Spring", seasonText);
                 break;
 
             case 2:
-                seasons.tableName = "Summer";
+                StringLocalizer.instance.Localize(tableName, "Summer", seasonText);
                 break;
 
             case 3:
-                seasons.tableName = "Autumn";
+                StringLocalizer.instance.Localize(tableName, "Autumn", seasonText);
                 break;
         }
     }

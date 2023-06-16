@@ -1,15 +1,16 @@
-using System.Collections;
-using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 using UnityEngine.Localization.Components;
 using UnityEngine.UI;
 
-public class PlayerDataManager : MonoBehaviour {
+
+public class PlayerDataManager : MonoBehaviour
+{
     #region Singleton
     public static PlayerDataManager instance;
-    private void Awake() {
-        if(instance != null) {
+    private void Awake()
+    {
+        if(instance != null)
+        {
             Debug.LogWarning("More than one instance of PlayerDataManager found!");
             return;
         }
@@ -20,79 +21,133 @@ public class PlayerDataManager : MonoBehaviour {
 
     #endregion
 
+    // Player data
     public PlayerData playerData;
 
-    //public Text moneyText;
+    // HUD text
     public Text levelText;
     public Text xpText;
 
-    //public string cash;
-
+    // Localization
     public LocalizeStringEvent moneyTextEvent;
     public LocalizeStringEvent levelTextEvent;
 
+
+    // Edit mode
     private bool editMode = false;
 
-    void Start() {
+
+    void Start()
+    {
+        // Set edit mode to false and update HUD
         editMode = false;
         UpdateHUD();
     }
 
-
-    // Method for buy a plant
-    public void Buy(Plant plant, int amount) {
-        if(plant.levelRequired <= playerData.level) {
+    /// <summary>
+    /// Method for buy a plant.
+    /// </summary>
+    /// <param name="plant">Plant reference.</param>
+    /// <param name="amount">Amount to buy.</param>
+    public void Buy(Plant plant, int amount)
+    {
+        // If player has enought level, add to player's inventory
+        if(plant.levelRequired <= playerData.level)
+        {
+            // Try to add to inventory
             bool canAdd = Inventory.instance.Add(plant, amount, false);
 
             // Check if player have money and slots enough to buy
-            if(plant.buyValue <= playerData.money && canAdd) {
+            if(plant.buyValue <= playerData.money && canAdd)
+            {
                 playerData.money -= plant.buyValue;
                 UpdateHUD();
             }
         }
-        else {
+
+        // If player don't have enought level
+        else
+        {
             Debug.Log("Not available for your level");
-        }        
+        }
     }
 
-    public void Sell(Plant plant, int amount, float multiplier=1f) {
-        if(Inventory.instance.Remove(plant, amount)) {
+    /// <summary>
+    /// Sell a plant.
+    /// </summary>
+    /// <param name="plant">Plant reference.</param>
+    /// <param name="amount">Amount to sell.</param>
+    /// <param name="multiplier">Price multiplier.</param>
+    public void Sell(Plant plant, int amount, float multiplier = 1f)
+    {
+        // If successfully removed from player inventory
+        if(Inventory.instance.Remove(plant, amount))
+        {
+            // Add money and update HUD
             playerData.money += plant.baseSellValue * multiplier;
             UpdateHUD();
         }
     }
 
-    // Method for update money text
-    private void UpdateHUD() {
+    /// <summary>
+    /// Method for update money text.
+    /// </summary>
+    private void UpdateHUD()
+    {
+        // Refresh money and level string
         moneyTextEvent.RefreshString();
         levelTextEvent.RefreshString();
+
+        // Update XP text
         xpText.text = playerData.xp + " / " + playerData.nextLvlXp;
     }
 
-    // Method for adding money
-    public void SetMoney(float moneyToAdd) {
+    /// <summary>
+    /// Method for adding money.
+    /// </summary>
+    /// <param name="moneyToAdd">Money to add.</param>
+    public void SetMoney(float moneyToAdd)
+    {
         playerData.money += moneyToAdd;
         UpdateHUD();
     }
 
-    // Method for adding XP
-    public void SetXp(int xp) {
+    /// <summary>
+    /// Method for adding XP.
+    /// </summary>
+    /// <param name="xp">XP to add.</param>
+    public void SetXp(int xp)
+    {
+        // Add XP
         playerData.xp += xp;
 
-        if(playerData.xp >= playerData.nextLvlXp) {
+        // Check for level up
+        if(playerData.xp >= playerData.nextLvlXp)
+        {
             playerData.xp = playerData.nextLvlXp - playerData.xp;
             playerData.level++;
             playerData.nextLvlXp += 10;
         }
 
+        // Update HUD
         UpdateHUD();
     }
 
-    public void SetEditMode(bool editMode) { 
+    /// <summary>
+    /// Change edit mode.
+    /// </summary>
+    /// <param name="editMode">New edit mode value.</param>
+    public void SetEditMode(bool editMode)
+    {
         this.editMode = editMode;
     }
 
-    public bool GetEditMode() {
+    /// <summary>
+    /// Get edit mode value.
+    /// </summary>
+    /// <returns>Edit mode value.</returns>
+    public bool GetEditMode()
+    {
         return editMode;
     }
 }
