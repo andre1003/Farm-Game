@@ -9,12 +9,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5874fb8ab14eb8946809e23d794a5664, type: 3}
-  m_Name: PlayerData
+  m_Script: {fileID: 11500000, guid: 27d6e0843a112eb42b5ad2edda865cc3, type: 3}
+  m_Name: Settings
   m_EditorClassIdentifier: 
-  name: Dufwine
-  level: 1
-  xp: 0
-  nextLvlXp: 50
-  money: 100
-  tutorialInstructionIndex: 0
+  resolutionWidth: 1920
+  resolutionHeight: 1080
+  refreshRate: 165
+  fullscreen: 1
+  generalVolume: 0
+  graphicsPreset: 5
+  useAdditionalResource: 0
+  languageIndex: 1

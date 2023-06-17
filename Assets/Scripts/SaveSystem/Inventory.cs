@@ -1,7 +1,8 @@
 using UnityEngine;
 
 
-public class Inventory : MonoBehaviour {
+public class Inventory : MonoBehaviour
+{
     #region Singleton
     // On Item Change delegate
     public delegate void OnItemChange();
@@ -10,8 +11,10 @@ public class Inventory : MonoBehaviour {
     // Instance
     public static Inventory instance;
 
-    private void Awake() {
-        if(instance != null) {
+    private void Awake()
+    {
+        if(instance != null)
+        {
             Debug.LogWarning("More than one instance of Inventory found!");
             return;
         }
@@ -30,7 +33,8 @@ public class Inventory : MonoBehaviour {
     /// <param name="amount">Amount to add.</param>
     /// <param name="harvested">This plant was harvested?</param>
     /// <returns>TRUE - Successfully added. FALSE - Failed to add.</returns>
-    public bool Add(Plant plant, int amount, bool harvested) {
+    public bool Add(Plant plant, int amount, bool harvested)
+    {
         // Try to add plant to inventory
         bool added = inventory.AddPlant(plant, amount, harvested);
 
@@ -45,7 +49,7 @@ public class Inventory : MonoBehaviour {
         }
 
         // Return if the plant have been successfully added to inventory or not
-        return added;            
+        return added;
     }
 
 
@@ -55,7 +59,8 @@ public class Inventory : MonoBehaviour {
     /// <param name="plant">Plant reference.</param>
     /// <param name="amount">Amount to remove.</param>
     /// <returns>TRUE - Successfully removed. FALSE - Failed to add.</returns>
-    public bool Remove(Plant plant, int amount) {
+    public bool Remove(Plant plant, int amount)
+    {
         // Try to remove a given amount of a given plant
         bool hasRemoved = inventory.RemovePlant(plant, amount);
 

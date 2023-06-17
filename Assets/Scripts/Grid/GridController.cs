@@ -37,12 +37,19 @@ public class GridController : MonoBehaviour
     // Current mouse position
     private Vector3 mousePosition;
 
-
+    // Settings
+    public GameSettings gameSettings;
 
 
     // THIS IS A WORK IN PROGRESS TO ADD GRASS TO THE FARM
     void Start()
     {
+        // If should not use additional resource, exit
+        if(!gameSettings.useAdditionalResource)
+        {
+            return;
+        }
+
         // Initial configuration
         int name = 0;
         float realI = spawn.x;

@@ -229,4 +229,23 @@ public class MovementController : MonoBehaviour
     {
         animator.SetBool(animation, value);
     }
+
+    /// <summary>
+    /// Is character moving?
+    /// </summary>
+    /// <returns>TRUE - The character is moving. FALSE - The character is NOT moving.</returns>
+    public bool IsCharacterMoving()
+    {
+        if(!myAgent.enabled)
+        {
+            return false;
+        }
+
+        if(myAgent.hasPath)
+        {
+            return true;
+        }
+
+        return false;
+    }
 }
