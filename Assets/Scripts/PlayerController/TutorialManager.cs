@@ -55,12 +55,18 @@ public class TutorialManager : MonoBehaviour
         CheckAction();
     }
 
+    /// <summary>
+    /// Wait 1 second to start tutorial.
+    /// </summary>
     private IEnumerator WaitForUpdateUI()
     {
         yield return new WaitForSeconds(1f);
         UpdateUI(instructions[instructionIndex], true);
     }
 
+    /// <summary>
+    /// Setup all actions.
+    /// </summary>
     private void SetupActions()
     {
         // Set actions list, adding instructions.Count actions.
@@ -226,6 +232,7 @@ public class TutorialManager : MonoBehaviour
         // If the action have been completed, get next instruction
         if(actionCompleted)
         {
+            // If can call next instruction, call it
             if(canCallNextInstruction)
             {
                 canCallNextInstruction = false;
