@@ -17,4 +17,4 @@ MonoBehaviour:
   xp: 0
   nextLvlXp: 50
   money: 100
-  tutorialInstructionIndex: 0
+  instructionIndex: 0

@@ -16,11 +16,13 @@ public class TutorialManager : MonoBehaviour
 
     // Instruction
     public List<string> instructions = new List<string>();
+    public List<float> instructionTimers = new List<float>();
 
 
     // Instruction
     private int instructionIndex = 0;
     private bool actionCompleted = false;
+    private bool canCallNextInstruction = true;
 
 
     // Awake method
@@ -40,7 +42,7 @@ public class TutorialManager : MonoBehaviour
         }
 
         // Update instruction UI
-        UpdateUI(instructions[instructionIndex], true);
+        StartCoroutine(WaitForUpdateUI());
 
         // Setup all tutorial actions
         SetupActions();
@@ -51,6 +53,12 @@ public class TutorialManager : MonoBehaviour
     {
         // Check for action update, if any
         CheckAction();
+    }
+
+    private IEnumerator WaitForUpdateUI()
+    {
+        yield return new WaitForSeconds(1f);
+        UpdateUI(instructions[instructionIndex], true);
     }
 
     private void SetupActions()
@@ -65,6 +73,7 @@ public class TutorialManager : MonoBehaviour
 
         // Set the actions
         actions[1] += MoveAround;
+        actions[2] += OpenInventory;
     }
 
 
@@ -87,12 +96,12 @@ public class TutorialManager : MonoBehaviour
             return;
         }
 
-        // Set action completed to false
-        actionCompleted = false;
-
         // Increase instruction index and save it
         instructionIndex++;
         PlayerDataManager.instance.playerData.instructionIndex = instructionIndex;
+
+        // Set action completed to false
+        actionCompleted = false;
 
         // If instruction index is out of bounds, set it to -1, save it and exit
         if(instructionIndex >= instructions.Count)
@@ -105,6 +114,9 @@ public class TutorialManager : MonoBehaviour
 
         // If instruction index is valid, set instruction text
         UpdateUI(instructions[instructionIndex], true);
+
+        // Allow action check to work
+        canCallNextInstruction = true;
     }
 
     /// <summary>
@@ -211,10 +223,14 @@ public class TutorialManager : MonoBehaviour
             return;
         }
 
-        // If the action have been completed, get next instructions after 2 seconds
+        // If the action have been completed, get next instruction
         if(actionCompleted)
         {
-            StartCoroutine(WaitForNextInstruction());
+            if(canCallNextInstruction)
+            {
+                canCallNextInstruction = false;
+                StartCoroutine(WaitForNextInstruction());
+            }
         }
 
         // If the action have NOT been completed, invoke it
@@ -225,11 +241,11 @@ public class TutorialManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Wait 2 seconds and get next instructions.
+    /// Wait 0.5 seconds and get next instructions.
     /// </summary>
     private IEnumerator WaitForNextInstruction()
     {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(instructionTimers[instructionIndex]);
         NextInstruction();
     }
 
@@ -251,6 +267,14 @@ public class TutorialManager : MonoBehaviour
     private void MoveAround()
     {
         actionCompleted = MovementController.instance.IsCharacterMoving();
+    }
+
+    /// <summary>
+    /// Check if player opened inventory.
+    /// </summary>
+    private void OpenInventory()
+    {
+        actionCompleted = InventoryUI.instance.inventoryCanvas.activeSelf;
     }
     #endregion
 }

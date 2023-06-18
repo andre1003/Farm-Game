@@ -14958,7 +14958,15 @@ MonoBehaviour:
   - "Ol\xE1 meu parceiro, como vai! Vamos come\xE7ar nossa aventura nessa jo\xE7a!"
   - "Primeiramente, voc\xEA precisa se familiarizar com essa fazenda. Ande um pouco
     por ai!"
-  - Muito bem!
+  - "Muito bem! Agora vamos ver o que voc\xEA tem no bolso. Pra abrir o invent\xE1rio,
+    utilize a tecla I."
+  - "Que maravilha! Parece que voc\xEA tem algumas coisas nesses bolsos al\xE9m de
+    teia de aranha!"
+  instructionTimers:
+  - 0
+  - 4
+  - 0.5
+  - 0
 --- !u!1001 &622801559
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -32838,7 +32846,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_TargetDisplay: 0
 --- !u!1 &1500677485
 GameObject:
