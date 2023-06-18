@@ -12,7 +12,8 @@ public class PlantationZones : ScriptableObject
     public List<Plant> plants;
 
     // Times
-    public List<int> times;
+    public List<int> plantingDays;
+    public List<int> plantingHours;
 
 
     /// <summary>
@@ -79,19 +80,22 @@ public class PlantationZones : ScriptableObject
     /// <summary>
     /// Add time to list.
     /// </summary>
-    /// <param name="time">Time to add.</param>
+    /// <param name="day">Planting day.</param>
+    /// <param name="hour">Planting hour.</param>
     /// <param name="index">Index to add.</param>
     /// <returns>Return the index of added time.</returns>
-    public int AddTime(int time, int index)
+    public int AddTime(int day, int hour, int index)
     {
         if(index == -1)
         {
-            times.Add(time);
-            return times.Count - 1;
+            plantingDays.Add(day);
+            plantingHours.Add(hour);
+            return plantingDays.Count - 1;
         }
         else
         {
-            times[index] = time;
+            plantingDays[index] = day;
+            plantingHours[index] = hour;
             return index;
         }
     }
@@ -104,18 +108,28 @@ public class PlantationZones : ScriptableObject
     {
         try
         {
-            times.RemoveAt(index);
+            plantingDays.RemoveAt(index);
+            plantingHours.RemoveAt(index);
         }
         catch { }
     }
 
     /// <summary>
-    /// Get time list.
+    /// Get planting days list.
     /// </summary>
-    /// <returns>Time list.</returns>
-    public List<int> GetTimes()
+    /// <returns>Planting days list.</returns>
+    public List<int> GetPlantingDays()
     {
-        return times;
+        return plantingDays;
+    }
+
+    /// <summary>
+    /// Get planting hours list.
+    /// </summary>
+    /// <returns>Planting hours list.</returns>
+    public List<int> GetPlantingHours() 
+    {
+        return plantingHours;
     }
 
     /// <summary>

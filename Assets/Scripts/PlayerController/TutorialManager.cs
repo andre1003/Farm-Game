@@ -15,6 +15,7 @@ public class TutorialManager : MonoBehaviour
     public TextMeshProUGUI instructionText;
 
     // Instruction
+    [TextArea]
     public List<string> instructions = new List<string>();
     public List<float> instructionTimers = new List<float>();
 
@@ -23,6 +24,9 @@ public class TutorialManager : MonoBehaviour
     private int instructionIndex = 0;
     private bool actionCompleted = false;
     private bool canCallNextInstruction = true;
+
+    // Initial game state
+    private int plantationZones;
 
 
     // Awake method
@@ -46,6 +50,9 @@ public class TutorialManager : MonoBehaviour
 
         // Setup all tutorial actions
         SetupActions();
+
+        // Set initial game state
+        plantationZones = GridController.instance.zones.positions.Count;
     }
 
     // Update method
@@ -77,9 +84,20 @@ public class TutorialManager : MonoBehaviour
             actions.Add(null);
         }
 
-        // Set the actions
+        //// Set the actions
+        // Move
         actions[1] += MoveAround;
+
+        // Inventory
         actions[2] += OpenInventory;
+        actions[3] += ChangeInvetoryTab;
+        actions[4] += CloseInventory;
+
+        // Plantation
+        actions[5] += StartEditMode;
+        actions[6] += CreatePlantationZone;
+        actions[7] += StopEditMode;
+        actions[8] += PlantSomething;
     }
 
 
@@ -282,6 +300,67 @@ public class TutorialManager : MonoBehaviour
     private void OpenInventory()
     {
         actionCompleted = InventoryUI.instance.inventoryCanvas.activeSelf;
+    }
+
+    /// <summary>
+    /// Check if player has changed inventory tab.
+    /// </summary>
+    private void ChangeInvetoryTab()
+    {
+        actionCompleted = InventoryUI.instance.GetHarvested();
+    }
+
+    /// <summary>
+    /// Check if player closed inventory.
+    /// </summary>
+    private void CloseInventory()
+    {
+        actionCompleted = !InventoryUI.instance.inventoryCanvas.activeSelf;
+    }
+
+    /// <summary>
+    /// Check if player is on edit mode.
+    /// </summary>
+    private void StartEditMode()
+    {
+        actionCompleted = PlayerDataManager.instance.GetEditMode();
+    }
+
+    /// <summary>
+    /// Check if player created a plantation zone.
+    /// </summary>
+    private void CreatePlantationZone()
+    {
+        actionCompleted = plantationZones != GridController.instance.zones.positions.Count;
+    }
+
+    /// <summary>
+    /// Check if player is not on edit mode.
+    /// </summary>
+    private void StopEditMode()
+    {
+        actionCompleted = !PlayerDataManager.instance.GetEditMode();
+    }
+
+    /// <summary>
+    /// Check if player have planted something.
+    /// </summary>
+    private void PlantSomething()
+    {
+        // Get all plants and loop them
+        List<Plant> plants = GridController.instance.zones.GetPlants();
+        foreach(Plant plant in plants)
+        {
+            // If there is a plant, set action to complete and exit
+            if(plant != null)
+            {
+                actionCompleted = true;
+                return;
+            }
+        }
+
+        // If there are no planted plants, set action to incomplete
+        actionCompleted = false;
     }
     #endregion
 }

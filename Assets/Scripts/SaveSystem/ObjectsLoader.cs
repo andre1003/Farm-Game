@@ -24,7 +24,8 @@ public class ObjectsLoader : MonoBehaviour
         // Getters
         List<Vector3> positions = zones.GetPositions();
         List<Plant> plant = zones.GetPlants();
-        List<int> times = zones.GetTimes();
+        List<int> plantingDays = zones.GetPlantingDays();
+        List<int> plantingHours = zones.GetPlantingHours();
 
         // Load all objects saved at zones variable
         for(int i = 0; i < plant.Count; i++)
@@ -40,7 +41,7 @@ public class ObjectsLoader : MonoBehaviour
 
             // Get PlantationController component and make the initial setup
             PlantationController controller = instance.GetComponent<PlantationController>();
-            controller.SetTimeAndId(times[i], i);
+            controller.SetTimeAndId(plantingDays[i], plantingHours[i], i);
             controller.InitialSetup();
 
             // Setup plant, if there was any

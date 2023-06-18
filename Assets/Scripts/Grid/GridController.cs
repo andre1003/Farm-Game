@@ -4,6 +4,19 @@ using UnityEngine;
 
 public class GridController : MonoBehaviour
 {
+    #region Singleton
+    public static GridController instance;
+
+    void Awake()
+    {
+        if(instance == null)
+        {
+            instance = this;
+        }
+    }
+    #endregion
+
+
     // Spawn vector
     public Vector3 spawn;
 
@@ -120,7 +133,9 @@ public class GridController : MonoBehaviour
 
         // If player is on edit mode, check the mouse position over the grid
         if(PlayerDataManager.instance.GetEditMode())
+        {
             GetMousePostitionOnGrid();
+        }
     }
 
     /// <summary>

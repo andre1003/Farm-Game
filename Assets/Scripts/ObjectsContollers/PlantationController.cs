@@ -29,11 +29,11 @@ public class PlantationController : MonoBehaviour
 
     // Initial planted day
     public int initialDay = 0;
+    public int initialHour = 0;
 
 
-    // Planted plant
+    // Plant
     private Plant planted;
-
     private List<Transform> spawned;
 
     // Harvest and rot controller
@@ -44,12 +44,16 @@ public class PlantationController : MonoBehaviour
     private int id = -1;
 
 
+    // Update method
     void Update()
     {
         AddTime();
     }
 
-    // Method for planting
+    /// <summary>
+    /// Method for planting.
+    /// </summary>
+    /// <param name="plant">Plant to be planted.</param>
     public void Plant(Plant plant)
     {
         // Plants only if player have in Inventory
@@ -83,93 +87,130 @@ public class PlantationController : MonoBehaviour
             if(initialDay == 0)
             {
                 initialDay = TimeManager.instance.day;
-                id = zones.AddTime(initialDay, id);
-                Debug.Log("Planted in day: " + initialDay);
+                initialHour = TimeManager.instance.hour;
+                id = zones.AddTime(initialDay, initialHour, id);
+                //Debug.Log("Planted in day: " + initialDay);
             }
         }
     }
 
+    /// <summary>
+    /// Initial plantation setup.
+    /// </summary>
     public void InitialSetup()
     {
-        id = zones.AddTime(initialDay, id);
+        id = zones.AddTime(initialDay, initialHour, id);
         time = 0;
     }
 
+    /// <summary>
+    /// Add time for this plantation zone.
+    /// </summary>
     public void AddTime()
     {
         if(planted != null)
         {
-            // Add time
-            time = TimeManager.instance.day - initialDay;
-            //id = zones.AddTime(time, id);
+            // Add time. The formula is:
+            // ((Current Day - Planting Day) * 24) + (Current Hour - Planting Hour)
+            time = ((TimeManager.instance.day - initialDay) * 24) + (TimeManager.instance.hour - initialHour);
 
             // If time is between grow and rot, player can harvest
-            if(time >= planted.timeToGrow && time < planted.timeToRot)
+            if(time >= planted.timeToGrow && time < planted.timeToRot && !isReadyToHarvest)
             {
                 Debug.Log("Ready to harvest!");
                 isReadyToHarvest = true;
                 isRotten = false;
             }
             // Else, if time is bigger or equal to time to rot, player can no longer harvest
-            else if(time >= planted.timeToRot)
+            else if(time >= planted.timeToRot && isReadyToHarvest)
             {
                 Debug.Log("Rotten!");
                 isReadyToHarvest = false;
                 isRotten = true;
 
+                // If have passe timeToRot + 10, remove XP and destroy the plants
                 if(time >= planted.timeToRot + 10)
                 {
-                    // Set XP
                     PlayerDataManager.instance.SetXp(-planted.xp);
-
-                    // Destroy plants
                     DestroyPlants();
                 }
             }
         }
     }
 
+    /// <summary>
+    /// Set plantation zone ID.
+    /// </summary>
+    /// <param name="id">New ID value.</param>
     public void SetId(int id)
     {
         this.id = id;
     }
 
-    public void SetTimeAndId(int time, int id)
+    /// <summary>
+    /// Set time and ID of this plantation zone.
+    /// </summary>
+    /// <param name="initialDay">Initial day value.</param>
+    /// <param name="initialHour">Initial hour value.</param>
+    /// <param name="id">ID value.</param>
+    public void SetTimeAndId(int initialDay, int initialHour, int id)
     {
-        this.initialDay = time;
+        this.initialDay = initialDay;
+        this.initialHour = initialHour;
         this.id = id;
     }
 
+    /// <summary>
+    /// Check if this plantation zone have a plant.
+    /// </summary>
     public bool HasPlant()
     {
+        // If there is a plant, return true
         if(planted != null)
+        {
             return true;
+        }
+
+        // If there is no plant, return false
         else
+        {
             return false;
+        }
     }
 
+    /// <summary>
+    /// Check if can harvest.
+    /// </summary>
     public bool CanHarvest()
     {
         return isReadyToHarvest;
     }
 
+    /// <summary>
+    /// Check if the plant is rotten.
+    /// </summary>
     public bool IsRotten()
     {
         return isRotten;
     }
 
+    /// <summary>
+    /// Harvest the plant.
+    /// </summary>
     public void Harvest()
     {
         Inventory.instance.Add(planted, Random.Range(planted.minHarvest, planted.maxHarvest), true);
-
         DestroyPlants();
     }
 
+    /// <summary>
+    /// Spawn plants at the corresponding location.
+    /// </summary>
+    /// <param name="plantPrefab"></param>
     private void SpawnPlants(Transform plantPrefab)
     {
-        spawned = new List<Transform>();
-
         // For each spawn point, spawn a seed
+        spawned = new List<Transform>();
         foreach(var spawn in spawns)
         {
             Transform newPlant = Instantiate(plantPrefab, spawn.transform.position, Quaternion.identity);
@@ -178,13 +219,19 @@ public class PlantationController : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Custom destroy method.
+    /// </summary>
     public void DestroyMe()
     {
-        Debug.Log("DestroyMe called!");
+        //Debug.Log("DestroyMe called!");
         DestroyPlants();
         zones.RemoveTime(id);
     }
 
+    /// <summary>
+    /// Destroy all plants of this plantation zone.
+    /// </summary>
     public void DestroyPlants()
     {
         // Loop spawned plants to clear
@@ -195,7 +242,7 @@ public class PlantationController : MonoBehaviour
 
         // Clear time
         time = 0;
-        id = zones.AddTime(0, id);
+        id = zones.AddTime(0, 0, id);
         initialDay = -1;
 
         // Clear planted plant
@@ -206,12 +253,12 @@ public class PlantationController : MonoBehaviour
         spawned.Clear();
     }
 
-    // Test function
-    private void OnTriggerEnter(Collider other)
-    {
-        if(planted != null)
-            Debug.Log("Aqui está plantado " + planted.name);
-        else
-            Debug.Log("Área vazia!");
-    }
+    //// Test function
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    if(planted != null)
+    //        Debug.Log("Aqui está plantado " + planted.name);
+    //    else
+    //        Debug.Log("Área vazia!");
+    //}
 }

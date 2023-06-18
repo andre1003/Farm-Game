@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Apple
   m_EditorClassIdentifier: 
   name: "Ma\xE7\xE3"
-  timeToGrow: 20
-  timeToRot: 35
+  timeToGrow: 5
+  timeToRot: 15
   buyValue: 7
   baseSellValue: 10
   life: 60

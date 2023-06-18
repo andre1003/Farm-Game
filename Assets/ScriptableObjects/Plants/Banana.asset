@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Banana
   m_EditorClassIdentifier: 
   name: Banana
-  timeToGrow: 4
-  timeToRot: 5
+  timeToGrow: 2
+  timeToRot: 10
   buyValue: 5.5
   baseSellValue: 8
   life: 200

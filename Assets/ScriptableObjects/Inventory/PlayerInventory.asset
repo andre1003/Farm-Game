@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   plants:
   - plant: {fileID: 11400000, guid: dbda9fb982eaa0f429505deb3c4e0a64, type: 2}
-    amount: 2
+    amount: 1
     harvested: 0

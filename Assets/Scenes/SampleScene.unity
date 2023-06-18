@@ -14957,15 +14957,38 @@ MonoBehaviour:
   instructions:
   - "Ol\xE1 meu parceiro, como vai! Vamos come\xE7ar nossa aventura nessa jo\xE7a!"
   - "Primeiramente, voc\xEA precisa se familiarizar com essa fazenda. Ande um pouco
-    por ai!"
+    por ai! Para andar, clique com o bot\xE3o esquerdo do mouse."
   - "Muito bem! Agora vamos ver o que voc\xEA tem no bolso. Pra abrir o invent\xE1rio,
     utilize a tecla I."
   - "Que maravilha! Parece que voc\xEA tem algumas coisas nesses bolsos al\xE9m de
-    teia de aranha!"
+    teia de aranha! \n\nT\xE1 vendo que voc\xEA tem dois bolsos nessa cal\xE7a, n\xE9?
+    Ent\xE3o, um \xE9 pra sementes e o outro \xE9 pro que voc\xEA colheu, navegue
+    pelos bolsos, veja o que voc\xEA tem, se \xE9 que voc\xEA tem mais..."
+  - "\xC9... aqui a coisa t\xE1 preta... Mas vamos resolver isso jaj\xE1. Pode tirar
+    a m\xE3o do bolso. Vamos agora pegar a inchada pra fazer um canteiro!\n\nVoc\xEA
+    pode sair do invent\xE1rio apertando I ou clicando no bot\xE3o vermelho com um
+    X."
+  - "Muito bem, muito bem! Agora \xE9 m\xE3o na massa. Vamos fazer um canteiro pra
+    plantar essa semente que t\xE1 sobrando no seu bolso, antes que ela estrague.\n\nPra
+    criar um canteiro, pressione a tecla P."
+  - "B\xE3o demais da conta! Agora voc\xEA pode criar um canteiro clicando com o
+    bot\xE3o direito do mouse. Voc\xEA pode desfazer um canteiro clicando em cima
+    de um canteiro existente, com o mesmo bot\xE3o. Cria um canteiro pra gente!"
+  - "Isso mesmo! Agora voc\xEA pode sair do modo de edi\xE7\xE3o apertando P novamente."
+  - "Show de bola! Agora voc\xEA tem que plantar as sementes do seu bolso. Para isso,
+    clique com o bot\xE3o direito do mouse em cima de um canteiro, e depois selecione
+    a semente que voc\xEA quer plantar."
+  - "E \xE9 isso! Agora voc\xEA pode continuar sua vida de plantador! Boa sorte!"
   instructionTimers:
   - 0
   - 4
   - 0.5
+  - 0.5
+  - 0.5
+  - 0.5
+  - 0.5
+  - 0.5
+  - 10
   - 0
 --- !u!1001 &622801559
 PrefabInstance:
@@ -30581,7 +30604,7 @@ RectTransform:
   m_Children:
   - {fileID: 1364490093}
   m_Father: {fileID: 1487801903}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -31976,6 +31999,82 @@ Transform:
   m_Father: {fileID: 27354581}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+--- !u!1 &1445215219
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1445215220}
+  - component: {fileID: 1445215222}
+  - component: {fileID: 1445215221}
+  m_Layer: 0
+  m_Name: Image
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1445215220
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1445215219}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1487801903}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1445215221
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1445215219}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.39215687}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1445215222
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1445215219}
+  m_CullTransparentMesh: 1
 --- !u!1 &1446906713
 GameObject:
   m_ObjectHideFlags: 0
@@ -32777,6 +32876,7 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1445215220}
   - {fileID: 1956029981}
   - {fileID: 1369342614}
   m_Father: {fileID: 880611997}
@@ -41226,7 +41326,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1487801903}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}

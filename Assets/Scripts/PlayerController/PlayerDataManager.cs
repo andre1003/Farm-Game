@@ -129,6 +129,12 @@ public class PlayerDataManager : MonoBehaviour
             playerData.nextLvlXp += 10;
         }
 
+        // Don't let XP be negative
+        else if(playerData.xp < 0)
+        {
+            playerData.xp = 0;
+        }
+
         // Update HUD
         UpdateHUD();
     }
