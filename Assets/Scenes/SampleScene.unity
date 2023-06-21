@@ -14952,44 +14952,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1583597e1ed6a0e4daaaa7374fb19e25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  instructions:
+  - {fileID: 11400000, guid: d9a0bc82d9d2d0c49899256e7da70ece, type: 2}
   instructionCanvas: {fileID: 1487801902}
   instructionText: {fileID: 1956029982}
-  instructions:
-  - "Ol\xE1 meu parceiro, como vai! Vamos come\xE7ar nossa aventura nessa jo\xE7a!"
-  - "Primeiramente, voc\xEA precisa se familiarizar com essa fazenda. Ande um pouco
-    por ai! Para andar, clique com o bot\xE3o esquerdo do mouse."
-  - "Muito bem! Agora vamos ver o que voc\xEA tem no bolso. Pra abrir o invent\xE1rio,
-    utilize a tecla I."
-  - "Que maravilha! Parece que voc\xEA tem algumas coisas nesses bolsos al\xE9m de
-    teia de aranha! \n\nT\xE1 vendo que voc\xEA tem dois bolsos nessa cal\xE7a, n\xE9?
-    Ent\xE3o, um \xE9 pra sementes e o outro \xE9 pro que voc\xEA colheu, navegue
-    pelos bolsos, veja o que voc\xEA tem, se \xE9 que voc\xEA tem mais..."
-  - "\xC9... aqui a coisa t\xE1 preta... Mas vamos resolver isso jaj\xE1. Pode tirar
-    a m\xE3o do bolso. Vamos agora pegar a inchada pra fazer um canteiro!\n\nVoc\xEA
-    pode sair do invent\xE1rio apertando I ou clicando no bot\xE3o vermelho com um
-    X."
-  - "Muito bem, muito bem! Agora \xE9 m\xE3o na massa. Vamos fazer um canteiro pra
-    plantar essa semente que t\xE1 sobrando no seu bolso, antes que ela estrague.\n\nPra
-    criar um canteiro, pressione a tecla P."
-  - "B\xE3o demais da conta! Agora voc\xEA pode criar um canteiro clicando com o
-    bot\xE3o direito do mouse. Voc\xEA pode desfazer um canteiro clicando em cima
-    de um canteiro existente, com o mesmo bot\xE3o. Cria um canteiro pra gente!"
-  - "Isso mesmo! Agora voc\xEA pode sair do modo de edi\xE7\xE3o apertando P novamente."
-  - "Show de bola! Agora voc\xEA tem que plantar as sementes do seu bolso. Para isso,
-    clique com o bot\xE3o direito do mouse em cima de um canteiro, e depois selecione
-    a semente que voc\xEA quer plantar."
-  - "E \xE9 isso! Agora voc\xEA pode continuar sua vida de plantador! Boa sorte!"
-  instructionTimers:
-  - 0
-  - 4
-  - 0.5
-  - 0.5
-  - 0.5
-  - 0.5
-  - 0.5
-  - 0.5
-  - 10
-  - 0
+  currentIndex: -1
 --- !u!1001 &622801559
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -41353,7 +41320,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Ol\xE1 meu parceiro, como vai! Vamos come\xE7ar nossa aventura nessa jo\xE7a!"
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5a89834a741d61849b79e9c35dd1e2e6, type: 2}
   m_sharedMaterial: {fileID: 5501063363965272835, guid: 5a89834a741d61849b79e9c35dd1e2e6, type: 2}

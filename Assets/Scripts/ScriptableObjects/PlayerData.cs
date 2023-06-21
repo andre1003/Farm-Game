@@ -17,8 +17,4 @@ public class PlayerData : ScriptableObject
     // Money
     [Header("Money")]
     public float money;
-
-    // Tutorial
-    [Header("Tutorial")]
-    public int instructionIndex;
 }
