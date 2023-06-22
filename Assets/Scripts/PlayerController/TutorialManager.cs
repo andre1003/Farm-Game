@@ -159,13 +159,41 @@ public class TutorialManager : MonoBehaviour
     /// <summary>
     /// Try get tutorial at a given index.
     /// </summary>
-    /// <param name="tutorialIndex">Tutorial index.</param>
+    /// <param name="tutorialKey">Tutorial key.</param>
     /// <returns>TRUE - If could start the tutorial. FALSE - If couldn't.</returns>
-    public bool GetTutorial(int tutorialIndex)
+    public bool GetTutorial(string tutorialKey)
     {
+        // Define tutorial index and make sure that tutorial key is in lower case
+        int tutorialIndex;
+        tutorialKey = tutorialKey.ToLower();
+
+        // Get list index by key
+        switch(tutorialKey)
+        {
+            // Initial tutorial
+            case "initial":
+                tutorialIndex = 0;
+                break;
+
+            // Store tutorial
+            case "store":
+                tutorialIndex = 1;
+                break;
+
+            // Workbench tutorial
+            case "workbench":
+                tutorialIndex = 2;
+                break;
+
+            // Invalid key
+            default:
+                return false;
+        }
+
         // If there is no active tutorial, and the index is valid, call next instruction and return true
         if(currentIndex == -1 && tutorialIndex >= 0 && tutorialIndex < instructions.Count)
         {
+            Debug.Log("Calling next instruction");
             instructions[tutorialIndex].NextInstruction();
             return true;
         }

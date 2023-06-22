@@ -55,6 +55,9 @@ public class Store : MonoBehaviour
 
         // Chang player busy state
         InGameSaves.ChangeIsBusy();
+
+        // Get tutorial
+        TutorialManager.instance.GetTutorial("store");
     }
 
     /// <summary>

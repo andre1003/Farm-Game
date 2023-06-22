@@ -23,11 +23,11 @@ public class TutorialInstruction : ScriptableObject
 
     // Controllers
     [SerializeField] protected int instructionIndex = -1;
+    [SerializeField] protected int initialIndex = -1;
     protected bool actionCompleted = false;
     protected bool canCallNextInstruction = true;
 
     // Auxiliar
-    [SerializeField] protected int initialIndex = -1;
     private int index = -1;
 
 
@@ -103,6 +103,12 @@ public class TutorialInstruction : ScriptableObject
 
                 // Allow action check to work
                 canCallNextInstruction = true;
+
+                // Set active to true
+                isActive = true;
+
+                // Exit
+                return;
             }
         }
 

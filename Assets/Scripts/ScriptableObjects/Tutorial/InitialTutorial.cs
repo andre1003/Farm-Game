@@ -1,9 +1,8 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 
-[CreateAssetMenu(fileName = "NewInitialTutorial", menuName = "ScriptableObjects/Initial Tutorial")]
+[CreateAssetMenu(fileName = "NewInitialTutorial", menuName = "ScriptableObjects/Tutorials/Initial Tutorial")]
 public class InitialTutorial : TutorialInstruction
 {
     // Initial game state
@@ -17,12 +16,13 @@ public class InitialTutorial : TutorialInstruction
         // Set initial game state
         plantationZones = GridController.instance.zones.positions.Count;
 
+        // If the initial index is invalid, exit
         if(initialIndex == -1)
         {
             return;
         }
 
-        // Because this is the initial tutorial, update UI
+        // For the initial tutorial, update UI at the start method
         instructionIndex = initialIndex;
         TutorialManager.instance.UpdateUIDelay(1f, instructions[instructionIndex], true);
     }
