@@ -60,17 +60,17 @@ public class StoreUI : MonoBehaviour
         // Display at inventory
         for(int i = 0; i < slots.Length; i++)
         {
-            // Add a plant to slot
-            if(i < store.storePlants.Length)
+            // If this index is valid for store plants inventory AND
+            // player have enought level for buying it, add to slot.
+            if(i < store.storePlants.Length &&
+                store.storePlants[i].levelRequired <= PlayerDataManager.instance.playerData.level)
             {
                 slots[i].AddPlant(store.storePlants[i]);
+                continue;
             }
 
             // Clear slot
-            else
-            {
-                slots[i].ClearSlot();
-            }
+            slots[i].ClearSlot();
         }
     }
 
@@ -112,6 +112,19 @@ public class StoreUI : MonoBehaviour
             {
                 slots[i].ClearSlot();
             }
+        }
+    }
+
+    public void UpdateMenu()
+    {
+        if(isOnBuyMenu)
+        {
+            BuyMenu();
+        }
+
+        else
+        {
+            SellMenu();
         }
     }
 }

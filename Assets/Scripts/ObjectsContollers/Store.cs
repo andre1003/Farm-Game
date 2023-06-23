@@ -23,6 +23,7 @@ public class Store : MonoBehaviour
 
     // Canvas
     public GameObject storeCanvas;
+    public GameObject newItemCanvas;
 
     // Destination
     public Transform frontSpot;
@@ -37,6 +38,13 @@ public class Store : MonoBehaviour
     // Sold plants
     private Dictionary<string, int> soldPlants = new Dictionary<string, int>();
 
+    private bool newLevel = true;
+
+
+    void Update()
+    {
+        newItemCanvas.SetActive(newLevel);
+    }
 
     /// <summary>
     /// Method for closing the store canvas.
@@ -51,15 +59,19 @@ public class Store : MonoBehaviour
     // Method for Trigger Enter
     private void OnTriggerEnter(Collider other)
     {
-        // Set store canvas visibility to true
+        // Update store menu UI and set store canvas visibility to true
+        StoreUI.instance.UpdateMenu();
         storeCanvas.SetActive(true);
 
         // Get player agent and stop animation
         myAgent = other.GetComponent<NavMeshAgent>();
-        EndAnimationHandler(myAgent);
+        EndAnimationHandler(myAgent);        
 
         // Chang player busy state
         InGameSaves.ChangeIsBusy();
+
+        // Set new level controller to false
+        newLevel = false;
 
         // Get tutorial
         TutorialManager.instance.GetTutorial("store");
@@ -162,5 +174,21 @@ public class Store : MonoBehaviour
     public void ClearSoldPlants()
     {
         soldPlants.Clear();
+    }
+
+    /// <summary>
+    /// Check for new items on store.
+    /// </summary>
+    public void CheckNewItems()
+    {
+        int playerLevel = PlayerDataManager.instance.playerData.level - 1;
+        foreach(Plant plant in storePlants)
+        {
+            if(playerLevel == plant.levelRequired)
+            {
+                newLevel = true;
+                return;
+            }
+        }
     }
 }

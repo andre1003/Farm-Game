@@ -20,7 +20,7 @@ MonoBehaviour:
   life: 60
   maxHarvest: 15
   minHarvest: 8
-  levelRequired: 1
+  levelRequired: 2
   xp: 20
   seasons: 03000000000000000100000002000000
   icon: {fileID: 21300000, guid: 0873364a8bf89e24790998d45bd6f110, type: 3}

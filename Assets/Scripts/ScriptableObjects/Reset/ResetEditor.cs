@@ -17,16 +17,22 @@ public class ResetEditor : Editor
             resetSaves.ResetAllPlayerData();
         }
 
-        // Reset tutorials button
-        if(GUILayout.Button("Reset Tutorials"))
-        {
-            resetSaves.ResetTutorials();
-        }
-
         // Reset plantation zones button
         if(GUILayout.Button("Reset Plantation Zones"))
         {
             resetSaves.ResetPlantationZones();
+        }
+
+        // Reset time system button
+        if(GUILayout.Button("Reset Time System"))
+        {
+            resetSaves.ResetTimeSystem();
+        }
+
+        // Reset tutorials button
+        if(GUILayout.Button("Reset Tutorials"))
+        {
+            resetSaves.ResetTutorials();
         }
 
         // Reset game settings button

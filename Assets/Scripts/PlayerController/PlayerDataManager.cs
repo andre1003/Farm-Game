@@ -124,9 +124,12 @@ public class PlayerDataManager : MonoBehaviour
         // Check for level up
         if(playerData.xp >= playerData.nextLvlXp)
         {
-            playerData.xp = playerData.nextLvlXp - playerData.xp;
+            playerData.xp -= playerData.nextLvlXp;
             playerData.level++;
             playerData.nextLvlXp += 10;
+
+            // Check for new items
+            Store.instance.CheckNewItems();
         }
 
         // Don't let XP be negative
