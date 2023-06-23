@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -33,14 +34,18 @@ public class Store : MonoBehaviour
     // Navigation mesh event
     private NavMeshAgent myAgent;
 
+    // Sold plants
+    private Dictionary<string, int> soldPlants = new Dictionary<string, int>();
+
 
     /// <summary>
-    /// Method for closing the workbench canvas.
+    /// Method for closing the store canvas.
     /// </summary>
     public void Close()
     {
         storeCanvas.SetActive(false);
         InGameSaves.ChangeIsBusy();
+        TutorialManager.instance.PauseTutorial();
     }
 
     // Method for Trigger Enter
@@ -98,5 +103,64 @@ public class Store : MonoBehaviour
     {
         yield return new WaitForSeconds(seconds);
         MovementController.instance.animator.SetBool("isWalking", false);
+    }
+
+    /// <summary>
+    /// Add a plant to sold plants dictionary.
+    /// </summary>
+    /// <param name="name">Plant name, used as the dictionary key.</param>
+    /// <param name="amount">Sold amount.</param>
+    public void AddSoldPlant(string name, int amount)
+    {
+        // Make sure the key is lower case
+        name = name.ToLower();
+
+        // If this plant already exists in the dictionary, add the amount
+        if(soldPlants.ContainsKey(name))
+        {
+            soldPlants[name] += amount;
+        }
+
+        // If the key is invalid, add it to dictionary
+        else
+        {
+            soldPlants.Add(name, amount);
+        }
+    }
+
+    /// <summary>
+    /// Check if player sold a certain amount of a plant.
+    /// </summary>
+    /// <param name="name">Plant name to check.</param>
+    /// <param name="amount">Sold amount to check.</param>
+    /// <returns>TRUE - If it did. FALSE - If it didn't.</returns>
+    public bool HasSold(string name, int amount=-1)
+    {
+        // Make sure the key is lower case
+        name = name.ToLower();
+
+        // If the plant has not been sold, return false
+        if(!soldPlants.ContainsKey(name))
+        {
+            return false;
+        }
+
+        // If the amount is invalid, return true
+        if(amount == -1)
+        {
+            return true;
+        }
+
+        // If the amount is valid, return if the amount of sold plant is bigger
+        // or equal to the given amount
+        return soldPlants[name] >= amount;
+    }
+
+    /// <summary>
+    /// Clear all sold plants.
+    /// </summary>
+    public void ClearSoldPlants()
+    {
+        soldPlants.Clear();
     }
 }

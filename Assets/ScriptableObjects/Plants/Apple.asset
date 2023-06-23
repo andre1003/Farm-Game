@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23382c37dae62a749a3c2944d3e1ecca, type: 3}
   m_Name: Apple
   m_EditorClassIdentifier: 
-  name: "Ma\xE7\xE3"
+  name: Apple
   timeToGrow: 5
   timeToRot: 15
   buyValue: 7
@@ -20,7 +20,7 @@ MonoBehaviour:
   life: 60
   maxHarvest: 15
   minHarvest: 8
-  levelRequired: 2
+  levelRequired: 1
   xp: 20
   seasons: 03000000000000000100000002000000
   icon: {fileID: 21300000, guid: 0873364a8bf89e24790998d45bd6f110, type: 3}

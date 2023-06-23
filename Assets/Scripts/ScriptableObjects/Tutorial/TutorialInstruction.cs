@@ -20,6 +20,9 @@ public class TutorialInstruction : ScriptableObject
     // Active
     public bool isActive = false;
 
+    // Completed
+    public bool completed = false;
+
 
     // Controllers
     [SerializeField] protected int instructionIndex = -1;
@@ -41,11 +44,39 @@ public class TutorialInstruction : ScriptableObject
         this.index = index;
 
         // Initial index setup
-        initialIndex = instructionIndex;
-        instructionIndex = -1;
+        SetupInitialIndex();
 
         // Setup all tutorial actions
         SetupActions();
+    }
+
+    /// <summary>
+    /// Setup initial and instruction index at start.
+    /// </summary>
+    protected virtual void SetupInitialIndex()
+    {
+        // If this tutorial is completed, set both index to -1 and exit
+        if(completed)
+        {
+            initialIndex = -1;
+            instructionIndex = -1;
+            return;
+        }
+
+        // If the instruction index is -1, set the initial to 0
+        if(instructionIndex == -1)
+        {
+            initialIndex = 0;
+        }
+
+        // If not, set initial index to instruction index
+        else
+        {
+            initialIndex = instructionIndex;
+        }
+        
+        // Set instruction index to -1
+        instructionIndex = -1;
     }
 
     /// <summary>
@@ -55,7 +86,7 @@ public class TutorialInstruction : ScriptableObject
     public bool UpdateInstruction()
     {
         // If instruction index is not -1 or this instruction is active, check action update
-        if(instructionIndex != -1 && isActive)
+        if(instructionIndex != -1 && isActive && !completed)
         {
             // Check action update
             CheckAction();
@@ -89,6 +120,8 @@ public class TutorialInstruction : ScriptableObject
             if(initialIndex == -1)
             {
                 TutorialManager.instance.UpdateUIDelay();
+                isActive = false;
+                completed = true;
                 return;
             }
 
@@ -131,6 +164,7 @@ public class TutorialInstruction : ScriptableObject
             instructionIndex = -1;
             initialIndex = -1;
             isActive = false;
+            completed = true;
             TutorialManager.instance.UpdateUIDelay();
             return;
         }
@@ -175,5 +209,15 @@ public class TutorialInstruction : ScriptableObject
         {
             actions[instructionIndex].Invoke();
         }
+    }
+
+    /// <summary>
+    /// Set initial and instruction index.
+    /// </summary>
+    /// <param name="instructionIndex">New initial and instruction index value.</param>
+    public void SetIndex(int instructionIndex)
+    {
+        this.instructionIndex = instructionIndex;
+        this.initialIndex = instructionIndex;
     }
 }

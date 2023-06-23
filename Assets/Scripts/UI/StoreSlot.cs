@@ -118,6 +118,9 @@ public class StoreSlot : MonoBehaviour
             float multiplier = 2f / (plant.seasons.IndexOf(TimeManager.instance.season) + 1);
             PlayerDataManager.instance.Sell(plant, 1, multiplier);
 
+            // Add the sold plant to sold plants dictionary
+            Store.instance.AddSoldPlant(plant.name, 1);
+
             // Decrease amount
             amount--;
 

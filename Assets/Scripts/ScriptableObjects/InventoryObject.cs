@@ -65,7 +65,31 @@ public class InventoryObject : ScriptableObject
         // Object doesn't exists in inventory
         return false;
     }
+
+    /// <summary>
+    /// Check if the inventory has the plant with a given name.
+    /// </summary>
+    /// <param name="plantName">Name of the plant to search.</param>
+    /// <returns>TRUE - If there is a plant. FALSE - If don't.</returns>
+    public bool HasPlant(string plantName)
+    {
+        // Loop all inventory slots
+        foreach(InventorySlotObject plant in plants)
+        {
+            // If this plant is the one we are looking for, return true
+            if(plant.plant.name.ToLower() == plantName.ToLower())
+            {
+                return true;
+            }
+        }
+
+        // If didn't find the plant, return false
+        return false;
+    }
 }
+
+
+
 
 /// <summary>
 /// Inventory slot class.

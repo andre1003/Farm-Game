@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5874fb8ab14eb8946809e23d794a5664, type: 3}
-  m_Name: PlayerData
+  m_Name: DefaultPlayerData
   m_EditorClassIdentifier: 
-  name: Dufwine
-  level: 10
-  xp: 150
-  nextLvlXp: 3500
-  money: 52210
+  name: 
+  level: 1
+  xp: 0
+  nextLvlXp: 50
+  money: 100

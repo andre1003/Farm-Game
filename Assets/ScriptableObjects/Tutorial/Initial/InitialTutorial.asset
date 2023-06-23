@@ -50,5 +50,6 @@ MonoBehaviour:
   - 10
   - 0
   isActive: 0
+  completed: 1
   instructionIndex: -1
   initialIndex: -1

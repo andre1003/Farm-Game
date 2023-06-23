@@ -164,8 +164,42 @@ public class TutorialManager : MonoBehaviour
     public bool GetTutorial(string tutorialKey)
     {
         // Define tutorial index and make sure that tutorial key is in lower case
-        int tutorialIndex;
         tutorialKey = tutorialKey.ToLower();
+        int tutorialIndex = TutorialKeyToIndex(tutorialKey);
+
+        // If there is no active tutorial, and the index is valid, call next instruction and return true
+        if(currentIndex == -1 && tutorialIndex != -1)
+        {
+            Debug.Log("Calling next instruction");
+            instructions[tutorialIndex].NextInstruction();
+            return true;
+        }
+
+        // Else, return false
+        return false;
+    }
+
+    /// <summary>
+    /// Pause the current tutorial.
+    /// </summary>
+    public void PauseTutorial()
+    {
+        // If there is an active tutorial, pause it
+        if(currentIndex != -1)
+        {
+            instructions[currentIndex].isActive = false;
+        }
+    }
+
+    /// <summary>
+    /// Try to convert a given tutorial key to index.
+    /// </summary>
+    /// <param name="tutorialKey">Tutorial key to convert.</param>
+    /// <returns>Tutorial list index. It returns -1 if the key is invalid.</returns>
+    private int TutorialKeyToIndex(string tutorialKey)
+    {
+        // Tutorial index
+        int tutorialIndex;
 
         // Get list index by key
         switch(tutorialKey)
@@ -187,18 +221,21 @@ public class TutorialManager : MonoBehaviour
 
             // Invalid key
             default:
-                return false;
+                tutorialIndex = -1;
+                break;
         }
 
-        // If there is no active tutorial, and the index is valid, call next instruction and return true
-        if(currentIndex == -1 && tutorialIndex >= 0 && tutorialIndex < instructions.Count)
+        // Return tutorial index
+        return tutorialIndex;
+    }
+
+    // On application quit method
+    void OnApplicationQuit()
+    {
+        // Deactivate all tutorials, except the first one (initial tutorial)
+        for (int i = 1; i < instructions.Count; i++)
         {
-            Debug.Log("Calling next instruction");
-            instructions[tutorialIndex].NextInstruction();
-            return true;
+            instructions[i].isActive = false;
         }
-
-        // Else, return false
-        return false;
     }
 }

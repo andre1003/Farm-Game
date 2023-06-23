@@ -853,7 +853,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &27354581
 Transform:
   m_ObjectHideFlags: 0
@@ -15452,6 +15452,61 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 636071719}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &637820214
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 637820215}
+  - component: {fileID: 637820216}
+  m_Layer: 0
+  m_Name: Reset
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &637820215
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 637820214}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 837859840}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &637820216
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 637820214}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b956cb9335ee0d4f92150e91d18f8f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  defaultInventory: {fileID: 11400000, guid: c23e56b0aa931c54a87466de2e3fda9c, type: 2}
+  defaultPlayerData: {fileID: 11400000, guid: 6115205c8bedcd44282152eb648c885c, type: 2}
+  defaultGameSettings: {fileID: 11400000, guid: 93de90b4ebc729d459183f57393b7edb, type: 2}
+  defaultTimeSystem: {fileID: 11400000, guid: 748dd8d8360098845839cde9092afff2, type: 2}
+  inventory: {fileID: 11400000, guid: d4e42aba098fc34478cb4ec2767c21ff, type: 2}
+  plantationZones: {fileID: 11400000, guid: de6bddc39361ff242acd78bdbd6c3217, type: 2}
+  playerData: {fileID: 11400000, guid: 3156cc3cbb3f60341aea7a8a59c1c968, type: 2}
+  gameSettings: {fileID: 11400000, guid: ffeaa14ed3df8474aaee1f2a26dd8439, type: 2}
+  timeSystem: {fileID: 11400000, guid: a7537185d30964c478ba0c49acdc1fad, type: 2}
+  initialTutorial: {fileID: 11400000, guid: d9a0bc82d9d2d0c49899256e7da70ece, type: 2}
+  storeTutorial: {fileID: 11400000, guid: 77427e7d7a74ea748b82b83f44502407, type: 2}
 --- !u!1 &640259514
 GameObject:
   m_ObjectHideFlags: 0
@@ -20390,6 +20445,7 @@ Transform:
   - {fileID: 729288375}
   - {fileID: 1722462549}
   - {fileID: 609625445}
+  - {fileID: 637820215}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -45352,6 +45408,10 @@ PrefabInstance:
     - target: {fileID: 8380183624992134920, guid: c7cb2a03ce766d54daaefa595c669f76, type: 3}
       propertyPath: m_Name
       value: Workbench
+      objectReference: {fileID: 0}
+    - target: {fileID: 8380183624992134920, guid: c7cb2a03ce766d54daaefa595c669f76, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8380183624992134921, guid: c7cb2a03ce766d54daaefa595c669f76, type: 3}
       propertyPath: m_RootOrder

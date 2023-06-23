@@ -28,8 +28,9 @@ MonoBehaviour:
     \xE0 disposi\xE7\xE3o!"
   timers:
   - 0
-  - 0
+  - 0.5
   - 0
   isActive: 0
+  completed: 0
   instructionIndex: 0
-  initialIndex: -1
+  initialIndex: 0
