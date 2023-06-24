@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 
@@ -22,10 +23,19 @@ public class StoreUI : MonoBehaviour
     // Buy menu controller
     public bool isOnBuyMenu = true;
 
+    // Amount selection
+    public GameObject storeCanvas;
+    public GameObject amountSelectionCanvas;
+    public TextMeshProUGUI amountText;
+    public TextMeshProUGUI buyOrSellButtonText;
+
 
     // Store
     private Store store;
     private StoreSlot[] slots;
+
+    // Amount selection
+    private int amount = 1;
 
 
     // Start is called before the first frame update
@@ -34,7 +44,10 @@ public class StoreUI : MonoBehaviour
         // Get store, slots and open buy menu
         store = Store.instance;
         slots = itemsParent.GetComponentsInChildren<StoreSlot>();
-        BuyMenu();
+
+        amountText.text = amount.ToString();
+
+        //BuyMenu();
     }
 
     /// <summary>
@@ -42,11 +55,14 @@ public class StoreUI : MonoBehaviour
     /// </summary>
     public void ClearUI()
     {
+        // Loop all slots and clear them all
         for(int i = 0; i < slots.Length; i++)
         {
             slots[i].ClearSlot();
         }
 
+        // Disable amount selection canvas
+        amountSelectionCanvas.SetActive(false);
     }
 
     /// <summary>
@@ -115,16 +131,131 @@ public class StoreUI : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Update menu tab.
+    /// </summary>
     public void UpdateMenu()
     {
+        // Buy tab
         if(isOnBuyMenu)
         {
             BuyMenu();
         }
 
+        // Sell tab
         else
         {
             SellMenu();
         }
+    }
+
+    /// <summary>
+    /// Set amount selection menu.
+    /// </summary>
+    /// <param name="isActive">Active status of amount selection menu.</param>
+    public void AmountSelectionMenu(bool isActive)
+    {
+        // Set amount
+        amount = 1;
+        amountText.text = amount.ToString();
+
+        // Define localization table and key
+        string tableName = "Store Text";
+        string key;
+
+        // If it is the buy tab, get the buy localized string
+        if(isOnBuyMenu)
+        {
+            key = "Buy Button";
+        }
+
+        // Else, get the sell localized string
+        else
+        {
+            key = "Sell Button";
+        }
+
+        // Localize the string
+        StringLocalizer.instance.Localize(tableName, key, buyOrSellButtonText);
+
+        // Activate amount selection menu
+        amountSelectionCanvas.SetActive(isActive);
+    }
+
+    /// <summary>
+    /// Increase amount.
+    /// </summary>
+    public void IncreaseAmount()
+    {
+        // Increase amount
+        amount++;
+
+        // If it is the buying menu
+        if(isOnBuyMenu)
+        {
+            // Get plant buy value and player money
+            float buyValue = Store.instance.GetSelectedPlant().buyValue;
+            float playerMoney = PlayerDataManager.instance.playerData.money;
+
+            // If the total buy value is bigger than player money, remove one from amount
+            if(amount * buyValue > playerMoney)
+            {
+                amount--;
+            }
+        }
+
+        // If it is the selling menu
+        else
+        {
+            // Define amount on inventory
+            int amountOnInventory = 0;
+
+            // Find the selected plant
+            foreach(var inventorySlot in Inventory.instance.inventory.plants)
+            {
+                // If this is the selected plant, get the amount and break the loop
+                if(inventorySlot.plant == Store.instance.GetSelectedPlant())
+                {
+                    amountOnInventory = inventorySlot.amount;
+                    break;
+                }
+            }
+
+            // If the current amount is bigger than amount on inventory, set it to amount on inventory
+            if(amount > amountOnInventory)
+            {
+                amount = amountOnInventory;
+            }
+        }
+
+        // Set amount text
+        amountText.text = amount.ToString();
+    }
+
+    /// <summary>
+    /// Decrease amount.
+    /// </summary>
+    public void DecreaseAmount()
+    {
+        // Decrease amount
+        amount--;
+
+        // If amount is lesser or equal to 0, set te amount to 1
+        if(amount <= 0)
+        {
+            amount = 1;
+        }
+
+        // Set amount text
+        amountText.text = amount.ToString();
+    }
+
+    /// <summary>
+    /// Get the selected amount.
+    /// </summary>
+    /// <returns>Selected amount.</returns>
+    public int GetSelectedAmount()
+    {
+        return amount;
     }
 }

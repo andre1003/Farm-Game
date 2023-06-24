@@ -25,6 +25,9 @@ public class Store : MonoBehaviour
     public GameObject storeCanvas;
     public GameObject newItemCanvas;
 
+    // Transition
+    public float transitionLenght = 0.25f;
+
     // Destination
     public Transform frontSpot;
 
@@ -38,12 +41,54 @@ public class Store : MonoBehaviour
     // Sold plants
     private Dictionary<string, int> soldPlants = new Dictionary<string, int>();
 
-    private bool newLevel = true;
+    // Items
+    private bool newItems = true;
+    private Plant selectedPlant;
+    private StoreSlot selectedSlot;
+
+    // UI
+    private CanvasGroup canvasGroup;
+    private bool changeUI = false;
+
+    // Transition
+    private float initialAlpha;
+    private float targetAlpha;
+    private float elapsedTime = 0f;
 
 
+    // Start method
+    void Start()
+    {
+        canvasGroup = storeCanvas.GetComponent<CanvasGroup>();
+    }
+
+    // Update method
     void Update()
     {
-        newItemCanvas.SetActive(newLevel);
+        newItemCanvas.SetActive(newItems);
+
+        // If doesn't need to change UI visibility, exit
+        if(!changeUI)
+        {
+            return;
+        }
+
+        // Change UI opacity over transition lenght seconds
+        canvasGroup.alpha = Mathf.Lerp(initialAlpha, targetAlpha, (elapsedTime / transitionLenght));
+        elapsedTime += Time.deltaTime;
+
+        // If UI opacity is the target opacity, reset elapsed time and set change UI controller to false
+        if(canvasGroup.alpha == targetAlpha)
+        {
+            elapsedTime = 0f;
+            changeUI = false;
+
+            // If target opacity is 0, set disable store canvas
+            if(targetAlpha == 0f)
+            {
+                storeCanvas.SetActive(false);
+            }
+        }
     }
 
     /// <summary>
@@ -51,7 +96,8 @@ public class Store : MonoBehaviour
     /// </summary>
     public void Close()
     {
-        storeCanvas.SetActive(false);
+        SetUI(false);
+        HUDManager.instance.SetHUD(true);
         InGameSaves.ChangeIsBusy();
         TutorialManager.instance.PauseTutorial();
     }
@@ -61,7 +107,8 @@ public class Store : MonoBehaviour
     {
         // Update store menu UI and set store canvas visibility to true
         StoreUI.instance.UpdateMenu();
-        storeCanvas.SetActive(true);
+        SetUI(true);
+        HUDManager.instance.SetHUD(false);
 
         // Get player agent and stop animation
         myAgent = other.GetComponent<NavMeshAgent>();
@@ -71,10 +118,36 @@ public class Store : MonoBehaviour
         InGameSaves.ChangeIsBusy();
 
         // Set new level controller to false
-        newLevel = false;
+        newItems = false;
 
         // Get tutorial
         TutorialManager.instance.GetTutorial("store");
+    }
+
+    /// <summary>
+    /// Set UI visibility.
+    /// </summary>
+    /// <param name="isActive">New visibility.</param>
+    private void SetUI(bool isActive)
+    {
+        // Set initial opacity
+        initialAlpha = canvasGroup.alpha;
+
+        // If the target is to display UI, set target opacity to 1
+        if(isActive)
+        {
+            targetAlpha = 1f;
+            storeCanvas.SetActive(true);
+        }
+
+        // If the target is to hide UI, set target opacity to 0
+        else
+        {
+            targetAlpha = 0f;
+        }
+
+        // Set change UI controller to true
+        changeUI = true;
     }
 
     /// <summary>
@@ -186,9 +259,95 @@ public class Store : MonoBehaviour
         {
             if(playerLevel == plant.levelRequired)
             {
-                newLevel = true;
+                newItems = true;
                 return;
             }
+        }
+    }
+
+    /// <summary>
+    /// Set the current selected plant.
+    /// </summary>
+    /// <param name="selectedPlant">New selected plant.</param>
+    public void SetSelectedPlant(Plant selectedPlant)
+    {
+        this.selectedPlant = selectedPlant;
+    }
+
+    /// <summary>
+    /// Get the current selected plant.
+    /// </summary>
+    /// <returns></returns>
+    public Plant GetSelectedPlant()
+    {
+        return selectedPlant;
+    }
+
+    /// <summary>
+    /// Set the current selected store slot.
+    /// </summary>
+    /// <param name="selectedSlot">New selected store slot.</param>
+    public void SetSelectedStoreSlot(StoreSlot selectedSlot)
+    {
+        this.selectedSlot = selectedSlot;
+    }
+
+    /// <summary>
+    /// Buy method.
+    /// </summary>
+    private void Buy()
+    {
+        // If there is no selected plant, exit
+        if(selectedPlant == null)
+        {
+            return;
+        }
+
+        // Get the amount and buy it
+        int amount = StoreUI.instance.GetSelectedAmount();
+        PlayerDataManager.instance.Buy(selectedPlant, amount);
+    }
+
+    /// <summary>
+    /// Sell method.
+    /// </summary>
+    private void Sell()
+    {
+        // If there is no selected plant, exit
+        if(selectedPlant == null)
+        {
+            return;
+        }
+
+        // Get amount
+        int amount = StoreUI.instance.GetSelectedAmount();
+
+        // Calculate multiplier and sell plant
+        float multiplier = 2f / (selectedPlant.seasons.IndexOf(TimeManager.instance.season) + 1);
+        PlayerDataManager.instance.Sell(selectedPlant, amount, multiplier);
+
+        // Add the sold plant to sold plants dictionary
+        AddSoldPlant(selectedPlant.name, amount);
+
+        // Update slot
+        selectedSlot.SellAmount(amount);
+    }
+
+    /// <summary>
+    /// Buy or sell handler
+    /// </summary>
+    public void BuyOrSell()
+    {
+        // If the current tab is the buy menu, call buy method
+        if(StoreUI.instance.isOnBuyMenu)
+        {
+            Buy();
+        }
+
+        // Else, call sell method
+        else
+        {
+            Sell();
         }
     }
 }

@@ -18,7 +18,7 @@ public class StoreSlot : MonoBehaviour
 
     // Auxiliar variables
     private Plant plant;
-    private int amount = -1;
+    public int amount = -1;
 
 
     /// <summary>
@@ -96,45 +96,24 @@ public class StoreSlot : MonoBehaviour
     }
 
     /// <summary>
-    /// Buy a plant.
+    /// Sell a certain amount of this plant.
     /// </summary>
-    public void Buy()
+    /// <param name="amount">Amount to sell.</param>
+    public void SellAmount(int amount)
     {
-        if(plant != null)
+        // Decrease amount
+        this.amount -= amount;
+
+        // If amount is less or equal to 0, clear the slot
+        if(this.amount <= 0)
         {
-            PlayerDataManager.instance.Buy(plant, 1);
+            ClearSlot();
         }
-    }
 
-    /// <summary>
-    /// Sell a plant.
-    /// </summary>
-    public void Sell()
-    {
-        // If there is a plant
-        if(plant != null)
+        // Else, update the slot
+        else
         {
-            // Calculate multiplier and sell plant
-            float multiplier = 2f / (plant.seasons.IndexOf(TimeManager.instance.season) + 1);
-            PlayerDataManager.instance.Sell(plant, 1, multiplier);
-
-            // Add the sold plant to sold plants dictionary
-            Store.instance.AddSoldPlant(plant.name, 1);
-
-            // Decrease amount
-            amount--;
-
-            // If amount is less or equal to 0, clear the slot
-            if(amount <= 0)
-            {
-                ClearSlot();
-            }
-
-            // Else, update the slot
-            else
-            {
-                AddPlantToSell(plant, amount);
-            }
+            AddPlantToSell(plant, this.amount);
         }
     }
 
@@ -143,16 +122,11 @@ public class StoreSlot : MonoBehaviour
     /// </summary>
     public void StoreActionHandler()
     {
-        // Buy
-        if(StoreUI.instance.isOnBuyMenu)
+        if(plant != null)
         {
-            Buy();
-        }
-
-        // Sell
-        else
-        {
-            Sell();
+            Store.instance.SetSelectedPlant(plant);
+            Store.instance.SetSelectedStoreSlot(this);
+            StoreUI.instance.AmountSelectionMenu(true);
         }
     }
 }

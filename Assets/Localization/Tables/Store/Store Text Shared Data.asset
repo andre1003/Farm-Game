@@ -27,6 +27,10 @@ MonoBehaviour:
     m_Key: Sell Button
     m_Metadata:
       m_Items: []
+  - m_Id: 144368808236724224
+    m_Key: Buy
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

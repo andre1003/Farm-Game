@@ -31,6 +31,6 @@ MonoBehaviour:
   - 0.5
   - 0
   isActive: 0
-  completed: 0
-  instructionIndex: 0
-  initialIndex: 0
+  completed: 1
+  instructionIndex: -1
+  initialIndex: -1
