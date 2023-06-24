@@ -1,6 +1,6 @@
 # Farm Game
 
-![farm-game](https://user-images.githubusercontent.com/44238339/170262347-73eefe43-b0b2-493b-9e2c-f12e7229bff7.png)
+![farm-game](https://github.com/andre1003/Farm-Game/assets/44238339/87c4ca0c-d8fe-4001-bf13-fbb30b9e85c8)
 
 > Farm Game made in Unity.
 
@@ -23,3 +23,4 @@ Done! You will run the application on your computer.
 *Obs.: The Farm Game has not been officially builded by the developer, so building it may not work as desired.*
 
 [⬆ Back to top](#farm-game)<br>
+
