@@ -1,5 +1,6 @@
+using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.Localization.Components;
 
 public class InventoryUI : MonoBehaviour
 {
@@ -23,7 +24,10 @@ public class InventoryUI : MonoBehaviour
     public GameObject inventoryCanvas;
 
     // Transition
-    public float transitionLenght = 0.25f;
+    public float transitionLength = 0.25f;
+
+    // Localization
+    public LocalizeStringEvent moneyTextEvent;
 
 
     // Inventory references
@@ -77,8 +81,8 @@ public class InventoryUI : MonoBehaviour
             return;
         }
 
-        // Change UI opacity over transition lenght seconds
-        canvasGroup.alpha = Mathf.Lerp(initialAlpha, targetAlpha, (elapsedTime / transitionLenght));
+        // Change UI opacity over transition length seconds
+        canvasGroup.alpha = Mathf.Lerp(initialAlpha, targetAlpha, (elapsedTime / transitionLength));
         elapsedTime += Time.deltaTime;
 
         // If UI opacity is the target opacity, reset elapsed time and set change UI controller to false
@@ -99,7 +103,7 @@ public class InventoryUI : MonoBehaviour
     /// Set UI visibility.
     /// </summary>
     /// <param name="isActive">New visibility.</param>
-    private void SetUI(bool isActive)
+    public void SetUI(bool isActive)
     {
         // Set initial opacity
         initialAlpha = canvasGroup.alpha;
@@ -126,13 +130,27 @@ public class InventoryUI : MonoBehaviour
     /// </summary>
     private void UpdateUI()
     {
+        // Refresh money text
+        moneyTextEvent.RefreshString();
+
+        // Get inventory slot, based on inventory tab
+        List<InventorySlotObject> inventorySlots;
+        if(harvested)
+        {
+            inventorySlots = inventory.inventory.harvestedPlants;
+        }
+        else
+        {
+            inventorySlots = inventory.inventory.plants;
+        }
+
         // Loop slots
         for(int i = 0; i < slots.Length; i++)
         {
             // If its the correct inventory tab, add it to slot
-            if(i < inventory.inventory.plants.Count && inventory.inventory.plants[i].harvested == harvested)
+            if(i < inventorySlots.Count)
             {
-                slots[i].AddPlant(inventory.inventory.plants[i].plant, inventory.inventory.plants[i].amount);
+                slots[i].AddPlant(inventorySlots[i].plant, inventorySlots[i].amount);
             }
 
             // Else, clear slot

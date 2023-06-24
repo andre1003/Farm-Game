@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27d6e0843a112eb42b5ad2edda865cc3, type: 3}
   m_Name: Settings
   m_EditorClassIdentifier: 
-  resolutionWidth: 1920
-  resolutionHeight: 1080
-  refreshRate: 165
+  resolutionWidth: 0
+  resolutionHeight: 0
+  refreshRate: 0
   fullscreen: 1
   generalVolume: 0
   graphicsPreset: 5
   useAdditionalResource: 0
-  languageIndex: 1
+  languageIndex: 0

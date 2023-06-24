@@ -12,20 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b78ea0913eb13cf4d825dbbadb68362a, type: 3}
   m_Name: StoreTutorial
   m_EditorClassIdentifier: 
+  tableName: Store Tutorial
   instructions:
-  - "Aoba, b\xE3o?! Bem-vindo \xE0 barraquinha do Seu Z\xE9z\xE3o! Eu sou o Z\xE9z\xE3o,
-    \xE9 um prazer conhecer oc\xEA!\r\n\r\nHoje eu tenho s\xF3 algumas coisinha aqui
-    na minha barraca. O rapaz que me tr\xE1s as semente me deixou na m\xE3o hoje...
-    Mas tudo bem, vida que segue.\r\n\r\nO que voc\xEA v\xEA \xE9 o que voc\xEA pode
-    comprar. O que vai querer hoje? Eu recomendo voc\xEA comprar essa sementes de
-    ma\xE7\xE3, mas ai \xE9 com voc\xEA..."
-  - "Legal, uma boa planta\xE7\xE3o proc\xEA!\r\n\r\nAh! Quando voc\xEA tiver alguma
-    planta colhida, tr\xE1s aqui que eu compro tamb\xE9m. Eu vi que voc\xEA plantou
-    umas bananas, tem uns clientes meus que tavam querendo. Se quiser vender pra
-    mim, eu compro!"
-  - "Muito obrigado! O produto parece ser de muito boa qualidade! Acho que os cliente
-    v\xE3o gost\xE1.\r\n\r\nSe tiver mais alguma coisa que eu possa te ajudar, t\xF4
-    \xE0 disposi\xE7\xE3o!"
+  - ST0
+  - ST1
+  - ST2
   timers:
   - 0
   - 0.5

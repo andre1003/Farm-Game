@@ -7,6 +7,7 @@ public class InventoryObject : ScriptableObject
 {
     // Plants list
     public List<InventorySlotObject> plants = new List<InventorySlotObject>();
+    public List<InventorySlotObject> harvestedPlants = new List<InventorySlotObject>();
 
 
     /// <summary>
@@ -16,22 +17,43 @@ public class InventoryObject : ScriptableObject
     /// <param name="plant">Plant reference.</param>
     /// <param name="amount">Amount to add.</param>
     /// <param name="harvested">This plant was harvested?</param>
-    public bool AddPlant(Plant plant, int amount, bool harvested)
+    public void AddPlant(Plant plant, int amount, bool harvested)
+    {
+        // Add to harvested plants list
+        if(harvested)
+        {
+            AddPlantImplementation(harvestedPlants, plant, amount);
+        }
+
+        // Add to plants list
+        else
+        {
+            AddPlantImplementation(plants, plant, amount);
+        }
+        
+    }
+
+    /// <summary>
+    /// Implementation of adding a plant to inventory.
+    /// </summary>
+    /// <param name="list">List to add.</param>
+    /// <param name="plant">Plant reference.</param>
+    /// <param name="amount">Amount to add.</param>
+    private void AddPlantImplementation(List<InventorySlotObject> list, Plant plant, int amount)
     {
         // Loop all plants on inventory
-        for(int i = 0; i < plants.Count; i++)
+        for(int i = 0; i < list.Count; i++)
         {
             // If found the corresponding plant, add the amount to it's amount
-            if(plants[i].plant == plant && plants[i].harvested == harvested)
+            if(list[i].plant == plant)
             {
-                plants[i].AddAmount(amount);
-                return true;
+                list[i].AddAmount(amount);
+                return;
             }
         }
 
         // If the plant does not exists, add it to the inventory
-        plants.Add(new InventorySlotObject(plant, amount, harvested));
-        return true;
+        list.Add(new InventorySlotObject(plant, amount));
     }
 
 
@@ -40,22 +62,43 @@ public class InventoryObject : ScriptableObject
     /// </summary>
     /// <param name="plant">Plant reference.</param>
     /// <param name="amount">Amount to remove.</param>
+    /// <param name="harvested">This plant was harvested?</param>
     /// <returns>TRUE - If successfully removed. FALSE - If failed to remove.</returns>
-    public bool RemovePlant(Plant plant, int amount)
+    public bool RemovePlant(Plant plant, int amount, bool harvested)
+    {
+        if(harvested)
+        {
+            return RemovePlantImplementation(harvestedPlants, plant, amount);
+        }
+
+        else
+        {
+            return RemovePlantImplementation(plants, plant, amount);
+        }
+    }
+
+    /// <summary>
+    /// Implementation of removing a plant to inventory.
+    /// </summary>
+    /// <param name="list">List to remove.</param>
+    /// <param name="plant"></param>
+    /// <param name="amount"></param>
+    /// <returns></returns>
+    private bool RemovePlantImplementation(List<InventorySlotObject> list, Plant plant, int amount)
     {
         // Loop all plants
-        for(int i = 0; i < plants.Count; i++)
+        for(int i = 0; i < list.Count; i++)
         {
             // If found the corresponding plant, remove the given amount
-            if(plants[i].plant == plant)
+            if(list[i].plant == plant)
             {
                 // Check if can remove the given amount
-                bool canRemoveFromList = plants[i].RemoveAmount(amount);
+                bool canRemoveFromList = list[i].RemoveAmount(amount);
 
                 // If can, remove it
                 if(canRemoveFromList)
                 {
-                    plants.RemoveAt(i);
+                    list.RemoveAt(i);
                 }
 
                 return true;
@@ -99,7 +142,6 @@ public class InventorySlotObject
 {
     public Plant plant;
     public int amount;
-    public bool harvested;
 
     /// <summary>
     /// Inventory Slot construct.
@@ -107,11 +149,10 @@ public class InventorySlotObject
     /// <param name="plant">Plant reference.</param>
     /// <param name="amount">Plant amount.</param>
     /// <param name="harvested">Was this plant harvested?</param>
-    public InventorySlotObject(Plant plant, int amount, bool harvested)
+    public InventorySlotObject(Plant plant, int amount)
     {
         this.plant = plant;
         this.amount = amount;
-        this.harvested = harvested;
     }
 
     /// <summary>

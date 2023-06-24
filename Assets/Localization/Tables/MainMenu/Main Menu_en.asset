@@ -66,6 +66,23 @@ MonoBehaviour:
     m_Localized: 'Language:'
     m_Metadata:
       m_Items: []
+  - m_Id: 119190411915341824
+    m_Localized: 'Thank you so much for participating in the very first version of
+      the Farm Game!
+
+      
+
+      Just to remind you, this is not the final version
+      of the game (not even close, actually), but a test version of the main Farm
+      Game features. Therefore, please be patient with any bugs or performance issues
+      that may occur.
+
+      
+
+      Also, your opinion is very important! Therefore,
+      I ask you to fill out the form at the end of the game.'
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

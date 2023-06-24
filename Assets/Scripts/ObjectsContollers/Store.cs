@@ -26,7 +26,7 @@ public class Store : MonoBehaviour
     public GameObject newItemCanvas;
 
     // Transition
-    public float transitionLenght = 0.25f;
+    public float transitionLength = 0.25f;
 
     // Destination
     public Transform frontSpot;
@@ -73,8 +73,8 @@ public class Store : MonoBehaviour
             return;
         }
 
-        // Change UI opacity over transition lenght seconds
-        canvasGroup.alpha = Mathf.Lerp(initialAlpha, targetAlpha, (elapsedTime / transitionLenght));
+        // Change UI opacity over transition length seconds
+        canvasGroup.alpha = Mathf.Lerp(initialAlpha, targetAlpha, (elapsedTime / transitionLength));
         elapsedTime += Time.deltaTime;
 
         // If UI opacity is the target opacity, reset elapsed time and set change UI controller to false

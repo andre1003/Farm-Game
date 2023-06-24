@@ -66,6 +66,16 @@ MonoBehaviour:
     m_Localized: 'Idioma:'
     m_Metadata:
       m_Items: []
+  - m_Id: 119190411915341824
+    m_Localized: "Muito obrigado por participar da primeir\xEDssima vers\xE3o do
+      Farm Game!\r\n\r\nApenas para lembrar, essa n\xE3o \xE9 a vers\xE3o final do
+      jogo (nem perto disso, na verdade), mas sim uma vers\xE3o de testes das principais
+      funcionalidades do Farm Game. Por isso, pe\xE7o que tenha paci\xEAncia com
+      eventuais bugs ou problemas de performances que possam ocorrer.\r\n\r\nAl\xE9m
+      disso, sua opini\xE3o \xE9 muito importante! Por isso, pe\xE7o para que preencha
+      o formul\xE1rio ao final do jogo."
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

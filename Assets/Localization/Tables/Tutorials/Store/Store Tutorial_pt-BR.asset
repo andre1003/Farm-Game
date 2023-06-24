@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: Store Tutorial_pt-BR
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: pt-BR
+  m_SharedData: {fileID: 11400000, guid: b6f3ce02299675e41ba607afdfa26b8e, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 57975287808
+    m_Localized: "Aoba, b\xE3o?! Bem-vindo \xE0 barraquinha do Seu Z\xE9z\xE3o! Eu
+      sou o Z\xE9z\xE3o, \xE9 um prazer conhecer oc\xEA!\r\n\r\nHoje eu tenho s\xF3
+      algumas coisinha aqui na minha barraca. O rapaz que me tr\xE1s as semente me
+      deixou na m\xE3o hoje... Mas tudo bem, vida que segue.\r\n\r\nO que voc\xEA
+      v\xEA \xE9 o que voc\xEA pode comprar. O que vai querer hoje? Eu recomendo
+      voc\xEA comprar essa sementes de ma\xE7\xE3, mas ai \xE9 com voc\xEA..."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 62115065856
+    m_Localized: "Legal, uma boa planta\xE7\xE3o proc\xEA!\r\n\r\nAh! Quando voc\xEA
+      tiver alguma planta colhida, tr\xE1s aqui que eu compro tamb\xE9m. Eu vi que
+      voc\xEA plantou umas bananas, tem uns clientes meus que tavam querendo. Se
+      quiser vender pra mim, eu compro!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 66015768576
+    m_Localized: "Muito obrigado! O produto parece ser de muito boa qualidade! Acho
+      que os cliente v\xE3o gost\xE1.\r\n\r\nSe tiver mais alguma coisa que eu possa
+      te ajudar, t\xF4 \xE0 disposi\xE7\xE3o!"
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

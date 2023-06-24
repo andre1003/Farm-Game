@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: "Localization-String-Tables-Portugu\xEAs (Brasil)"
+  m_EditorClassIdentifier: 
+  m_GroupName: "Localization-String-Tables-Portugu\xEAs (Brasil)"
+  m_Data:
+    m_SerializedData: []
+  m_GUID: be186f1b0a89aa64e97800cf9814d966
+  m_SerializeEntries:
+  - m_GUID: c435c4e0c574c594abe9e550157da967
+    m_Address: Initial Tutorial_pt-BR
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-pt-BR
+    - Preload
+  - m_GUID: 38f6d906a59db2945ad3b56f948cfa35
+    m_Address: Store Tutorial_pt-BR
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-pt-BR
+    - Preload
+  m_ReadOnly: 1
+  m_Settings: {fileID: 11400000, guid: ef5026b9b1b0d014b8ac5aa922080ff5, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 45a56c5aee4977e458ab0fe016c7129a, type: 2}
+    - {fileID: 11400000, guid: ea4b52306339f834e94f0cbcebd43612, type: 2}

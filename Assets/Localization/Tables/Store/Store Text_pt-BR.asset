@@ -30,6 +30,14 @@ MonoBehaviour:
     m_Localized: Vender
     m_Metadata:
       m_Items: []
+  - m_Id: 144593625267351552
+    m_Localized: 'Quantidade:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 144593841638912000
+    m_Localized: 'Total:'
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

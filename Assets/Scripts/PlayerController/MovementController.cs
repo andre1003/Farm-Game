@@ -31,8 +31,10 @@ public class MovementController : MonoBehaviour
     // Navigation mesh agent
     private NavMeshAgent myAgent;
 
-    // Is planting?
+    // Planting
     private bool isPlanting = false;
+    private float plantLength;
+    private float standUpLength;
 
     // Look at
     private Transform lookAt;
@@ -44,6 +46,22 @@ public class MovementController : MonoBehaviour
         // Set navigation mesh agent
         myAgent = GetComponent<NavMeshAgent>();
         myAgent.updateRotation = false;
+
+        // Get plant animation length
+        plantLength = 0f;
+        standUpLength = 0f;
+        var clips = animator.runtimeAnimatorController.animationClips;
+        foreach(var clip in clips)
+        {
+            if(clip.name == "Plant")
+            {
+                plantLength = clip.length;
+            }
+            else if(clip.name == "StandUp")
+            {
+                standUpLength = clip.length;
+            }
+        }
     }
 
     // Update method
@@ -133,9 +151,6 @@ public class MovementController : MonoBehaviour
                         // Change busy status
                         InGameSaves.ChangeIsBusy();
 
-                        // Wait 8 seconds and change busy status again
-                        StartCoroutine(Wait(8f));
-
                         // Change player rotation to look at plantation zone
                         myAgent.transform.LookAt(lookAt);
 
@@ -143,7 +158,11 @@ public class MovementController : MonoBehaviour
                         isPlanting = false;
 
                         // Play Plant animation
+                        //animator.speed = 2f;
                         animator.Play("Plant");
+
+                        // Wait for character to plant and change busy status again
+                        StartCoroutine(Wait(plantLength + standUpLength));
                     }
                 }
             }
@@ -247,5 +266,14 @@ public class MovementController : MonoBehaviour
         }
 
         return false;
+    }
+
+    /// <summary>
+    /// Get plant clip length.
+    /// </summary>
+    /// <returns>Plant clip length.</returns>
+    public float GetPlantLength()
+    {
+        return plantLength;
     }
 }

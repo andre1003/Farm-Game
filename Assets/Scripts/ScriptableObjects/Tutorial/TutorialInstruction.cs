@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,8 +9,10 @@ public class TutorialInstruction : ScriptableObject
     public delegate void InstructionAction();
     public List<InstructionAction> actions;
 
+    // Localization
+    public string tableName;
+
     // Instructions
-    [TextArea]
     public List<string> instructions;
 
     // Timers
@@ -113,6 +114,7 @@ public class TutorialInstruction : ScriptableObject
     /// </summary>
     public void NextInstruction()
     {
+
         // If instruction index is -1
         if(instructionIndex == -1)
         {
@@ -132,7 +134,7 @@ public class TutorialInstruction : ScriptableObject
                 instructionIndex = initialIndex;
 
                 // Set instruction text
-                TutorialManager.instance.UpdateUI(instructions[instructionIndex], true);
+                StringLocalizer.instance.LocalizeTutorial(tableName, instructions[instructionIndex]);
 
                 // Allow action check to work
                 canCallNextInstruction = true;
@@ -170,7 +172,7 @@ public class TutorialInstruction : ScriptableObject
         }
 
         // If instruction index is valid, set instruction text
-        TutorialManager.instance.UpdateUI(instructions[instructionIndex], true);
+        StringLocalizer.instance.LocalizeTutorial(tableName, instructions[instructionIndex]);
 
         // Allow action check to work
         canCallNextInstruction = true;

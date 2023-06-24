@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -35,6 +36,7 @@ public class PlantationController : MonoBehaviour
     // Plant
     private Plant planted;
     private List<Transform> spawned;
+    private float interval;
 
     // Harvest and rot controller
     private bool isReadyToHarvest = false;
@@ -60,7 +62,7 @@ public class PlantationController : MonoBehaviour
         if(planted == null)
         {
             // Try to remove one plant from inventory
-            bool hasRemoved = Inventory.instance.Remove(plant, 1);
+            bool hasRemoved = Inventory.instance.Remove(plant, 1, false);
 
             // If removed
             if(hasRemoved)
@@ -81,7 +83,8 @@ public class PlantationController : MonoBehaviour
 
             // Set plant to planted plant and spawn the objects
             planted = plant;
-            SpawnPlants(plant.plantPrefab);
+            interval = MovementController.instance.GetPlantLength() / spawns.Count;
+            SpawnPlants(plant.plantPrefab, 0);
 
             // Setup initial plant day
             if(initialDay == 0)
@@ -199,24 +202,55 @@ public class PlantationController : MonoBehaviour
     /// </summary>
     public void Harvest()
     {
-        Inventory.instance.Add(planted, Random.Range(planted.minHarvest, planted.maxHarvest), true);
+        Inventory.instance.Add(planted, UnityEngine.Random.Range(planted.minHarvest, planted.maxHarvest), true);
         DestroyPlants();
+    }
+
+    /// <summary>
+    /// Wait for seconds before spawn next plant.
+    /// </summary>
+    /// <param name="seconds">Seconds to wait.</param>
+    /// <param name="plantPrefab">Plants prefab reference.</param>
+    private IEnumerator WaitForSpawnPlants(float seconds, Transform plantPrefab, int index)
+    {
+        yield return new WaitForSeconds(seconds);
+        SpawnPlants(plantPrefab, index + 1);
     }
 
     /// <summary>
     /// Spawn plants at the corresponding location.
     /// </summary>
-    /// <param name="plantPrefab"></param>
-    private void SpawnPlants(Transform plantPrefab)
+    /// <param name="plantPrefab">Plant prefab.</param>
+    /// <param name="index">List index.</param>
+    private void SpawnPlants(Transform plantPrefab, int index)
     {
-        // For each spawn point, spawn a seed
-        spawned = new List<Transform>();
-        foreach(var spawn in spawns)
+        // If spawned list is null, initialize it
+        if(spawned == null)
         {
-            Transform newPlant = Instantiate(plantPrefab, spawn.transform.position, Quaternion.identity);
-            newPlant.parent = transform;
-            spawned.Add(newPlant);
+            spawned = new List<Transform>();
         }
+
+        // If spawned list count is equal spawns count, exit
+        if(spawned.Count == spawns.Count)
+        {
+            return;
+        }
+
+        // Spawn plant at the corresponding location and wait for spawn next plant
+        Spawn(plantPrefab, index);
+        StartCoroutine(WaitForSpawnPlants(interval, plantPrefab, index));
+    }
+
+    /// <summary>
+    /// Spawn a plant at a location.
+    /// </summary>
+    /// <param name="plantPrefab">Plant prefab.</param>
+    /// <param name="index">List index.</param>
+    private void Spawn(Transform plantPrefab, int index)
+    {
+        Transform newPlant = Instantiate(plantPrefab, spawns[index].transform.position, Quaternion.identity);
+        newPlant.parent = transform;
+        spawned.Add(newPlant);
     }
 
     /// <summary>

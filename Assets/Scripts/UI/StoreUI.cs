@@ -1,7 +1,8 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-
+using UnityEngine.Localization.Components;
+using UnityEngine.Localization.SmartFormat;
 
 public class StoreUI : MonoBehaviour
 {
@@ -27,7 +28,11 @@ public class StoreUI : MonoBehaviour
     public GameObject storeCanvas;
     public GameObject amountSelectionCanvas;
     public TextMeshProUGUI amountText;
+    public TextMeshProUGUI totalText;
     public TextMeshProUGUI buyOrSellButtonText;
+
+    // Localization
+    public LocalizeStringEvent moneyTextEvent;
 
 
     // Store
@@ -46,8 +51,6 @@ public class StoreUI : MonoBehaviour
         slots = itemsParent.GetComponentsInChildren<StoreSlot>();
 
         amountText.text = amount.ToString();
-
-        //BuyMenu();
     }
 
     /// <summary>
@@ -103,14 +106,11 @@ public class StoreUI : MonoBehaviour
         List<int> amounts = new List<int>();
 
         // Loop inventory to get harvested plants
-        foreach(InventorySlotObject plant in Inventory.instance.inventory.plants)
+        foreach(InventorySlotObject plant in Inventory.instance.inventory.harvestedPlants)
         {
             // If the plant have been harvested, add to UI
-            if(plant.harvested)
-            {
-                plants.Add(plant.plant);
-                amounts.Add(plant.amount);
-            }
+            plants.Add(plant.plant);
+            amounts.Add(plant.amount);
         }
 
         // Display at inventory
@@ -147,6 +147,9 @@ public class StoreUI : MonoBehaviour
         {
             SellMenu();
         }
+
+        // Refresh money text
+        moneyTextEvent.RefreshString();
     }
 
     /// <summary>
@@ -180,6 +183,7 @@ public class StoreUI : MonoBehaviour
 
         // Activate amount selection menu
         amountSelectionCanvas.SetActive(isActive);
+        UpdateTotal();
     }
 
     /// <summary>
@@ -211,7 +215,7 @@ public class StoreUI : MonoBehaviour
             int amountOnInventory = 0;
 
             // Find the selected plant
-            foreach(var inventorySlot in Inventory.instance.inventory.plants)
+            foreach(var inventorySlot in Inventory.instance.inventory.harvestedPlants)
             {
                 // If this is the selected plant, get the amount and break the loop
                 if(inventorySlot.plant == Store.instance.GetSelectedPlant())
@@ -228,8 +232,9 @@ public class StoreUI : MonoBehaviour
             }
         }
 
-        // Set amount text
+        // Set amount and total text
         amountText.text = amount.ToString();
+        UpdateTotal();
     }
 
     /// <summary>
@@ -246,8 +251,26 @@ public class StoreUI : MonoBehaviour
             amount = 1;
         }
 
-        // Set amount text
+        // Set amount and text
         amountText.text = amount.ToString();
+        UpdateTotal();
+    }
+
+    /// <summary>
+    /// Update total text.
+    /// </summary>
+    private void UpdateTotal()
+    {
+        // If there is no selected plant, exit
+        Plant selectedPlant = Store.instance.GetSelectedPlant();
+        if(selectedPlant == null)
+        {
+            return;
+        }
+
+        // Set total value
+        float total = selectedPlant.buyValue * amount;
+        totalText.text = total.ToString("F2");
     }
 
     /// <summary>

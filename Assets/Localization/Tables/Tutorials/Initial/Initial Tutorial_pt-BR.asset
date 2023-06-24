@@ -1,0 +1,82 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: Initial Tutorial_pt-BR
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: pt-BR
+  m_SharedData: {fileID: 11400000, guid: 6e2522262ff0d32498c0580c30e6f19a, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 24076922880
+    m_Localized: "Ol\xE1 meu parceiro, como vai! Vamos come\xE7ar nossa aventura
+      nessa jo\xE7a?!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 27486892032
+    m_Localized: "Primeiramente, voc\xEA precisa se familiarizar com essa fazenda.
+      Ande um pouco por ai! Para andar, clique com o bot\xE3o esquerdo do mouse."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 30708117504
+    m_Localized: "Muito bem! Agora vamos ver o que voc\xEA tem no bolso. Pra abrir
+      o invent\xE1rio, utilize a tecla I."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 34193584128
+    m_Localized: "Que maravilha! Parece que voc\xEA tem algumas coisas nesses bolsos
+      al\xE9m de teia de aranha!\r\n\r\nT\xF4 vendo que voc\xEA tem dois bolsos nessa
+      cal\xE7a, n\xE9?\r\n\r\nEnt\xE3o, um \xE9 pra sementes e o outro \xE9 pro que
+      voc\xEA colheu. Navegue pelos bolsos, veja o que voc\xEA tem, se \xE9 que voc\xEA
+      tem mais..."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 37062488064
+    m_Localized: "\xC9... aqui a coisa t\xE1 preta... Mas vamos resolver isso jaj\xE1.
+      Pode tirar a m\xE3o do bolso. Vamos agora pegar a inchada pra fazer um canteiro!\r\n\r\nVoc\xEA
+      pode sair do invent\xE1rio apertando I ou clicando no bot\xE3o vermelho com
+      um X."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 40564731904
+    m_Localized: "Muito bem, muito bem! Agora \xE9 m\xE3o na massa. Vamos fazer um
+      canteiro pra plantar essa semente que t\xE1 sobrando no seu bolso, antes que
+      ela estrague.\r\n\r\nPra criar um canteiro, pressione a tecla P."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 43769180160
+    m_Localized: "Legal! Agora voc\xEA pode criar um canteiro clicando com o bot\xE3o
+      direito do mouse.\r\n\r\nVoc\xEA pode desfazer um canteiro clicando em cima
+      de um canteiro existente, com o mesmo bot\xE3o.\r\n\r\nCria um canteiro pra
+      gente!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 49649594368
+    m_Localized: "B\xE3o demais da conta! Agora voc\xEA pode sair do modo de edi\xE7\xE3o
+      apertando P novamente."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 54724702208
+    m_Localized: "Show de bola! Agora voc\xEA tem que plantar as sementes do seu
+      bolso.\r\n\r\nPara isso, clique com o bot\xE3o direito do mouse em cima de
+      um canteiro, e depois selecione a semente que voc\xEA quer plantar."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 60395401216
+    m_Localized: "E \xE9 isso! Agora voc\xEA pode continuar sua vida de plantador!
+      Boa sorte!"
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

@@ -20,7 +20,7 @@ MonoBehaviour:
     - rid: 2896074513485398033
   m_TableData:
   - m_Id: 56754634752
-    m_Localized: 'Cash: {playerdata.money}'
+    m_Localized: 'Cash: {playerdata.money:F2}'
     m_Metadata:
       m_Items:
       - rid: 2896074513485398033

@@ -39,6 +39,26 @@ public class StringLocalizer : MonoBehaviour
     }
 
     /// <summary>
+    /// Localize a string, based on table name and key.
+    /// </summary>
+    /// <param name="tableName">Table to search the localization.</param>
+    /// <param name="key">Key of localization string.</param>
+    public void LocalizeTutorial(string tableName, string key)
+    {
+        StartCoroutine(GetTutorialLocalizedString(tableName, key));
+    }
+
+    /// <summary>
+    /// Localize the first tutorial string, based on table name and key.
+    /// </summary>
+    /// <param name="tableName">Table to search the localization.</param>
+    /// <param name="key">Key of localization string.</param>
+    public void LocalizeTutorialInit(string tableName, string key)
+    {
+        StartCoroutine(GetTutorialLocalizedStringInit(tableName, key));
+    }
+
+    /// <summary>
     /// Get the localized string and update the text UI.
     /// </summary>
     /// <param name="tableName">Table to search the localization.</param>
@@ -54,6 +74,40 @@ public class StringLocalizer : MonoBehaviour
         // When table is loaded, get the localized value
         StringTable currentStringTable = tableLoading;
         text.text = currentStringTable[key].LocalizedValue;
+    }
+
+    /// <summary>
+    /// Get the localized string.
+    /// </summary>
+    /// <param name="tableName">Table to search the localization.</param>
+    /// <param name="key">Key of localization string.</param>
+    private IEnumerator GetTutorialLocalizedString(string tableName, string key)
+    {
+        // Get the string table with name tableName
+        LocalizedStringTable _stringTable = new LocalizedStringTable { TableReference = tableName };
+        var tableLoading = _stringTable.GetTable();
+        yield return tableLoading;
+
+        // When table is loaded, get the localized value
+        StringTable currentStringTable = tableLoading;
+        TutorialManager.instance.UpdateUI(currentStringTable[key].LocalizedValue, true);
+    }
+
+    /// <summary>
+    /// Get the localized string.
+    /// </summary>
+    /// <param name="tableName">Table to search the localization.</param>
+    /// <param name="key">Key of localization string.</param>
+    private IEnumerator GetTutorialLocalizedStringInit(string tableName, string key)
+    {
+        // Get the string table with name tableName
+        LocalizedStringTable _stringTable = new LocalizedStringTable { TableReference = tableName };
+        var tableLoading = _stringTable.GetTable();
+        yield return tableLoading;
+
+        // When table is loaded, get the localized value
+        StringTable currentStringTable = tableLoading;
+        TutorialManager.instance.UpdateUIDelay(1f, currentStringTable[key].LocalizedValue, true);
     }
 
     /// <summary>

@@ -19,6 +19,7 @@ public class ObjectsManager : MonoBehaviour
     public Vector2 hotSpot = Vector2.zero;
 
 
+    // Awake method
     void Awake()
     {
         Instantiate(player, spawnSpot.transform.position, Quaternion.Euler(0, 90, 0));
@@ -107,7 +108,9 @@ public class ObjectsManager : MonoBehaviour
                     // If there is no plant planted, open inventory
                     else
                     {
-                        inventory.SetActive(true);
+                        InventoryUI.instance.SetUI(true);
+                        InventoryUI.instance.SetHarvested(false);
+                        HUDManager.instance.SetHUD(false);
                     }
 
                     // Set current plantation zone

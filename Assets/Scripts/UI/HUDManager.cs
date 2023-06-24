@@ -19,7 +19,7 @@ public class HUDManager : MonoBehaviour
     public GameObject hudCanvas;
 
     // Transition
-    public float transitionLenght = 0.25f;
+    public float transitionLength = 0.25f;
 
 
     // HUD
@@ -47,8 +47,8 @@ public class HUDManager : MonoBehaviour
             return;
         }
 
-        // Change HUD opacity over transition lenght seconds
-        canvasGroup.alpha = Mathf.Lerp(initialAlpha, targetAlpha, (elapsedTime / transitionLenght));
+        // Change HUD opacity over transition length seconds
+        canvasGroup.alpha = Mathf.Lerp(initialAlpha, targetAlpha, (elapsedTime / transitionLength));
         elapsedTime += Time.deltaTime;
 
         // If HUD opacity is the target opacity, reset elapsed time and set change HUD controller to false

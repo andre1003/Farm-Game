@@ -17,7 +17,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &5240316520624676077
 RectTransform:
   m_ObjectHideFlags: 0
@@ -464,6 +464,7 @@ MonoBehaviour:
   costImage: {fileID: 2451174803966811326}
   levelText: {fileID: 1580956086076752697}
   costText: {fileID: 2451174804616396490}
+  amount: -1
 --- !u!1 &7077660342675974286
 GameObject:
   m_ObjectHideFlags: 0

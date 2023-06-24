@@ -37,6 +37,7 @@ public class PlayerDataManager : MonoBehaviour
     private bool editMode = false;
 
 
+    // Start method
     void Start()
     {
         // Set edit mode to false and update HUD
@@ -51,25 +52,22 @@ public class PlayerDataManager : MonoBehaviour
     /// <param name="amount">Amount to buy.</param>
     public void Buy(Plant plant, int amount)
     {
-        // If player has enought level, add to player's inventory
-        if(plant.levelRequired <= playerData.level)
+        // If player does not has enought level, exit
+        if(plant.levelRequired > playerData.level)
         {
-            // Try to add to inventory
-            bool canAdd = Inventory.instance.Add(plant, amount, false);
-
-            // Check if player have money and slots enough to buy
-            if(plant.buyValue <= playerData.money && canAdd)
-            {
-                playerData.money -= plant.buyValue;
-                UpdateHUD();
-            }
+            return;
         }
 
-        // If player don't have enought level
-        else
+        // If player does not have money to buy, exit
+        if(plant.buyValue > playerData.money)
         {
-            Debug.Log("Not available for your level");
+            return;
         }
+
+        // Add to inventory
+        Inventory.instance.Add(plant, amount, false);
+        playerData.money -= plant.buyValue;
+        UpdateHUD();
     }
 
     /// <summary>
@@ -81,7 +79,7 @@ public class PlayerDataManager : MonoBehaviour
     public void Sell(Plant plant, int amount, float multiplier = 1f)
     {
         // If successfully removed from player inventory
-        if(Inventory.instance.Remove(plant, amount))
+        if(Inventory.instance.Remove(plant, amount, true))
         {
             // Add money and update HUD
             playerData.money += plant.baseSellValue * multiplier;

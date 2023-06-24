@@ -34,7 +34,7 @@ public class InventorySlot : MonoBehaviour
     }
 
     /// <summary>
-    /// Clear the slot
+    /// Clear the slot.
     /// </summary>
     public void ClearSlot()
     {
@@ -48,14 +48,15 @@ public class InventorySlot : MonoBehaviour
     }
 
     /// <summary>
-    /// Plant the selected item in inventory at the selected plantation zone
+    /// Plant the selected item in inventory at the selected plantation zone.
     /// </summary>
     public void Plant()
     {
         GameObject plantationZone = InGameSaves.GetPlantationZone();
         if(plant != null && plantationZone != null && !InventoryUI.instance.GetHarvested())
         {
-            InventoryUI.instance.inventoryCanvas.SetActive(false);
+            InventoryUI.instance.SetUI(false);
+            HUDManager.instance.SetHUD(true);
             plantationZone.GetComponent<PlantationController>().Plant(plant);
         }
     }

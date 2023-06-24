@@ -53,6 +53,15 @@ MonoBehaviour:
     m_Address: Assets/Localization/Tables/Graphics/Graphics Text Shared Data.asset
     m_ReadOnly: 1
     m_SerializedLabels: []
+  - m_GUID: 6e2522262ff0d32498c0580c30e6f19a
+    m_Address: Assets/Localization/Tables/Tutorials/Initial/Initial Tutorial Shared
+      Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+  - m_GUID: b6f3ce02299675e41ba607afdfa26b8e
+    m_Address: Assets/Localization/Tables/Tutorials/Store/Store Tutorial Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
   m_ReadOnly: 1
   m_Settings: {fileID: 11400000, guid: ef5026b9b1b0d014b8ac5aa922080ff5, type: 2}
   m_SchemaSet:
