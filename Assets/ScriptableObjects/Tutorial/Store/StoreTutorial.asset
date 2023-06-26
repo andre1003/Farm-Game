@@ -18,8 +18,8 @@ MonoBehaviour:
   - ST1
   - ST2
   timers:
+  - 1
   - 0
-  - 0.5
   - 0
   isActive: 0
   completed: 1

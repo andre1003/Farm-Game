@@ -24,7 +24,7 @@ public class InitialTutorial : TutorialInstruction
 
         // For the initial tutorial, update UI at the start method
         instructionIndex = initialIndex;
-        StringLocalizer.instance.LocalizeTutorialInit(tableName, instructions[instructionIndex]);
+        StringLocalizer.instance.LocalizeTutorial(tableName, instructions[instructionIndex], 1f);
     }
 
     public override void SetupActions()

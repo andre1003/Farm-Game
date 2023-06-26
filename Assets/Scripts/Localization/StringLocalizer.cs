@@ -26,6 +26,7 @@ public class StringLocalizer : MonoBehaviour
     public List<string> options;
 
 
+    #region Localize String
     /// <summary>
     /// Localize a string, based on table name and key.
     /// It also updates the text UI.
@@ -36,26 +37,6 @@ public class StringLocalizer : MonoBehaviour
     public void Localize(string tableName, string key, TMPro.TextMeshProUGUI text)
     {
         StartCoroutine(GetLocalizedString(tableName, key, text));
-    }
-
-    /// <summary>
-    /// Localize a string, based on table name and key.
-    /// </summary>
-    /// <param name="tableName">Table to search the localization.</param>
-    /// <param name="key">Key of localization string.</param>
-    public void LocalizeTutorial(string tableName, string key)
-    {
-        StartCoroutine(GetTutorialLocalizedString(tableName, key));
-    }
-
-    /// <summary>
-    /// Localize the first tutorial string, based on table name and key.
-    /// </summary>
-    /// <param name="tableName">Table to search the localization.</param>
-    /// <param name="key">Key of localization string.</param>
-    public void LocalizeTutorialInit(string tableName, string key)
-    {
-        StartCoroutine(GetTutorialLocalizedStringInit(tableName, key));
     }
 
     /// <summary>
@@ -75,13 +56,27 @@ public class StringLocalizer : MonoBehaviour
         StringTable currentStringTable = tableLoading;
         text.text = currentStringTable[key].LocalizedValue;
     }
+    #endregion
+
+    #region Tutorial
+    /// <summary>
+    /// Localize a string, based on table name and key.
+    /// </summary>
+    /// <param name="tableName">Table to search the localization.</param>
+    /// <param name="key">Key of localization string.</param>
+    /// <param name="seconds">UI update delay.</param>
+    public void LocalizeTutorial(string tableName, string key, float seconds)
+    {
+        StartCoroutine(GetTutorialLocalizedString(tableName, key, seconds));
+    }
 
     /// <summary>
     /// Get the localized string.
     /// </summary>
     /// <param name="tableName">Table to search the localization.</param>
     /// <param name="key">Key of localization string.</param>
-    private IEnumerator GetTutorialLocalizedString(string tableName, string key)
+    /// <param name="seconds">UI update delay.</param>
+    private IEnumerator GetTutorialLocalizedString(string tableName, string key, float seconds)
     {
         // Get the string table with name tableName
         LocalizedStringTable _stringTable = new LocalizedStringTable { TableReference = tableName };
@@ -90,26 +85,11 @@ public class StringLocalizer : MonoBehaviour
 
         // When table is loaded, get the localized value
         StringTable currentStringTable = tableLoading;
-        TutorialManager.instance.UpdateUI(currentStringTable[key].LocalizedValue, true);
+        TutorialManager.instance.UpdateUIDelay(seconds, currentStringTable[key].LocalizedValue, true);
     }
+    #endregion
 
-    /// <summary>
-    /// Get the localized string.
-    /// </summary>
-    /// <param name="tableName">Table to search the localization.</param>
-    /// <param name="key">Key of localization string.</param>
-    private IEnumerator GetTutorialLocalizedStringInit(string tableName, string key)
-    {
-        // Get the string table with name tableName
-        LocalizedStringTable _stringTable = new LocalizedStringTable { TableReference = tableName };
-        var tableLoading = _stringTable.GetTable();
-        yield return tableLoading;
-
-        // When table is loaded, get the localized value
-        StringTable currentStringTable = tableLoading;
-        TutorialManager.instance.UpdateUIDelay(1f, currentStringTable[key].LocalizedValue, true);
-    }
-
+    #region Locales
     /// <summary>
     /// Get all avalilable locales for the game.
     /// </summary>
@@ -136,7 +116,9 @@ public class StringLocalizer : MonoBehaviour
         }
 
     }
+    #endregion
 
+    #region Language
     /// <summary>
     /// Change the game language.
     /// </summary>
@@ -156,4 +138,5 @@ public class StringLocalizer : MonoBehaviour
         yield return LocalizationSettings.InitializationOperation;
         LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales[index];
     }
+    #endregion
 }

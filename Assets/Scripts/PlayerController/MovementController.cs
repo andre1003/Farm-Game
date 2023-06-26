@@ -122,6 +122,7 @@ public class MovementController : MonoBehaviour
             // If hit any point on clickable area, send player to the hit point
             if(Physics.Raycast(ray, out hitInfo, 100, clickableArea))
             {
+                myAgent.isStopped = false;
                 myAgent.SetDestination(hitInfo.point);
                 animator.SetBool("isWalking", true);
             }
@@ -133,39 +134,38 @@ public class MovementController : MonoBehaviour
     /// </summary>
     private void ArriveDestinationHandler()
     {
-        // Check if player reached the destination
-        if(!myAgent.pathPending)
+        // If player has not reached destination or is not walking, exit
+        if(
+            (myAgent.pathPending) ||
+            (myAgent.remainingDistance > myAgent.stoppingDistance) ||
+            (myAgent.hasPath || myAgent.velocity.sqrMagnitude > 0f) ||
+            animator.GetBool("isWalking") == false)
         {
-            // If there is no remaining distance from destination
-            if(myAgent.remainingDistance <= myAgent.stoppingDistance)
-            {
-                // If there is no path for agent OR agent is not moving
-                if(!myAgent.hasPath || myAgent.velocity.sqrMagnitude == 0f)
-                {
-                    // Stop walking animation
-                    animator.SetBool("isWalking", false);
+            return;
+        }
 
-                    // If player is planting
-                    if(isPlanting)
-                    {
-                        // Change busy status
-                        InGameSaves.ChangeIsBusy();
+        // Stop walking 
+        StopPlayer();
+        
 
-                        // Change player rotation to look at plantation zone
-                        myAgent.transform.LookAt(lookAt);
+        // If player is planting
+        if(isPlanting)
+        {
+            // Change busy status
+            InGameSaves.ChangeIsBusy();
 
-                        // Set is planting to false
-                        isPlanting = false;
+            // Change player rotation to look at plantation zone
+            myAgent.transform.LookAt(lookAt);
 
-                        // Play Plant animation
-                        //animator.speed = 2f;
-                        animator.Play("Plant");
+            // Set is planting to false
+            isPlanting = false;
 
-                        // Wait for character to plant and change busy status again
-                        StartCoroutine(Wait(plantLength + standUpLength));
-                    }
-                }
-            }
+            // Play Plant animation
+            //animator.speed = 2f;
+            animator.Play("Plant");
+
+            // Wait for character to plant and change busy status again
+            StartCoroutine(Wait(plantLength + standUpLength));
         }
     }
 

@@ -134,7 +134,7 @@ public class TutorialInstruction : ScriptableObject
                 instructionIndex = initialIndex;
 
                 // Set instruction text
-                StringLocalizer.instance.LocalizeTutorial(tableName, instructions[instructionIndex]);
+                StringLocalizer.instance.LocalizeTutorial(tableName, instructions[instructionIndex], timers[instructionIndex]);
 
                 // Allow action check to work
                 canCallNextInstruction = true;
@@ -172,7 +172,7 @@ public class TutorialInstruction : ScriptableObject
         }
 
         // If instruction index is valid, set instruction text
-        StringLocalizer.instance.LocalizeTutorial(tableName, instructions[instructionIndex]);
+        StringLocalizer.instance.LocalizeTutorial(tableName, instructions[instructionIndex], timers[instructionIndex]);
 
         // Allow action check to work
         canCallNextInstruction = true;

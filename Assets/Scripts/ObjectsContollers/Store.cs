@@ -219,7 +219,7 @@ public class Store : MonoBehaviour
     /// <param name="name">Plant name to check.</param>
     /// <param name="amount">Sold amount to check.</param>
     /// <returns>TRUE - If it did. FALSE - If it didn't.</returns>
-    public bool HasSold(string name, int amount=-1)
+    public bool HasSold(string name, int amount=1)
     {
         // Make sure the key is lower case
         name = name.ToLower();
@@ -349,5 +349,8 @@ public class Store : MonoBehaviour
         {
             Sell();
         }
+
+        // Refresh money text
+        StoreUI.instance.RefreshMoneyText();
     }
 }

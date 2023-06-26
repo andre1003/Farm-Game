@@ -31,8 +31,8 @@ public class StoreUI : MonoBehaviour
     public TextMeshProUGUI totalText;
     public TextMeshProUGUI buyOrSellButtonText;
 
-    // Localization
-    public LocalizeStringEvent moneyTextEvent;
+    // Money
+    public TextMeshProUGUI moneyText;
 
 
     // Store
@@ -149,7 +149,7 @@ public class StoreUI : MonoBehaviour
         }
 
         // Refresh money text
-        moneyTextEvent.RefreshString();
+        RefreshMoneyText();
     }
 
     /// <summary>
@@ -271,6 +271,9 @@ public class StoreUI : MonoBehaviour
         // Set total value
         float total = selectedPlant.buyValue * amount;
         totalText.text = total.ToString("F2");
+
+        // Refresh money text
+        RefreshMoneyText();
     }
 
     /// <summary>
@@ -280,5 +283,13 @@ public class StoreUI : MonoBehaviour
     public int GetSelectedAmount()
     {
         return amount;
+    }
+
+    /// <summary>
+    /// Refresh money text.
+    /// </summary>
+    public void RefreshMoneyText()
+    {
+        moneyText.text = PlayerDataManager.instance.playerData.money.ToString("F2");
     }
 }

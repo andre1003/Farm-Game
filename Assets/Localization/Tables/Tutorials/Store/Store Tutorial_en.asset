@@ -17,7 +17,43 @@ MonoBehaviour:
   m_SharedData: {fileID: 11400000, guid: b6f3ce02299675e41ba607afdfa26b8e, type: 2}
   m_Metadata:
     m_Items: []
-  m_TableData: []
+  m_TableData:
+  - m_Id: 57975287808
+    m_Localized: 'Hi, what''s up? Welcome to Big Eddie store! I''m Big Eddie, nice
+      to meet ya!
+
+      
+
+      Today I have just a few things in my shop... The
+      boy who brings me the seeds didn''t come today... But it''s fine, whatever.
+
+      
+
+      What
+      you see is all you can buy. What you wanna buy today? I''d recommend ya these
+      apple seeds, but it''s up to you...'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 62115065856
+    m_Localized: 'Nice, have a good planting!
+
+      
+
+      Oh! When you have
+      any plant to sell, bring it here, and I''ll buy it. I saw that you plant some
+      bananas, some of my clients want them. If you wanna sell it to me, I''ll buy!'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 66015768576
+    m_Localized: 'Thanks! The product seems to be of very high quality! I bet the
+      clients will love it.
+
+      
+
+      If there is anything that I can help
+      with, just let me know!'
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

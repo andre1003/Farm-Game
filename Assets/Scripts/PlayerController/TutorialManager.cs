@@ -170,7 +170,6 @@ public class TutorialManager : MonoBehaviour
         // If there is no active tutorial, and the index is valid, call next instruction and return true
         if(currentIndex == -1 && tutorialIndex != -1)
         {
-            Debug.Log("Calling next instruction");
             instructions[tutorialIndex].NextInstruction();
             return true;
         }

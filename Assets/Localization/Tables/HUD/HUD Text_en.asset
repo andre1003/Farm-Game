@@ -20,10 +20,9 @@ MonoBehaviour:
     - rid: 2896074513485398033
   m_TableData:
   - m_Id: 56754634752
-    m_Localized: 'Cash: {playerdata.money:F2}'
+    m_Localized: 'Cash:'
     m_Metadata:
-      m_Items:
-      - rid: 2896074513485398033
+      m_Items: []
   - m_Id: 9849980518400
     m_Localized: 'Level: {playerdata.level}'
     m_Metadata:
@@ -59,4 +58,4 @@ MonoBehaviour:
     - rid: 2896074513485398033
       type: {class: SmartFormatTag, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
       data:
-        m_Entries: 0000d7360d00000000009760f508000000f009df8f4f5a0000f04984dc4f5a0000f089b209525a0000f0c929be935a00
+        m_Entries: 00009760f508000000f009df8f4f5a0000f04984dc4f5a0000f089b209525a0000f0c929be935a00

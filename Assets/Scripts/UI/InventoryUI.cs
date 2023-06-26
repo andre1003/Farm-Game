@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Localization.Components;
 
@@ -27,7 +28,7 @@ public class InventoryUI : MonoBehaviour
     public float transitionLength = 0.25f;
 
     // Localization
-    public LocalizeStringEvent moneyTextEvent;
+    public TextMeshProUGUI moneyText;
 
 
     // Inventory references
@@ -94,6 +95,7 @@ public class InventoryUI : MonoBehaviour
             // If target opacity is 0, set disable store canvas
             if(targetAlpha == 0f)
             {
+                MovementController.instance.ResumePlayer();
                 inventoryCanvas.SetActive(false);
             }
         }
@@ -113,6 +115,7 @@ public class InventoryUI : MonoBehaviour
         {
             targetAlpha = 1f;
             inventoryCanvas.SetActive(true);
+            MovementController.instance.StopPlayer();
         }
 
         // If the target is to hide UI, set target opacity to 0
@@ -131,7 +134,7 @@ public class InventoryUI : MonoBehaviour
     private void UpdateUI()
     {
         // Refresh money text
-        moneyTextEvent.RefreshString();
+        moneyText.text = PlayerDataManager.instance.playerData.money.ToString("F2");
 
         // Get inventory slot, based on inventory tab
         List<InventorySlotObject> inventorySlots;

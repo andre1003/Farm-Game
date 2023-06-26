@@ -16,21 +16,12 @@ public class PlayerDataManager : MonoBehaviour
         }
 
         instance = this;
-        //UpdateHUD();
     }
 
     #endregion
 
     // Player data
     public PlayerData playerData;
-
-    // HUD text
-    public Text levelText;
-    public Text xpText;
-
-    // Localization
-    public LocalizeStringEvent moneyTextEvent;
-    public LocalizeStringEvent levelTextEvent;
 
 
     // Edit mode
@@ -42,7 +33,6 @@ public class PlayerDataManager : MonoBehaviour
     {
         // Set edit mode to false and update HUD
         editMode = false;
-        UpdateHUD();
     }
 
     /// <summary>
@@ -67,7 +57,6 @@ public class PlayerDataManager : MonoBehaviour
         // Add to inventory
         Inventory.instance.Add(plant, amount, false);
         playerData.money -= plant.buyValue;
-        UpdateHUD();
     }
 
     /// <summary>
@@ -83,21 +72,7 @@ public class PlayerDataManager : MonoBehaviour
         {
             // Add money and update HUD
             playerData.money += plant.baseSellValue * multiplier;
-            UpdateHUD();
         }
-    }
-
-    /// <summary>
-    /// Method for update money text.
-    /// </summary>
-    private void UpdateHUD()
-    {
-        // Refresh money and level string
-        moneyTextEvent.RefreshString();
-        levelTextEvent.RefreshString();
-
-        // Update XP text
-        xpText.text = playerData.xp + " / " + playerData.nextLvlXp;
     }
 
     /// <summary>
@@ -107,7 +82,6 @@ public class PlayerDataManager : MonoBehaviour
     public void SetMoney(float moneyToAdd)
     {
         playerData.money += moneyToAdd;
-        UpdateHUD();
     }
 
     /// <summary>
@@ -135,9 +109,6 @@ public class PlayerDataManager : MonoBehaviour
         {
             playerData.xp = 0;
         }
-
-        // Update HUD
-        UpdateHUD();
     }
 
     /// <summary>
