@@ -78,13 +78,13 @@ MonoBehaviour:
     - Locale-en
     - Preload
   - m_GUID: 190b05768b3e4114d9ba4a43229df4a0
-    m_Address: Apple_en
+    m_Address: Item Names_en
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale-en
     - Preload
   - m_GUID: ea93140e629c2c84d903be7798c091b9
-    m_Address: Banana_en
+    m_Address: Item Descriptions_en
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale-en

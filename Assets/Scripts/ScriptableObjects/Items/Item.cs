@@ -3,7 +3,7 @@ using UnityEngine.Localization;
 using UnityEngine.Localization.Tables;
 
 
-[CreateAssetMenu(fileName = "NewItem", menuName = "ScriptableObjects/Item")]
+[CreateAssetMenu(fileName = "NewItem", menuName = "Items/Item")]
 public class Item : ScriptableObject
 {
     // Information
@@ -12,7 +12,10 @@ public class Item : ScriptableObject
 
     // Localization
     [Header("Localization")]
-    public LocalizedStringTable localizationTable;
+    public LocalizedStringTable nameLocalization;
+    public LocalizedStringTable descriptionLocalization;
+    // It might be interesting to have two big tables, one for names and the other for
+    // description, and search the localized string based on item name
 
     // Price
     [Header("Price")]
@@ -35,8 +38,8 @@ public class Item : ScriptableObject
     /// <returns>Localized commertial name.</returns>
     public string GetCommertialName()
     {
-        StringTable table = localizationTable.GetTable();
-        return table["commertialName"].LocalizedValue;
+        StringTable table = nameLocalization.GetTable();
+        return table[name].LocalizedValue;
     }
 
     /// <summary>
@@ -45,7 +48,7 @@ public class Item : ScriptableObject
     /// <returns>Localized description.</returns>
     public string GetDescription()
     {
-        StringTable table = localizationTable.GetTable();
-        return table["description"].LocalizedValue;
+        StringTable table = descriptionLocalization.GetTable();
+        return table[name].LocalizedValue;
     }
 }

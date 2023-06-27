@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23382c37dae62a749a3c2944d3e1ecca, type: 3}
+  m_Name: Apple
+  m_EditorClassIdentifier: 
+  name: Apple
+  nameLocalization:
+    m_TableReference:
+      m_TableCollectionName: GUID:3dacc9b41cb8e56469c3859ea1291f22
+  descriptionLocalization:
+    m_TableReference:
+      m_TableCollectionName: GUID:aa045d9d94d385f4d8c4532668e728f5
+  buyValue: 7
+  baseSellValue: 10
+  levelRequired: 1
+  xp: 20
+  icon: {fileID: 21300000, guid: 0873364a8bf89e24790998d45bd6f110, type: 3}
+  timeToGrow: 5
+  timeToRot: 15
+  life: 60
+  maxHarvest: 15
+  minHarvest: 8
+  seasons: 03000000000000000100000002000000
+  plantPrefab: {fileID: 0}

@@ -10,27 +10,27 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
-  m_Name: Apple Shared Data
+  m_Name: Item Descriptions Shared Data
   m_EditorClassIdentifier: 
-  m_TableCollectionName: Apple
-  m_TableCollectionNameGuidString: 3dacc9b41cb8e56469c3859ea1291f22
+  m_TableCollectionName: Item Descriptions
+  m_TableCollectionNameGuidString: aa045d9d94d385f4d8c4532668e728f5
   m_Entries:
-  - m_Id: 19773566976
-    m_Key: commertialName
+  - m_Id: 6007861248
+    m_Key: Apple
     m_Metadata:
       m_Items: []
-  - m_Id: 105060544512
-    m_Key: description
+  - m_Id: 10940362752
+    m_Key: Banana
     m_Metadata:
       m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
-    rid: 8023874723344285698
+    rid: 8023874723344285703
   references:
     version: 2
     RefIds:
-    - rid: 8023874723344285698
+    - rid: 8023874723344285703
       type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables, asm: Unity.Localization}
       data:
-        m_CustomEpoch: 1687792290966
+        m_CustomEpoch: 1687793344362

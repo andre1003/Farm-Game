@@ -36,13 +36,13 @@ MonoBehaviour:
     - Locale-pt-BR
     - Preload
   - m_GUID: 07dc8ea2659a65647bc5664f218f7130
-    m_Address: Apple_pt-BR
+    m_Address: Item Names_pt-BR
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale-pt-BR
     - Preload
   - m_GUID: 38ffe3d0ef5413f46b25d5cfadc296e3
-    m_Address: Banana_pt-BR
+    m_Address: Item Descriptions_pt-BR
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale-pt-BR

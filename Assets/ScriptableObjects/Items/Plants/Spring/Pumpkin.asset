@@ -10,23 +10,24 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 23382c37dae62a749a3c2944d3e1ecca, type: 3}
-  m_Name: Banana
+  m_Name: Pumpkin
   m_EditorClassIdentifier: 
-  name: Banana
-  commertialName: 
-  description: 
-  localizationTable:
+  name: Pumpkin
+  nameLocalization:
+    m_TableReference:
+      m_TableCollectionName: GUID:3dacc9b41cb8e56469c3859ea1291f22
+  descriptionLocalization:
     m_TableReference:
       m_TableCollectionName: GUID:aa045d9d94d385f4d8c4532668e728f5
-  buyValue: 5.5
-  baseSellValue: 8
-  levelRequired: 1
-  xp: 10
-  icon: {fileID: 21300000, guid: c0db9a66afd43284c8197f1157882ac0, type: 3}
-  timeToGrow: 2
-  timeToRot: 10
-  life: 200
-  maxHarvest: 20
-  minHarvest: 5
-  seasons: 03000000000000000100000002000000
-  plantPrefab: {fileID: 8368236161006161924, guid: 4f9e32135f94dd6499f27535b0ffe2a8, type: 3}
+  buyValue: 0
+  baseSellValue: 0
+  levelRequired: 0
+  xp: 0
+  icon: {fileID: 0}
+  timeToGrow: 0
+  timeToRot: 0
+  life: 0
+  maxHarvest: 0
+  minHarvest: 0
+  seasons: 
+  plantPrefab: {fileID: 0}

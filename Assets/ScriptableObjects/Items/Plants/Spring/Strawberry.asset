@@ -10,23 +10,24 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 23382c37dae62a749a3c2944d3e1ecca, type: 3}
-  m_Name: Apple
+  m_Name: Strawberry
   m_EditorClassIdentifier: 
-  name: Apple
-  commertialName: 
-  description: 
-  localizationTable:
+  name: Strawberry
+  nameLocalization:
     m_TableReference:
       m_TableCollectionName: GUID:3dacc9b41cb8e56469c3859ea1291f22
-  buyValue: 7
-  baseSellValue: 10
-  levelRequired: 1
-  xp: 20
-  icon: {fileID: 21300000, guid: 0873364a8bf89e24790998d45bd6f110, type: 3}
-  timeToGrow: 5
-  timeToRot: 15
-  life: 60
-  maxHarvest: 15
-  minHarvest: 8
-  seasons: 03000000000000000100000002000000
+  descriptionLocalization:
+    m_TableReference:
+      m_TableCollectionName: GUID:aa045d9d94d385f4d8c4532668e728f5
+  buyValue: 0
+  baseSellValue: 0
+  levelRequired: 0
+  xp: 0
+  icon: {fileID: 0}
+  timeToGrow: 0
+  timeToRot: 0
+  life: 0
+  maxHarvest: 0
+  minHarvest: 0
+  seasons: 
   plantPrefab: {fileID: 0}

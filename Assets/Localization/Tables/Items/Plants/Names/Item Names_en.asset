@@ -10,16 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
-  m_Name: Apple_pt-BR
+  m_Name: Item Names_en
   m_EditorClassIdentifier: 
   m_LocaleId:
-    m_Code: pt-BR
+    m_Code: en
   m_SharedData: {fileID: 11400000, guid: 3dacc9b41cb8e56469c3859ea1291f22, type: 2}
   m_Metadata:
     m_Items: []
   m_TableData:
   - m_Id: 19773566976
-    m_Localized: "Sementes de Ma\xE7\xE3"
+    m_Localized: Apple Seeds
+    m_Metadata:
+      m_Items: []
+  - m_Id: 105060544512
+    m_Localized: Banana Seeds
     m_Metadata:
       m_Items: []
   references:

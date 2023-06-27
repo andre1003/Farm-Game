@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23382c37dae62a749a3c2944d3e1ecca, type: 3}
+  m_Name: BellPepper
+  m_EditorClassIdentifier: 
+  name: BellPepper
+  nameLocalization:
+    m_TableReference:
+      m_TableCollectionName: GUID:3dacc9b41cb8e56469c3859ea1291f22
+  descriptionLocalization:
+    m_TableReference:
+      m_TableCollectionName: GUID:aa045d9d94d385f4d8c4532668e728f5
+  buyValue: 0
+  baseSellValue: 0
+  levelRequired: 0
+  xp: 0
+  icon: {fileID: 0}
+  timeToGrow: 0
+  timeToRot: 0
+  life: 0
+  maxHarvest: 0
+  minHarvest: 0
+  seasons: 
+  plantPrefab: {fileID: 0}
