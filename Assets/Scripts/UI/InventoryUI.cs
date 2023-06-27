@@ -36,7 +36,7 @@ public class InventoryUI : MonoBehaviour
     private InventorySlot[] slots;
 
     // Tab controller
-    private bool harvested = false;
+    private int tab = 0;
 
     // UI
     private CanvasGroup canvasGroup;
@@ -137,15 +137,7 @@ public class InventoryUI : MonoBehaviour
         moneyText.text = PlayerDataManager.instance.playerData.money.ToString("F2");
 
         // Get inventory slot, based on inventory tab
-        List<InventorySlotObject> inventorySlots;
-        if(harvested)
-        {
-            inventorySlots = inventory.inventory.harvestedPlants;
-        }
-        else
-        {
-            inventorySlots = inventory.inventory.plants;
-        }
+        List<InventorySlotObject> inventorySlots = GetSlots();
 
         // Loop slots
         for(int i = 0; i < slots.Length; i++)
@@ -153,7 +145,7 @@ public class InventoryUI : MonoBehaviour
             // If its the correct inventory tab, add it to slot
             if(i < inventorySlots.Count)
             {
-                slots[i].AddPlant(inventorySlots[i].plant, inventorySlots[i].amount);
+                slots[i].AddItem(inventorySlots[i].item, inventorySlots[i].amount);
             }
 
             // Else, clear slot
@@ -164,22 +156,40 @@ public class InventoryUI : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// Set harvested variable value.
-    /// </summary>
-    /// <param name="harvested">Harvasted value.</param>
-    public void SetHarvested(bool harvested)
+    private List<InventorySlotObject> GetSlots()
     {
-        this.harvested = harvested;
+        switch(tab)
+        {
+            case 0:
+                return inventory.inventory.plants;
+
+            case 1:
+                return inventory.inventory.harvestedPlants;
+
+            case 2:
+                return inventory.inventory.items;
+
+            default:
+                return null;
+        }
+    }
+
+    /// <summary>
+    /// Set inventory tab.
+    /// </summary>
+    /// <param name="tab">New inventory tab.</param>
+    public void SetTab(int tab)
+    {
+        this.tab = tab;
         UpdateUI();
     }
 
     /// <summary>
-    /// Get harvested variable value.
+    /// Get current inventory tab.
     /// </summary>
-    /// <returns>Harvested value.</returns>
-    public bool GetHarvested()
+    /// <returns>Current inventory tab.</returns>
+    public int GetTab()
     {
-        return harvested;
+        return this.tab;
     }
 }

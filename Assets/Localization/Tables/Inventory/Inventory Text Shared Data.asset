@@ -27,6 +27,10 @@ MonoBehaviour:
     m_Key: Plantable Items
     m_Metadata:
       m_Items: []
+  - m_Id: 146072143218126848
+    m_Key: Other Items
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

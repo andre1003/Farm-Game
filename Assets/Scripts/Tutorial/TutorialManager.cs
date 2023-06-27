@@ -38,7 +38,7 @@ public class TutorialManager : MonoBehaviour
         // Call Start method of each instruction
         for(int i = 0; i < instructions.Count; i++)
         {
-            instructions[i].StartInstruction(i);
+            instructions[i].StartInstruction();
         }
     }
 
@@ -96,30 +96,14 @@ public class TutorialManager : MonoBehaviour
         // If canvas is active, pause game
         if(canvasActive)
         {
-            PauseGame();
+            PauseMenu.instance.PauseGame();
         }
 
         // If canvas is NOT active, resume game
         else
         {
-            ResumeGame();
+            PauseMenu.instance.ResumeGame();
         }
-    }
-
-    /// <summary>
-    /// Pause game completly.
-    /// </summary>
-    public void PauseGame()
-    {
-        Time.timeScale = 0;
-    }
-
-    /// <summary>
-    /// Resume game completly.
-    /// </summary>
-    public void ResumeGame()
-    {
-        Time.timeScale = 1;
     }
 
     /// <summary>

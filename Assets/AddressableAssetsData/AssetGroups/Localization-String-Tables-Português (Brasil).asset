@@ -35,6 +35,47 @@ MonoBehaviour:
     m_SerializedLabels:
     - Locale-pt-BR
     - Preload
+  - m_GUID: 07dc8ea2659a65647bc5664f218f7130
+    m_Address: Apple_pt-BR
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-pt-BR
+    - Preload
+  - m_GUID: 38ffe3d0ef5413f46b25d5cfadc296e3
+    m_Address: Banana_pt-BR
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-pt-BR
+    - Preload
+  - m_GUID: 645582afb1eee594aa8e17db6b507037
+    m_Address: Inventory Text_pt-BR
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-pt-BR
+    - Preload
+  - m_GUID: 2071d5716f6c0a44faea1e5c103d8f42
+    m_Address: Questlines_pt-BR
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-pt-BR
+    - Preload
+  - m_GUID: 2c2d62694286d344cb15a3a0b19d0a07
+    m_Address: Quest Titles_pt-BR
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-pt-BR
+  - m_GUID: 466d6e20ded46b84c9bc08db6ca93780
+    m_Address: Quest Descriptions_pt-BR
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-pt-BR
+    - Preload
+  - m_GUID: d694d1ba2fe326646a673b929cbef4b1
+    m_Address: Quest Short Descriptions_pt-BR
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-pt-BR
+    - Preload
   m_ReadOnly: 1
   m_Settings: {fileID: 11400000, guid: ef5026b9b1b0d014b8ac5aa922080ff5, type: 2}
   m_SchemaSet:

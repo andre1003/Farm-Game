@@ -31,19 +31,13 @@ public class TutorialInstruction : ScriptableObject
     protected bool actionCompleted = false;
     protected bool canCallNextInstruction = true;
 
-    // Auxiliar
-    private int index = -1;
-
 
     /// <summary>
     /// Start instruction method.
     /// </summary>
     /// <param name="index">Tutorial index.</param>
-    public virtual void StartInstruction(int index)
+    public virtual void StartInstruction()
     {
-        // Setup index
-        this.index = index;
-
         // Initial index setup
         SetupInitialIndex();
 
@@ -98,7 +92,7 @@ public class TutorialInstruction : ScriptableObject
     }
 
     /// <summary>
-    /// Base setup actions. This class must be extended to work propertly.
+    /// Base setup actions. This method must be extended to work propertly.
     /// </summary>
     public virtual void SetupActions()
     {

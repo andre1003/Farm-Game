@@ -28,6 +28,18 @@ public class StringLocalizer : MonoBehaviour
 
     #region Localize String
     /// <summary>
+    /// Get localized string base on a localized string table and a key.
+    /// </summary>
+    /// <param name="stringTable">Localized string table reference.</param>
+    /// <param name="key">Table key.</param>
+    /// <returns>Localized string.</returns>
+    public string Localize(LocalizedStringTable stringTable, string key)
+    {
+        StringTable table = stringTable.GetTable();
+        return table[key].LocalizedValue;
+    }
+
+    /// <summary>
     /// Localize a string, based on table name and key.
     /// It also updates the text UI.
     /// </summary>

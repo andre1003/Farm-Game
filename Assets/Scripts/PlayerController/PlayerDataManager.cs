@@ -31,7 +31,7 @@ public class PlayerDataManager : MonoBehaviour
     // Start method
     void Start()
     {
-        // Set edit mode to false and update HUD
+        // Set edit mode to false
         editMode = false;
     }
 

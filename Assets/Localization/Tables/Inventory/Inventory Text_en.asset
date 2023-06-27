@@ -27,7 +27,11 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 25357515391365120
-    m_Localized: Bought
+    m_Localized: Seeds
+    m_Metadata:
+      m_Items: []
+  - m_Id: 146072143218126848
+    m_Localized: Other
     m_Metadata:
       m_Items: []
   references:

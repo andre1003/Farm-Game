@@ -13,15 +13,20 @@ MonoBehaviour:
   m_Name: Apple
   m_EditorClassIdentifier: 
   name: Apple
-  timeToGrow: 5
-  timeToRot: 15
+  commertialName: 
+  description: 
+  localizationTable:
+    m_TableReference:
+      m_TableCollectionName: GUID:3dacc9b41cb8e56469c3859ea1291f22
   buyValue: 7
   baseSellValue: 10
+  levelRequired: 1
+  xp: 20
+  icon: {fileID: 21300000, guid: 0873364a8bf89e24790998d45bd6f110, type: 3}
+  timeToGrow: 5
+  timeToRot: 15
   life: 60
   maxHarvest: 15
   minHarvest: 8
-  levelRequired: 1
-  xp: 20
   seasons: 03000000000000000100000002000000
-  icon: {fileID: 21300000, guid: 0873364a8bf89e24790998d45bd6f110, type: 3}
   plantPrefab: {fileID: 0}

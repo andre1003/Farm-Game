@@ -13,19 +13,19 @@ public class InventorySlot : MonoBehaviour
 
 
     // Plant
-    private Plant plant;
+    private Item item;
 
 
     /// <summary>
     /// Add a certain type of plant to the inventory slot.
     /// </summary>
-    /// <param name="plant">Plant to be added to inventory slot.</param>
+    /// <param name="item">Item to be added to inventory slot.</param>
     /// <param name="amount">Amount of plant to be added.</param>
-    public void AddPlant(Plant plant, int amount)
+    public void AddItem(Item item, int amount)
     {
-        this.plant = plant;
+        this.item = item;
 
-        icon.sprite = plant.icon;
+        icon.sprite = item.icon;
         amountImage.enabled = true;
         icon.enabled = true;
 
@@ -38,7 +38,7 @@ public class InventorySlot : MonoBehaviour
     /// </summary>
     public void ClearSlot()
     {
-        plant = null;
+        item = null;
 
         icon.sprite = null;
         icon.enabled = false;
@@ -53,11 +53,11 @@ public class InventorySlot : MonoBehaviour
     public void Plant()
     {
         GameObject plantationZone = InGameSaves.GetPlantationZone();
-        if(plant != null && plantationZone != null && !InventoryUI.instance.GetHarvested())
+        if(item != null && plantationZone != null && InventoryUI.instance.GetTab() == 0)
         {
             InventoryUI.instance.SetUI(false);
             HUDManager.instance.SetHUD(true);
-            plantationZone.GetComponent<PlantationController>().Plant(plant);
+            plantationZone.GetComponent<PlantationController>().Plant((Plant)item);
         }
     }
 }

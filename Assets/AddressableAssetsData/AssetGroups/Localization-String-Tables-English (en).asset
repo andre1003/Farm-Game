@@ -77,6 +77,41 @@ MonoBehaviour:
     m_SerializedLabels:
     - Locale-en
     - Preload
+  - m_GUID: 190b05768b3e4114d9ba4a43229df4a0
+    m_Address: Apple_en
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en
+    - Preload
+  - m_GUID: ea93140e629c2c84d903be7798c091b9
+    m_Address: Banana_en
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en
+    - Preload
+  - m_GUID: c9e0ce5150a53f047afbbf83244811a0
+    m_Address: Questlines_en
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en
+    - Preload
+  - m_GUID: efc046434f34c9a41b8df3c3c0d28090
+    m_Address: Quest Titles_en
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en
+  - m_GUID: cd1aed9adc853da4d902a7afdcc002de
+    m_Address: Quest Descriptions_en
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en
+    - Preload
+  - m_GUID: 3487a1b2f8744d94e90ca180489b8392
+    m_Address: Quest Short Descriptions_en
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en
+    - Preload
   m_ReadOnly: 1
   m_Settings: {fileID: 11400000, guid: ef5026b9b1b0d014b8ac5aa922080ff5, type: 2}
   m_SchemaSet:

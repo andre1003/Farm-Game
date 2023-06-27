@@ -9,6 +9,28 @@ public class InventoryObject : ScriptableObject
     public List<InventorySlotObject> plants = new List<InventorySlotObject>();
     public List<InventorySlotObject> harvestedPlants = new List<InventorySlotObject>();
 
+    // Items list
+    public List<InventorySlotObject> items = new List<InventorySlotObject>();
+
+
+
+    public void AddItem(Item item, int amount)
+    {
+        // Loop all items on inventory
+        for(int i = 0; i < items.Count; i++)
+        {
+            // If found the corresponding item, add the amount to it's amount
+            if((Plant)items[i].item == item)
+            {
+                items[i].AddAmount(amount);
+                return;
+            }
+        }
+
+        // If the item does not exists, add it to the inventory
+        items.Add(new InventorySlotObject(item, amount));
+    }
+
 
     /// <summary>
     /// Add a plant, with a given amount, to the inventory.
@@ -45,7 +67,7 @@ public class InventoryObject : ScriptableObject
         for(int i = 0; i < list.Count; i++)
         {
             // If found the corresponding plant, add the amount to it's amount
-            if(list[i].plant == plant)
+            if((Plant)list[i].item == plant)
             {
                 list[i].AddAmount(amount);
                 return;
@@ -90,7 +112,7 @@ public class InventoryObject : ScriptableObject
         for(int i = 0; i < list.Count; i++)
         {
             // If found the corresponding plant, remove the given amount
-            if(list[i].plant == plant)
+            if((Plant)list[i].item == plant)
             {
                 // Check if can remove the given amount
                 bool canRemoveFromList = list[i].RemoveAmount(amount);
@@ -120,7 +142,7 @@ public class InventoryObject : ScriptableObject
         foreach(InventorySlotObject plant in plants)
         {
             // If this plant is the one we are looking for, return true
-            if(plant.plant.name.ToLower() == plantName.ToLower())
+            if(plant.item.name.ToLower() == plantName.ToLower())
             {
                 return true;
             }
@@ -140,18 +162,17 @@ public class InventoryObject : ScriptableObject
 [System.Serializable]
 public class InventorySlotObject
 {
-    public Plant plant;
+    public Item item;
     public int amount;
 
     /// <summary>
     /// Inventory Slot construct.
     /// </summary>
-    /// <param name="plant">Plant reference.</param>
+    /// <param name="item">Item reference.</param>
     /// <param name="amount">Plant amount.</param>
-    /// <param name="harvested">Was this plant harvested?</param>
-    public InventorySlotObject(Plant plant, int amount)
+    public InventorySlotObject(Item item, int amount)
     {
-        this.plant = plant;
+        this.item = item;
         this.amount = amount;
     }
 

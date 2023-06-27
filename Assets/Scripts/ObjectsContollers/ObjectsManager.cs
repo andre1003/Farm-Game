@@ -109,7 +109,7 @@ public class ObjectsManager : MonoBehaviour
                     else
                     {
                         InventoryUI.instance.SetUI(true);
-                        InventoryUI.instance.SetHarvested(false);
+                        InventoryUI.instance.SetTab(0);
                         HUDManager.instance.SetHUD(false);
                     }
 

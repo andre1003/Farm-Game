@@ -8,10 +8,10 @@ public class InitialTutorial : TutorialInstruction
     // Initial game state
     private int plantationZones;
 
-    public override void StartInstruction(int index)
+    public override void StartInstruction()
     {
         // Call base Start method
-        base.StartInstruction(index);
+        base.StartInstruction();
 
         // Set initial game state
         plantationZones = GridController.instance.zones.positions.Count;
@@ -73,7 +73,7 @@ public class InitialTutorial : TutorialInstruction
     /// </summary>
     private void ChangeInvetoryTab()
     {
-        actionCompleted = InventoryUI.instance.GetHarvested();
+        actionCompleted = InventoryUI.instance.GetTab() == 1;
     }
 
     /// <summary>

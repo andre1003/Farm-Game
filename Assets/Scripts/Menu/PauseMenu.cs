@@ -2,6 +2,19 @@ using UnityEngine;
 
 
 public class PauseMenu : MonoBehaviour {
+    #region Singleton
+    public static PauseMenu instance;
+
+    void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+    }
+    #endregion
+
+
     // UI
     public GameObject pauseCanvas;
 
@@ -58,7 +71,7 @@ public class PauseMenu : MonoBehaviour {
             // Else, pause game
             else
             {
-                Time.timeScale = 0f;
+                PauseGame();
             }
         }
     }
@@ -103,7 +116,7 @@ public class PauseMenu : MonoBehaviour {
         SetUI(false);
 
         // Resume game
-        Time.timeScale = 1f;
+        ResumeGame();
     }
 
     /// <summary>
@@ -122,7 +135,7 @@ public class PauseMenu : MonoBehaviour {
         // Resume game
         if(pauseCanvas.activeSelf)
         {
-            Time.timeScale = 1f;
+            ResumeGame();
         }
 
         // Change HUD and pause menu cavases visibilities
@@ -145,5 +158,21 @@ public class PauseMenu : MonoBehaviour {
         {
             MovementController.instance.ResumePlayer();
         }
+    }
+
+    /// <summary>
+    /// Pause game completly.
+    /// </summary>
+    public void PauseGame()
+    {
+        Time.timeScale = 0;
+    }
+
+    /// <summary>
+    /// Resume game completly.
+    /// </summary>
+    public void ResumeGame()
+    {
+        Time.timeScale = 1;
     }
 }

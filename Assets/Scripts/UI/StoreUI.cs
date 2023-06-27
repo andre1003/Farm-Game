@@ -109,7 +109,7 @@ public class StoreUI : MonoBehaviour
         foreach(InventorySlotObject plant in Inventory.instance.inventory.harvestedPlants)
         {
             // If the plant have been harvested, add to UI
-            plants.Add(plant.plant);
+            plants.Add((Plant)plant.item);
             amounts.Add(plant.amount);
         }
 
@@ -218,7 +218,7 @@ public class StoreUI : MonoBehaviour
             foreach(var inventorySlot in Inventory.instance.inventory.harvestedPlants)
             {
                 // If this is the selected plant, get the amount and break the loop
-                if(inventorySlot.plant == Store.instance.GetSelectedPlant())
+                if((Plant)inventorySlot.item == Store.instance.GetSelectedPlant())
                 {
                     amountOnInventory = inventorySlot.amount;
                     break;

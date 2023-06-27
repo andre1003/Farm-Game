@@ -23,6 +23,8 @@ public class Inventory : MonoBehaviour
     }
     #endregion
 
+
+    // Inventory
     public InventoryObject inventory;
 
 
@@ -32,7 +34,6 @@ public class Inventory : MonoBehaviour
     /// <param name="plant">Plant reference.</param>
     /// <param name="amount">Amount to add.</param>
     /// <param name="harvested">This plant was harvested?</param>
-    /// <returns>TRUE - Successfully added. FALSE - Failed to add.</returns>
     public void Add(Plant plant, int amount, bool harvested)
     {
         // Try to add plant to inventory
@@ -45,6 +46,22 @@ public class Inventory : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Add an item and amount to player's inventory.
+    /// </summary>
+    /// <param name="item">Item reference.</param>
+    /// <param name="amount">Amount to add.</param>
+    public void Add(Item item, int amount)
+    {
+        // Try to add item to inventory
+        inventory.AddItem(item, amount);
+
+        // Call Item Change Callback if needed
+        if(onItemChangeCallback != null)
+        {
+            onItemChangeCallback.Invoke();
+        }
+    }
 
     /// <summary>
     /// Remove certain amount of a plant from inventory.

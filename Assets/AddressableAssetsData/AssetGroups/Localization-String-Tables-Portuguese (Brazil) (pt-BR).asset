@@ -17,12 +17,6 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: 4d07d6f7df0924944bf78344fcde8f50
   m_SerializeEntries:
-  - m_GUID: 645582afb1eee594aa8e17db6b507037
-    m_Address: Inventory Text_pt-BR
-    m_ReadOnly: 1
-    m_SerializedLabels:
-    - Locale-pt-BR
-    - Preload
   - m_GUID: 3a41d870f83721b4398d8086cb88b75f
     m_Address: Store Text_pt-BR
     m_ReadOnly: 1
