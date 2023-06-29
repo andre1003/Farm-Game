@@ -85,9 +85,7 @@ public class InventoryUI : MonoBehaviour
         // If player press I ky and isBusy is false, change inventory visibility and update UI
         if(Input.GetKeyDown(KeyCode.I) && !InGameSaves.GetIsBusy())
         {
-            HUDManager.instance.SetHUD(inventoryCanvas.activeSelf);
-            SetUI(!inventoryCanvas.activeSelf);
-            UpdateUI();
+            OpenCloseInventory();
         }
 
         // If doesn't need to change HUD visibility, exit
@@ -113,6 +111,22 @@ public class InventoryUI : MonoBehaviour
                 inventoryCanvas.SetActive(false);
             }
         }
+    }
+
+    /// <summary>
+    /// Open or close inventory UI.
+    /// </summary>
+    public void OpenCloseInventory()
+    {
+        // If inventory will be closed, set mouse cursor to default
+        if(inventoryCanvas.activeSelf)
+        {
+            ObjectsManager.instance.StopHoverUI();
+        }
+
+        HUDManager.instance.SetHUD(inventoryCanvas.activeSelf);
+        SetUI(!inventoryCanvas.activeSelf);
+        UpdateUI();
     }
 
     /// <summary>
@@ -206,7 +220,21 @@ public class InventoryUI : MonoBehaviour
     public void SetTab(int tab)
     {
         this.tab = tab;
+        page = 0;
+        prevPageButton.interactable = false;
         UpdateUI();
+
+        // If there are no items on next page (after page increment), disable next page button
+        if((page + 1) * slots.Length >= GetSlots().Count - 1)
+        {
+            nextPageButton.interactable = false;
+        }
+
+        // Else, enable next page button
+        else
+        {
+            nextPageButton.interactable = true;
+        }
     }
 
     /// <summary>

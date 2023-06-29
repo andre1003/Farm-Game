@@ -55,7 +55,6 @@ public class MainMenuManager : MonoBehaviour
     [Space(15)]
     [Header("Cursor")]
     // Cursor
-    public Texture2D normalCursor;
     public Texture2D hoverCursor;
     public Vector2 hotSpot = Vector2.zero;
 
@@ -192,8 +191,8 @@ public class MainMenuManager : MonoBehaviour
     /// </summary>
     public void NormalCursor()
     {
-        // Set cursor to normalCursor
-        Cursor.SetCursor(normalCursor, hotSpot, CursorMode.Auto);
+        // Set cursor to default cursor
+        Cursor.SetCursor(null, hotSpot, CursorMode.Auto);
     }
 
     /// <summary>

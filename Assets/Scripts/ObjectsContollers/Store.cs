@@ -96,6 +96,7 @@ public class Store : MonoBehaviour
     /// </summary>
     public void Close()
     {
+        ObjectsManager.instance.StopHoverUI();
         SetUI(false);
         HUDManager.instance.SetHUD(true);
         InGameSaves.ChangeIsBusy();

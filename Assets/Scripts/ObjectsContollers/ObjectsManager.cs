@@ -10,7 +10,7 @@ public class ObjectsManager : MonoBehaviour
     public GameObject inventory;
 
     // Cursors
-    public Texture2D normalCursor;
+    public Texture2D hoverCursor;
     public Texture2D buyCursor;
     public Texture2D craftCursor;
     public Texture2D plantCursor;
@@ -19,26 +19,40 @@ public class ObjectsManager : MonoBehaviour
     public Vector2 hotSpot = Vector2.zero;
 
 
+    private bool isHoveringUI = false;
+
+
+    #region Singleton
+    // Instance
+    public static ObjectsManager instance;
+
     // Awake method
     void Awake()
     {
         Instantiate(player, spawnSpot.transform.position, Quaternion.Euler(0, 90, 0));
-    }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        Cursor.SetCursor(normalCursor, hotSpot, CursorMode.Auto);
+        if(instance == null)
+        {
+            instance = this;
+        }
     }
+    #endregion
+
 
     // Update is called once per frame
     void Update()
     {
+        // If player is hovering an UI, exit
+        if(isHoveringUI)
+        {
+            return;
+        }
+
         // Check if mouse is over an game object
         if(EventSystem.current.IsPointerOverGameObject())
         {
             // If it is, set cursor to normal
-            Cursor.SetCursor(normalCursor, Vector3.zero, CursorMode.Auto);
+            Cursor.SetCursor(null, Vector3.zero, CursorMode.Auto);
             return;
         }
 
@@ -102,7 +116,6 @@ public class ObjectsManager : MonoBehaviour
                         {
                             controller.DestroyPlants();
                         }
-
                     }
 
                     // If there is no plant planted, open inventory
@@ -121,8 +134,26 @@ public class ObjectsManager : MonoBehaviour
             // If it's not an special location, set cursor to normal
             else
             {
-                Cursor.SetCursor(normalCursor, Vector3.zero, CursorMode.Auto);
+                Cursor.SetCursor(null, Vector3.zero, CursorMode.Auto);
             }
         }
+    }
+
+    /// <summary>
+    /// Start hovering UI.
+    /// </summary>
+    public void HoverUI()
+    {
+        Cursor.SetCursor(hoverCursor, Vector3.zero, CursorMode.Auto);
+        isHoveringUI = true;
+    }
+
+    /// <summary>
+    /// Stop hovering UI.
+    /// </summary>
+    public void StopHoverUI()
+    {
+        Cursor.SetCursor(null, Vector3.zero, CursorMode.Auto);
+        isHoveringUI = false;
     }
 }

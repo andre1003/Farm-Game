@@ -13,7 +13,185 @@ MonoBehaviour:
   m_Name: PlayerInventory
   m_EditorClassIdentifier: 
   plants:
+  - item: {fileID: 11400000, guid: b0a29c9d0ac98474491dc423d057afcf, type: 2}
+    amount: 1
   - item: {fileID: 11400000, guid: dbda9fb982eaa0f429505deb3c4e0a64, type: 2}
     amount: 1
-  harvestedPlants: []
+  - item: {fileID: 11400000, guid: dbda9fb982eaa0f429505deb3c4e0a64, type: 2}
+    amount: 1
+  - item: {fileID: 11400000, guid: dbda9fb982eaa0f429505deb3c4e0a64, type: 2}
+    amount: 1
+  - item: {fileID: 11400000, guid: dbda9fb982eaa0f429505deb3c4e0a64, type: 2}
+    amount: 1
+  - item: {fileID: 11400000, guid: dbda9fb982eaa0f429505deb3c4e0a64, type: 2}
+    amount: 1
+  - item: {fileID: 11400000, guid: dbda9fb982eaa0f429505deb3c4e0a64, type: 2}
+    amount: 1
+  - item: {fileID: 11400000, guid: dbda9fb982eaa0f429505deb3c4e0a64, type: 2}
+    amount: 1
+  - item: {fileID: 11400000, guid: dbda9fb982eaa0f429505deb3c4e0a64, type: 2}
+    amount: 1
+  - item: {fileID: 11400000, guid: dbda9fb982eaa0f429505deb3c4e0a64, type: 2}
+    amount: 1
+  - item: {fileID: 11400000, guid: dbda9fb982eaa0f429505deb3c4e0a64, type: 2}
+    amount: 1
+  - item: {fileID: 11400000, guid: dbda9fb982eaa0f429505deb3c4e0a64, type: 2}
+    amount: 1
+  - item: {fileID: 11400000, guid: dbda9fb982eaa0f429505deb3c4e0a64, type: 2}
+    amount: 1
+  - item: {fileID: 11400000, guid: dbda9fb982eaa0f429505deb3c4e0a64, type: 2}
+    amount: 1
+  - item: {fileID: 11400000, guid: dbda9fb982eaa0f429505deb3c4e0a64, type: 2}
+    amount: 1
+  - item: {fileID: 11400000, guid: dbda9fb982eaa0f429505deb3c4e0a64, type: 2}
+    amount: 1
+  - item: {fileID: 11400000, guid: dbda9fb982eaa0f429505deb3c4e0a64, type: 2}
+    amount: 1
+  - item: {fileID: 11400000, guid: dbda9fb982eaa0f429505deb3c4e0a64, type: 2}
+    amount: 1
+  - item: {fileID: 11400000, guid: dbda9fb982eaa0f429505deb3c4e0a64, type: 2}
+    amount: 1
+  - item: {fileID: 11400000, guid: dbda9fb982eaa0f429505deb3c4e0a64, type: 2}
+    amount: 1
+  - item: {fileID: 11400000, guid: dbda9fb982eaa0f429505deb3c4e0a64, type: 2}
+    amount: 1
+  - item: {fileID: 11400000, guid: dbda9fb982eaa0f429505deb3c4e0a64, type: 2}
+    amount: 1
+  - item: {fileID: 11400000, guid: dbda9fb982eaa0f429505deb3c4e0a64, type: 2}
+    amount: 1
+  - item: {fileID: 11400000, guid: dbda9fb982eaa0f429505deb3c4e0a64, type: 2}
+    amount: 1
+  - item: {fileID: 11400000, guid: dbda9fb982eaa0f429505deb3c4e0a64, type: 2}
+    amount: 1
+  - item: {fileID: 11400000, guid: dbda9fb982eaa0f429505deb3c4e0a64, type: 2}
+    amount: 1
+  - item: {fileID: 11400000, guid: dbda9fb982eaa0f429505deb3c4e0a64, type: 2}
+    amount: 1
+  - item: {fileID: 11400000, guid: dbda9fb982eaa0f429505deb3c4e0a64, type: 2}
+    amount: 1
+  - item: {fileID: 11400000, guid: dbda9fb982eaa0f429505deb3c4e0a64, type: 2}
+    amount: 1
+  - item: {fileID: 11400000, guid: dbda9fb982eaa0f429505deb3c4e0a64, type: 2}
+    amount: 1
+  - item: {fileID: 11400000, guid: dbda9fb982eaa0f429505deb3c4e0a64, type: 2}
+    amount: 1
+  - item: {fileID: 11400000, guid: dbda9fb982eaa0f429505deb3c4e0a64, type: 2}
+    amount: 1
+  - item: {fileID: 11400000, guid: dbda9fb982eaa0f429505deb3c4e0a64, type: 2}
+    amount: 1
+  - item: {fileID: 11400000, guid: dbda9fb982eaa0f429505deb3c4e0a64, type: 2}
+    amount: 1
+  - item: {fileID: 11400000, guid: dbda9fb982eaa0f429505deb3c4e0a64, type: 2}
+    amount: 1
+  - item: {fileID: 11400000, guid: dbda9fb982eaa0f429505deb3c4e0a64, type: 2}
+    amount: 1
+  - item: {fileID: 11400000, guid: dbda9fb982eaa0f429505deb3c4e0a64, type: 2}
+    amount: 1
+  - item: {fileID: 11400000, guid: dbda9fb982eaa0f429505deb3c4e0a64, type: 2}
+    amount: 1
+  - item: {fileID: 11400000, guid: dbda9fb982eaa0f429505deb3c4e0a64, type: 2}
+    amount: 1
+  - item: {fileID: 11400000, guid: dbda9fb982eaa0f429505deb3c4e0a64, type: 2}
+    amount: 1
+  - item: {fileID: 11400000, guid: dbda9fb982eaa0f429505deb3c4e0a64, type: 2}
+    amount: 1
+  - item: {fileID: 11400000, guid: dbda9fb982eaa0f429505deb3c4e0a64, type: 2}
+    amount: 1
+  - item: {fileID: 11400000, guid: 88ca14c100b76d041b30659cd8ac1583, type: 2}
+    amount: 1
+  - item: {fileID: 11400000, guid: 77d4e552d2fe0a349b13aaaab808579c, type: 2}
+    amount: 1
+  - item: {fileID: 11400000, guid: 54181bb9c23a58245b4830857cb747ad, type: 2}
+    amount: 1
+  harvestedPlants:
+  - item: {fileID: 11400000, guid: c0635013efbbd4a469a87e57616cc065, type: 2}
+    amount: 1
+  - item: {fileID: 11400000, guid: 88ca14c100b76d041b30659cd8ac1583, type: 2}
+    amount: 2
+  - item: {fileID: 11400000, guid: 9339cc01e277695469f7744754c360f5, type: 2}
+    amount: 1
+  - item: {fileID: 11400000, guid: 9339cc01e277695469f7744754c360f5, type: 2}
+    amount: 1
+  - item: {fileID: 11400000, guid: 9339cc01e277695469f7744754c360f5, type: 2}
+    amount: 1
+  - item: {fileID: 11400000, guid: 9339cc01e277695469f7744754c360f5, type: 2}
+    amount: 1
+  - item: {fileID: 11400000, guid: 9339cc01e277695469f7744754c360f5, type: 2}
+    amount: 1
+  - item: {fileID: 11400000, guid: 9339cc01e277695469f7744754c360f5, type: 2}
+    amount: 1
+  - item: {fileID: 11400000, guid: 9339cc01e277695469f7744754c360f5, type: 2}
+    amount: 1
+  - item: {fileID: 11400000, guid: 9339cc01e277695469f7744754c360f5, type: 2}
+    amount: 1
+  - item: {fileID: 11400000, guid: 9339cc01e277695469f7744754c360f5, type: 2}
+    amount: 1
+  - item: {fileID: 11400000, guid: 9339cc01e277695469f7744754c360f5, type: 2}
+    amount: 1
+  - item: {fileID: 11400000, guid: 9339cc01e277695469f7744754c360f5, type: 2}
+    amount: 1
+  - item: {fileID: 11400000, guid: 9339cc01e277695469f7744754c360f5, type: 2}
+    amount: 1
+  - item: {fileID: 11400000, guid: 9339cc01e277695469f7744754c360f5, type: 2}
+    amount: 1
+  - item: {fileID: 11400000, guid: 9339cc01e277695469f7744754c360f5, type: 2}
+    amount: 1
+  - item: {fileID: 11400000, guid: 9339cc01e277695469f7744754c360f5, type: 2}
+    amount: 1
+  - item: {fileID: 11400000, guid: 9339cc01e277695469f7744754c360f5, type: 2}
+    amount: 1
+  - item: {fileID: 11400000, guid: 9339cc01e277695469f7744754c360f5, type: 2}
+    amount: 1
+  - item: {fileID: 11400000, guid: 9339cc01e277695469f7744754c360f5, type: 2}
+    amount: 1
+  - item: {fileID: 11400000, guid: 9339cc01e277695469f7744754c360f5, type: 2}
+    amount: 1
+  - item: {fileID: 11400000, guid: 9339cc01e277695469f7744754c360f5, type: 2}
+    amount: 1
+  - item: {fileID: 11400000, guid: 9339cc01e277695469f7744754c360f5, type: 2}
+    amount: 1
+  - item: {fileID: 11400000, guid: 9339cc01e277695469f7744754c360f5, type: 2}
+    amount: 1
+  - item: {fileID: 11400000, guid: 9339cc01e277695469f7744754c360f5, type: 2}
+    amount: 1
+  - item: {fileID: 11400000, guid: 9339cc01e277695469f7744754c360f5, type: 2}
+    amount: 1
+  - item: {fileID: 11400000, guid: 9339cc01e277695469f7744754c360f5, type: 2}
+    amount: 1
+  - item: {fileID: 11400000, guid: 9339cc01e277695469f7744754c360f5, type: 2}
+    amount: 1
+  - item: {fileID: 11400000, guid: 9339cc01e277695469f7744754c360f5, type: 2}
+    amount: 1
+  - item: {fileID: 11400000, guid: 9339cc01e277695469f7744754c360f5, type: 2}
+    amount: 1
+  - item: {fileID: 11400000, guid: 9339cc01e277695469f7744754c360f5, type: 2}
+    amount: 1
+  - item: {fileID: 11400000, guid: 9339cc01e277695469f7744754c360f5, type: 2}
+    amount: 1
+  - item: {fileID: 11400000, guid: 9339cc01e277695469f7744754c360f5, type: 2}
+    amount: 1
+  - item: {fileID: 11400000, guid: 9339cc01e277695469f7744754c360f5, type: 2}
+    amount: 1
+  - item: {fileID: 11400000, guid: 9339cc01e277695469f7744754c360f5, type: 2}
+    amount: 1
+  - item: {fileID: 11400000, guid: 9339cc01e277695469f7744754c360f5, type: 2}
+    amount: 1
+  - item: {fileID: 11400000, guid: 9339cc01e277695469f7744754c360f5, type: 2}
+    amount: 1
+  - item: {fileID: 11400000, guid: 9339cc01e277695469f7744754c360f5, type: 2}
+    amount: 1
+  - item: {fileID: 11400000, guid: 9339cc01e277695469f7744754c360f5, type: 2}
+    amount: 1
+  - item: {fileID: 11400000, guid: 9339cc01e277695469f7744754c360f5, type: 2}
+    amount: 1
+  - item: {fileID: 11400000, guid: c0635013efbbd4a469a87e57616cc065, type: 2}
+    amount: 1
+  - item: {fileID: 11400000, guid: 9339cc01e277695469f7744754c360f5, type: 2}
+    amount: 1
+  - item: {fileID: 11400000, guid: 816d3b94e435ada4b93efad6dcd12fd4, type: 2}
+    amount: 1
+  - item: {fileID: 11400000, guid: 9339cc01e277695469f7744754c360f5, type: 2}
+    amount: 1
+  - item: {fileID: 11400000, guid: 698f291a9d36ef04d8e4c047a7e27163, type: 2}
+    amount: 1
   items: []
