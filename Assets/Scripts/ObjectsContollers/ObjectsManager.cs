@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.EventSystems;
 
 
 public class ObjectsManager : MonoBehaviour
@@ -19,6 +18,7 @@ public class ObjectsManager : MonoBehaviour
     public Vector2 hotSpot = Vector2.zero;
 
 
+    // Hovering UI controller
     private bool isHoveringUI = false;
 
 
@@ -48,14 +48,6 @@ public class ObjectsManager : MonoBehaviour
             return;
         }
 
-        // Check if mouse is over an game object
-        if(EventSystem.current.IsPointerOverGameObject())
-        {
-            // If it is, set cursor to normal
-            Cursor.SetCursor(null, Vector3.zero, CursorMode.Auto);
-            return;
-        }
-
         // Check for any cursor change
         CheckCursorChange();
     }
@@ -69,73 +61,102 @@ public class ObjectsManager : MonoBehaviour
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
 
+        // Define tag string
+        string tag = "";
+
         // If the ray hits something
         if(Physics.Raycast(ray, out hit))
         {
-            // Store
-            if(hit.collider.gameObject.tag == "Store")
-            {
-                // Set cursor to buyCursor
+            tag = hit.collider.gameObject.tag;
+        }
+
+        // If tag is null, exit
+        if(tag == "")
+        {
+            return;
+        }
+
+        // If tag is Untagged, set cursor to null and exit
+        if(tag == "Untagged")
+        {
+            Cursor.SetCursor(null, Vector3.zero, CursorMode.Auto);
+            return;
+        }
+
+        // Update cursor
+        UpdateCursor(hit.collider.gameObject);
+    }
+
+    /// <summary>
+    /// Update cursor, based on a hit object.
+    /// </summary>
+    /// <param name="hitObject">Hit object reference.</param>
+    private void UpdateCursor(GameObject hitObject)
+    {
+        // Switch hit object tag
+        switch(hitObject.tag)
+        {
+            case "Store": // Store
                 Cursor.SetCursor(buyCursor, Vector3.zero, CursorMode.Auto);
-            }
+                break;
 
-            // Workbench
-            else if(hit.collider.gameObject.tag == "Workbench")
-            {
-                // Set cursor to craftCursor
+            case "Workbench": // Workbench
                 Cursor.SetCursor(craftCursor, Vector3.zero, CursorMode.Auto);
-            }
+                break;
 
-            // Plantation zone
-            else if(hit.collider.gameObject.tag == "Plantable")
-            {
-                // Set cursor to plantCursor
+            case "Plantable": // Plantable
                 Cursor.SetCursor(plantCursor, Vector3.zero, CursorMode.Auto);
+                StartPlantingOrHarvest(hitObject);
+                break;
 
-                // If Fire2 at a plantation zone and player is not in edit mode
-                if(Input.GetButtonDown("Fire2") && !PlayerDataManager.instance.GetEditMode())
+            default: // Default
+                Cursor.SetCursor(null, Vector3.zero, CursorMode.Auto);
+                break;
+        }
+    }
+
+    /// <summary>
+    /// Start planting or harvest.
+    /// </summary>
+    /// <param name="hitObject">Hit game object reference.</param>
+    private void StartPlantingOrHarvest(GameObject hitObject)
+    {
+        // If Fire2 at a plantation zone and player is not in edit mode
+        if(Input.GetButtonDown("Fire2") && !PlayerDataManager.instance.GetEditMode())
+        {
+            // Get PlantationController component
+            PlantationController controller = hitObject.GetComponent<PlantationController>();
+
+            // If there is a plant on this platation zone
+            if(controller.HasPlant())
+            {
+                // Check if can harvest and if it is rotten
+                bool canHarvest = controller.CanHarvest();
+                bool isRotten = controller.IsRotten();
+
+                // If the plant can be harvested and it is not rotten, harvest
+                if(canHarvest && !isRotten)
                 {
-                    // Get PlantationController component
-                    PlantationController controller = hit.collider.gameObject.GetComponent<PlantationController>();
+                    controller.Harvest();
+                }
 
-                    // If there is a plant on this platation zone
-                    if(controller.HasPlant())
-                    {
-                        // Check if can harvest and if it is rotten
-                        bool canHarvest = controller.CanHarvest();
-                        bool isRotten = controller.IsRotten();
-
-                        // If the plant can be harvested and it is not rotten, harvest
-                        if(canHarvest && !isRotten)
-                        {
-                            controller.Harvest();
-                        }
-
-                        // If it is rotten or not ready to harvert, destroy it
-                        else
-                        {
-                            controller.DestroyPlants();
-                        }
-                    }
-
-                    // If there is no plant planted, open inventory
-                    else
-                    {
-                        InventoryUI.instance.SetUI(true);
-                        InventoryUI.instance.SetTab(0);
-                        HUDManager.instance.SetHUD(false);
-                    }
-
-                    // Set current plantation zone
-                    InGameSaves.SetPlantationZone(hit.collider.gameObject);
+                // If it is rotten or not ready to harvert, destroy it
+                else
+                {
+                    controller.DestroyPlants();
                 }
             }
 
-            // If it's not an special location, set cursor to normal
+            // If there is no plant planted, open inventory
             else
             {
-                Cursor.SetCursor(null, Vector3.zero, CursorMode.Auto);
+                InventoryUI.instance.SetUI(true);
+                InventoryUI.instance.SetTab(0);
+                HUDManager.instance.SetHUD(false);
             }
+
+            // Set current plantation zone
+            InGameSaves.SetPlantationZone(hitObject);
         }
     }
 
