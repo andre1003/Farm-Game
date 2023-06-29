@@ -23,7 +23,7 @@ MonoBehaviour:
   baseSellValue: 10
   levelRequired: 1
   xp: 20
-  icon: {fileID: 21300000, guid: 0873364a8bf89e24790998d45bd6f110, type: 3}
+  icon: {fileID: 21300000, guid: f4bd4ed9db706214c9a5b58df8dea436, type: 3}
   timeToGrow: 5
   timeToRot: 15
   life: 60

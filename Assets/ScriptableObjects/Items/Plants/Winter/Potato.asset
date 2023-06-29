@@ -23,7 +23,7 @@ MonoBehaviour:
   baseSellValue: 0
   levelRequired: 0
   xp: 0
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 4c12611658901a44fae73a5c1bda2b57, type: 3}
   timeToGrow: 0
   timeToRot: 0
   life: 0

@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Localization.Components;
+using UnityEngine.UI;
 
 public class InventoryUI : MonoBehaviour
 {
@@ -23,6 +24,9 @@ public class InventoryUI : MonoBehaviour
     // UI elements references
     public Transform itemsParent;
     public GameObject inventoryCanvas;
+    public Button nextPageButton;
+    public Button prevPageButton;
+    public TextMeshProUGUI pageText;
 
     // Transition
     public float transitionLength = 0.25f;
@@ -37,6 +41,7 @@ public class InventoryUI : MonoBehaviour
 
     // Tab controller
     private int tab = 0;
+    private int page = 0;
 
     // UI
     private CanvasGroup canvasGroup;
@@ -60,6 +65,15 @@ public class InventoryUI : MonoBehaviour
 
         // Get canvas group
         canvasGroup = inventoryCanvas.GetComponent<CanvasGroup>();
+
+        // Disable next page button, if needed
+        if(page * slots.Length >= GetSlots().Count)
+        {
+            nextPageButton.interactable = false;
+        }
+
+        // Disable previous page button
+        prevPageButton.interactable = false;
 
         // Update UI
         UpdateUI();
@@ -133,6 +147,12 @@ public class InventoryUI : MonoBehaviour
     /// </summary>
     private void UpdateUI()
     {
+        // Set page text
+        pageText.text = (page + 1).ToString();
+
+        // Get number of slots
+        int slotsNumber = slots.Length;
+
         // Refresh money text
         moneyText.text = PlayerDataManager.instance.playerData.money.ToString("F2");
 
@@ -140,12 +160,12 @@ public class InventoryUI : MonoBehaviour
         List<InventorySlotObject> inventorySlots = GetSlots();
 
         // Loop slots
-        for(int i = 0; i < slots.Length; i++)
+        for(int i = 0, j = page * slotsNumber; i < slotsNumber; i++, j++)
         {
             // If its the correct inventory tab, add it to slot
-            if(i < inventorySlots.Count)
+            if(j < inventorySlots.Count)
             {
-                slots[i].AddItem(inventorySlots[i].item, inventorySlots[i].amount);
+                slots[i].AddItem(inventorySlots[j].item, inventorySlots[j].amount);
             }
 
             // Else, clear slot
@@ -156,20 +176,25 @@ public class InventoryUI : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Get inventory slots.
+    /// </summary>
+    /// <returns>Inventory slots.</returns>
     private List<InventorySlotObject> GetSlots()
     {
+        // Switch tab
         switch(tab)
         {
-            case 0:
+            case 0: // Plants
                 return inventory.inventory.plants;
 
-            case 1:
+            case 1: // Harvested plants
                 return inventory.inventory.harvestedPlants;
 
-            case 2:
+            case 2: // Items
                 return inventory.inventory.items;
 
-            default:
+            default: // Null
                 return null;
         }
     }
@@ -191,5 +216,47 @@ public class InventoryUI : MonoBehaviour
     public int GetTab()
     {
         return this.tab;
+    }
+
+    /// <summary>
+    /// Next inventory tab.
+    /// </summary>
+    public void NextPage()
+    {
+        // Increase page
+        page++;
+
+        // If there are no items on next page (after page increment), disable next page button
+        if((page + 1) * slots.Length >= GetSlots().Count-1)
+        {
+            nextPageButton.interactable = false;
+        }
+
+        // Enable previous page button
+        prevPageButton.interactable = true;
+
+        // Update UI
+        UpdateUI();
+    }
+
+    /// <summary>
+    /// Previous inventory page.
+    /// </summary>
+    public void PrevPage()
+    {
+        // Decrease page
+        page--; 
+
+        // If it is the first page, disable previous page button
+        if(page == 0)
+        {
+            prevPageButton.interactable = false;
+        }
+
+        // Enable next page button
+        nextPageButton.interactable = true;
+
+        // Update UI
+        UpdateUI();
     }
 }

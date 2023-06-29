@@ -3,6 +3,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.Localization.Components;
 using UnityEngine.Localization.SmartFormat;
+using UnityEngine.UI;
 
 public class StoreUI : MonoBehaviour
 {
@@ -34,6 +35,11 @@ public class StoreUI : MonoBehaviour
     // Money
     public TextMeshProUGUI moneyText;
 
+    // UI
+    public Button nextPageButton;
+    public Button prevPageButton;
+    public TextMeshProUGUI pageText;
+
 
     // Store
     private Store store;
@@ -41,6 +47,9 @@ public class StoreUI : MonoBehaviour
 
     // Amount selection
     private int amount = 1;
+
+    // Page
+    private int page = 0;
 
 
     // Start is called before the first frame update
@@ -50,7 +59,32 @@ public class StoreUI : MonoBehaviour
         store = Store.instance;
         slots = itemsParent.GetComponentsInChildren<StoreSlot>();
 
+        // Set amount text
         amountText.text = amount.ToString();
+
+        // Define length variable
+        int length;
+
+        // If it is on buy menu, get store plants length
+        if(isOnBuyMenu)
+        {
+            length = store.storePlants.Length;
+        }
+
+        // If not, get harversted plant lentgth
+        else
+        {
+            length = Inventory.instance.inventory.harvestedPlants.Count;
+        }
+
+        // If there are no items on next page (after page increment), disable next page button
+        if((page + 1) * slots.Length >= length - 1)
+        {
+            nextPageButton.interactable = false;
+        }
+
+        // Enable previous page button
+        prevPageButton.interactable = false;
     }
 
     /// <summary>
@@ -73,18 +107,31 @@ public class StoreUI : MonoBehaviour
     /// </summary>
     public void BuyMenu()
     {
+        // If menu changed, update page
+        if(!isOnBuyMenu)
+        {
+            page = 0;
+            nextPageButton.interactable = !((page + 1) * slots.Length >= store.storePlants.Length);
+            prevPageButton.interactable = false;
+        }
+
+        // Update page text
+        pageText.text = (page + 1).ToString();
+
         // Set tab controller
         isOnBuyMenu = true;
 
+        int slotsNumber = slots.Length;
+
         // Display at inventory
-        for(int i = 0; i < slots.Length; i++)
+        for(int i = 0, j = page * slotsNumber; i < slotsNumber; i++, j++)
         {
             // If this index is valid for store plants inventory AND
             // player have enought level for buying it, add to slot.
-            if(i < store.storePlants.Length &&
-                store.storePlants[i].levelRequired <= PlayerDataManager.instance.playerData.level)
+            if(j < store.storePlants.Length &&
+                store.storePlants[j].levelRequired <= PlayerDataManager.instance.playerData.level)
             {
-                slots[i].AddPlant(store.storePlants[i]);
+                slots[i].AddPlant(store.storePlants[j]);
                 continue;
             }
 
@@ -98,6 +145,17 @@ public class StoreUI : MonoBehaviour
     /// </summary>
     public void SellMenu()
     {
+        // If menu changed, update page
+        if(isOnBuyMenu)
+        {
+            page = 0;
+            nextPageButton.interactable = !((page + 1) * slots.Length >= Inventory.instance.inventory.harvestedPlants.Count);
+            prevPageButton.interactable = false;
+        }
+
+        // Update page text
+        pageText.text = (page + 1).ToString();
+
         // Set tab controller
         isOnBuyMenu = false;
 
@@ -115,12 +173,12 @@ public class StoreUI : MonoBehaviour
 
         // Display at inventory
         int length = slots.Length;
-        for(int i = 0; i < length; i++)
+        for(int i = 0, j = page * length; i < length; i++, j++)
         {
             // Add plant to sell slot
-            if(i < plants.Count)
+            if(j < plants.Count)
             {
-                slots[i].AddPlantToSell(plants[i], amounts[i]);
+                slots[i].AddPlantToSell(plants[j], amounts[j]);
             }
 
             // Clear slot
@@ -291,5 +349,62 @@ public class StoreUI : MonoBehaviour
     public void RefreshMoneyText()
     {
         moneyText.text = PlayerDataManager.instance.playerData.money.ToString("F2");
+    }
+
+    /// <summary>
+    /// Next store page.
+    /// </summary>
+    public void NextPage()
+    {
+        // Increase page
+        page++;
+
+        // Define length variable
+        int length;
+
+        // If it is on buy menu, get store plants length
+        if(isOnBuyMenu)
+        {
+            length = store.storePlants.Length;
+        }
+
+        // If not, get harversted plant lentgth
+        else
+        {
+            length = Inventory.instance.inventory.harvestedPlants.Count;
+        }
+
+        // If there are no items on next page (after page increment), disable next page button
+        if((page + 1) * slots.Length >= length - 1)
+        {
+            nextPageButton.interactable = false;
+        }
+
+        // Enable previous page button
+        prevPageButton.interactable = true;
+
+        // Update menu
+        UpdateMenu();
+    }
+
+    /// <summary>
+    /// Previous store page.
+    /// </summary>
+    public void PrevPage()
+    {
+        // Decrease page
+        page--;
+
+        // If it is the first page, disable previous page button
+        if(page == 0)
+        {
+            prevPageButton.interactable = false;
+        }
+
+        // Enable next page button
+        nextPageButton.interactable = true;
+
+        // Update menu
+        UpdateMenu();
     }
 }
