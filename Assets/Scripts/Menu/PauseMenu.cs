@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 
@@ -17,6 +18,7 @@ public class PauseMenu : MonoBehaviour {
 
     // UI
     public GameObject pauseCanvas;
+    public List<GameObject> allCanvas;
 
     // Transition
     public float transitionLength = 0.25f;
@@ -25,6 +27,7 @@ public class PauseMenu : MonoBehaviour {
     // UI
     private CanvasGroup canvasGroup;
     private bool changeUI = false;
+    private List<bool> canvasActiveSelf;
 
     // Transition
     private float initialAlpha;
@@ -35,7 +38,11 @@ public class PauseMenu : MonoBehaviour {
     // Start method
     void Start()
     {
+        // Get canvas group component
         canvasGroup = pauseCanvas.GetComponent<CanvasGroup>();
+
+        // Set canvas active self list
+        canvasActiveSelf = new List<bool>();
     }
 
     // Update is called once per frame
@@ -46,6 +53,15 @@ public class PauseMenu : MonoBehaviour {
             PauseResume();
         }
 
+        // Change canvas opacity if needed
+        ChangeCanvasOpacity();
+    }
+
+    /// <summary>
+    /// Change canvas UI, if needed.
+    /// </summary>
+    private void ChangeCanvasOpacity()
+    {
         // If doesn't need to change UI visibility, exit
         if(!changeUI)
         {
@@ -66,6 +82,7 @@ public class PauseMenu : MonoBehaviour {
             if(targetAlpha == 0f)
             {
                 pauseCanvas.SetActive(false);
+                ReactivateAllCanvas();
             }
 
             // Else, pause game
@@ -89,6 +106,7 @@ public class PauseMenu : MonoBehaviour {
         if(isActive)
         {
             targetAlpha = 1f;
+            DisableAllCanvas();
             pauseCanvas.SetActive(true);
             StopPlayerMovement(true);
         }
@@ -167,12 +185,71 @@ public class PauseMenu : MonoBehaviour {
     {
         Time.timeScale = 0;
     }
-
     /// <summary>
     /// Resume game completly.
     /// </summary>
     public void ResumeGame()
     {
         Time.timeScale = 1;
+    }
+
+    /// <summary>
+    /// Disable all canvases.
+    /// </summary>
+    private void DisableAllCanvas()
+    {
+        // Clear canvas active self list and loop all canvas
+        canvasActiveSelf.Clear();
+        for(int i = 0; i < allCanvas.Count; i++)
+        {
+            // Add canvas active self to list
+            canvasActiveSelf.Add(allCanvas[i].activeSelf);
+
+            // If it is inventory canvas, call smooth change UI
+            if(allCanvas[i].name.Contains("Inventory"))
+            {
+                InventoryUI.instance.SetUI(false);
+            }
+
+            // If it is store canvas, call smooth change UI
+            else if(allCanvas[i].name.Contains("Store"))
+            {
+                Store.instance.SetUI(false);
+            }
+
+            // Else, set canvas active self to false
+            else
+            {
+                allCanvas[i].SetActive(false);
+            }
+        }
+    }
+
+    /// <summary>
+    /// Reactivate all canvases.
+    /// </summary>
+    private void ReactivateAllCanvas()
+    {
+        // Reactivate all needed canvas
+        for(int i = 0; i < allCanvas.Count; i++)
+        {
+            // If it is inventory canvas, call smooth change UI
+            if(allCanvas[i].name.Contains("Inventory"))
+            {
+                InventoryUI.instance.SetUI(canvasActiveSelf[i]);
+            }
+
+            // If it is store canvas, call smooth change UI
+            else if(allCanvas[i].name.Contains("Store"))
+            {
+                Store.instance.SetUI(canvasActiveSelf[i]);
+            }
+
+            // Else, set canvas active self to previous state
+            else
+            {
+                allCanvas[i].SetActive(canvasActiveSelf[i]);
+            }
+        }
     }
 }

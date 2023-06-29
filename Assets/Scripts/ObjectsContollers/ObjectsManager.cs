@@ -121,43 +121,46 @@ public class ObjectsManager : MonoBehaviour
     /// <param name="hitObject">Hit game object reference.</param>
     private void StartPlantingOrHarvest(GameObject hitObject)
     {
-        // If Fire2 at a plantation zone and player is not in edit mode
-        if(Input.GetButtonDown("Fire2") && !PlayerDataManager.instance.GetEditMode())
+        // If not Fire2 at a plantation zone or player is in edit mode, exit
+        if(!Input.GetButtonDown("Fire2") || PlayerDataManager.instance.GetEditMode())
         {
-            // Get PlantationController component
-            PlantationController controller = hitObject.GetComponent<PlantationController>();
+            return;
+        }
 
-            // If there is a plant on this platation zone
-            if(controller.HasPlant())
+        
+        // Get PlantationController component
+        PlantationController controller = hitObject.GetComponent<PlantationController>();
+
+        // If there is a plant on this platation zone
+        if(controller.HasPlant())
+        {
+            // Check if can harvest and if it is rotten
+            bool canHarvest = controller.CanHarvest();
+            bool isRotten = controller.IsRotten();
+
+            // If the plant can be harvested and it is not rotten, harvest
+            if(canHarvest && !isRotten)
             {
-                // Check if can harvest and if it is rotten
-                bool canHarvest = controller.CanHarvest();
-                bool isRotten = controller.IsRotten();
-
-                // If the plant can be harvested and it is not rotten, harvest
-                if(canHarvest && !isRotten)
-                {
-                    controller.Harvest();
-                }
-
-                // If it is rotten or not ready to harvert, destroy it
-                else
-                {
-                    controller.DestroyPlants();
-                }
+                controller.Harvest();
             }
 
-            // If there is no plant planted, open inventory
+            // If it is rotten or not ready to harvert, destroy it
             else
             {
-                InventoryUI.instance.SetUI(true);
-                InventoryUI.instance.SetTab(0);
-                HUDManager.instance.SetHUD(false);
+                controller.DestroyPlants();
             }
-
-            // Set current plantation zone
-            InGameSaves.SetPlantationZone(hitObject);
         }
+
+        // If there is no plant planted, open inventory
+        else
+        {
+            InventoryUI.instance.SetUI(true);
+            InventoryUI.instance.SetTab(0);
+            HUDManager.instance.SetHUD(false);
+        }
+
+        // Set current plantation zone
+        InGameSaves.SetPlantationZone(hitObject);
     }
 
     /// <summary>

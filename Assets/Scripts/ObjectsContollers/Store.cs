@@ -65,8 +65,18 @@ public class Store : MonoBehaviour
     // Update method
     void Update()
     {
+        // Update new items canvas active status based on newItems variable
         newItemCanvas.SetActive(newItems);
 
+        // Change canvas opacity, if needed
+        ChangeCanvasOpacity();
+    }
+
+    /// <summary>
+    /// Change canvas UI, if needed.
+    /// </summary>
+    private void ChangeCanvasOpacity()
+    {
         // If doesn't need to change UI visibility, exit
         if(!changeUI)
         {
@@ -129,7 +139,7 @@ public class Store : MonoBehaviour
     /// Set UI visibility.
     /// </summary>
     /// <param name="isActive">New visibility.</param>
-    private void SetUI(bool isActive)
+    public void SetUI(bool isActive)
     {
         // Set initial opacity
         initialAlpha = canvasGroup.alpha;

@@ -20519,6 +20519,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pauseCanvas: {fileID: 2140505198}
+  allCanvas:
+  - {fileID: 949683717}
+  - {fileID: 323137183}
+  - {fileID: 1789935402}
+  - {fileID: 1487801902}
   transitionLength: 0.25
 --- !u!1 &704630063
 GameObject:

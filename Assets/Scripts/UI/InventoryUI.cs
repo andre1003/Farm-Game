@@ -52,6 +52,9 @@ public class InventoryUI : MonoBehaviour
     private float targetAlpha;
     private float elapsedTime = 0f;
 
+    // Input
+    float horizontalAxis = 0f;
+
 
     // Start is called before the first frame update
     void Start()
@@ -82,12 +85,95 @@ public class InventoryUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        InputHandler();
+        ChangeCanvasOpacity();
+    }
+
+    /// <summary>
+    /// Open or close inventory UI.
+    /// </summary>
+    public void OpenCloseInventory()
+    {
+        // If inventory will be closed, set mouse cursor to default
+        if(inventoryCanvas.activeSelf)
+        {
+            ObjectsManager.instance.StopHoverUI();
+        }
+
+        HUDManager.instance.SetHUD(inventoryCanvas.activeSelf);
+        SetUI(!inventoryCanvas.activeSelf);
+        UpdateUI();
+    }
+
+    /// <summary>
+    /// Input handler.
+    /// </summary>
+    private void InputHandler()
+    {
         // If player press I ky and isBusy is false, change inventory visibility and update UI
         if(Input.GetKeyDown(KeyCode.I) && !InGameSaves.GetIsBusy())
         {
             OpenCloseInventory();
+            return;
         }
 
+        // If inventory canvas is not active, exit
+        if(!inventoryCanvas.activeSelf)
+        {
+            return;
+        }
+
+        // If change tab button key have been pressed
+        if(Input.GetButtonDown("ChangeTab"))
+        {
+            // If it is the las tab, set it to the first
+            if(tab == 2)
+            {
+                SetTab(0);
+            }
+
+            // Else, set to next tab
+            else
+            {
+                SetTab(tab + 1);
+            }
+
+            // Exit
+            return;
+        }
+
+        // Get horizontal axis raw value
+        float axis = Input.GetAxisRaw("Horizontal");
+
+        // If horizontalAxis is equal axis, exit
+        if(horizontalAxis == axis)
+        {
+            return;
+        }
+
+        // Set horizontalAxis value to axis
+        horizontalAxis = axis;
+
+        // If horizontal axis is negative (pressing left button) and the previous button
+        // is interactable, get previous page
+        if(horizontalAxis == -1f && prevPageButton.interactable)
+        {
+            PrevPage();
+        }
+
+        // If horizontal axis is positive (pressing right button) and the next button
+        // is interactable, get next page
+        else if(horizontalAxis == 1f && nextPageButton.interactable)
+        {
+            NextPage();
+        }
+    }
+    
+    /// <summary>
+    /// Change canvas UI, if needed.
+    /// </summary>
+    private void ChangeCanvasOpacity()
+    {
         // If doesn't need to change HUD visibility, exit
         if(!changeUI)
         {
@@ -111,22 +197,6 @@ public class InventoryUI : MonoBehaviour
                 inventoryCanvas.SetActive(false);
             }
         }
-    }
-
-    /// <summary>
-    /// Open or close inventory UI.
-    /// </summary>
-    public void OpenCloseInventory()
-    {
-        // If inventory will be closed, set mouse cursor to default
-        if(inventoryCanvas.activeSelf)
-        {
-            ObjectsManager.instance.StopHoverUI();
-        }
-
-        HUDManager.instance.SetHUD(inventoryCanvas.activeSelf);
-        SetUI(!inventoryCanvas.activeSelf);
-        UpdateUI();
     }
 
     /// <summary>

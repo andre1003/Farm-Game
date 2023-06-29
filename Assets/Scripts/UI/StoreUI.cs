@@ -51,6 +51,9 @@ public class StoreUI : MonoBehaviour
     // Page
     private int page = 0;
 
+    // Input
+    float horizontalAxis = 0f;
+
 
     // Start is called before the first frame update
     void Start()
@@ -85,6 +88,79 @@ public class StoreUI : MonoBehaviour
 
         // Enable previous page button
         prevPageButton.interactable = false;
+    }
+
+    // Update method
+    void Update()
+    {
+        InputHandler();
+    }
+
+    /// <summary>
+    /// Input handler.
+    /// </summary>
+    private void InputHandler()
+    {
+        // If store canvas is not active, exit
+        if(!storeCanvas.activeSelf)
+        {
+            return;
+        }
+
+        // If change tab button key have been pressed
+        if(Input.GetButtonDown("ChangeTab"))
+        {
+            // Reset page and previous page button active status
+            page = 0;
+            prevPageButton.interactable = false;
+
+            // If it is not on buy menu
+            if(!isOnBuyMenu)
+            {
+                nextPageButton.interactable = !((page + 1) * slots.Length >= store.storePlants.Length);
+            }
+
+            // If it is on buy menu
+            else
+            {
+                nextPageButton.interactable = !((page + 1) * slots.Length >= Inventory.instance.inventory.harvestedPlants.Count);
+            }
+
+            // Change isOnBuyMenu value
+            isOnBuyMenu = !isOnBuyMenu;
+
+            // Update menu
+            UpdateMenu();
+
+            // Exit
+            return;
+        }
+
+        // Get horizontal axis raw value
+        float axis = Input.GetAxisRaw("Horizontal");
+
+        // If horizontalAxis is equal axis, exit
+        if(horizontalAxis == axis)
+        {
+            return;
+        }
+
+        // Set horizontalAxis value to axis
+        horizontalAxis = axis;
+
+        // If horizontal axis is negative (pressing left button) and the previous button
+        // is interactable, get previous page
+        if(horizontalAxis == -1f && prevPageButton.interactable)
+        {
+            PrevPage();
+        }
+
+        // If horizontal axis is positive (pressing right button) and the next button
+        // is interactable, get next page
+        else if(horizontalAxis == 1f && nextPageButton.interactable)
+        {
+            NextPage();
+        }
     }
 
     /// <summary>
