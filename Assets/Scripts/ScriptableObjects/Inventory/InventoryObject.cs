@@ -100,12 +100,12 @@ public class InventoryObject : ScriptableObject
     }
 
     /// <summary>
-    /// Implementation of removing a plant to inventory.
+    /// Implementation of removing a plant from inventory.
     /// </summary>
     /// <param name="list">List to remove.</param>
-    /// <param name="plant"></param>
-    /// <param name="amount"></param>
-    /// <returns></returns>
+    /// <param name="plant">Plant reference.</param>
+    /// <param name="amount">Amount to remove.</param>
+    /// <returns>TRUE - If removed. FALSE - If not.</returns>
     private bool RemovePlantImplementation(List<InventorySlotObject> list, Plant plant, int amount)
     {
         // Loop all plants
@@ -132,6 +132,37 @@ public class InventoryObject : ScriptableObject
     }
 
     /// <summary>
+    /// Remov an item from inventory.
+    /// </summary>
+    /// <param name="item">Item reference.</param>
+    /// <param name="amount">Amount to remove.</param>
+    /// <returns>TRUE - If removed. FALSE - If not.</returns>
+    public bool RemoveItem(Item item, int amount)
+    {
+        // Loop all items
+        for(int i = 0; i < items.Count; i++)
+        {
+            // If found the corresponding item, remove the given amount
+            if(items[i].item == item)
+            {
+                // Check if can remove the given amount
+                bool canRemoveFromList = items[i].RemoveAmount(amount);
+
+                // If can, remove it
+                if(canRemoveFromList)
+                {
+                    items.RemoveAt(i);
+                }
+
+                return true;
+            }
+        }
+
+        // Object doesn't exists in inventory
+        return false;
+    }
+
+    /// <summary>
     /// Check if the inventory has the plant with a given name.
     /// </summary>
     /// <param name="plantName">Name of the plant to search.</param>
@@ -143,6 +174,47 @@ public class InventoryObject : ScriptableObject
         {
             // If this plant is the one we are looking for, return true
             if(plant.item.name.ToLower() == plantName.ToLower())
+            {
+                return true;
+            }
+        }
+
+        // If didn't find the plant, return false
+        return false;
+    }
+
+    /// <summary>
+    /// Check if the inventory has the item with a given name.
+    /// </summary>
+    /// <param name="itemName">Name of the item to search.</param>
+    /// <returns>TRUE - If there is an item. FALSE - If don't.</returns>
+    public bool HasItem(string itemName)
+    {
+        // Search in 'plants' list
+        foreach(InventorySlotObject plant in plants)
+        {
+            // If this item is the one we are looking for, return true
+            if(plant.item.name.ToLower() == itemName.ToLower())
+            {
+                return true;
+            }
+        }
+
+        // Search in 'harvestedPlants' list
+        foreach(InventorySlotObject harvestedPlant in harvestedPlants)
+        {
+            // If this item is the one we are looking for, return true
+            if(harvestedPlant.item.name.ToLower() == itemName.ToLower())
+            {
+                return true;
+            }
+        }
+
+        // Search in 'items' list
+        foreach(InventorySlotObject item in items)
+        {
+            // If this item is the one we are looking for, return true
+            if(item.item.name.ToLower() == itemName.ToLower())
             {
                 return true;
             }

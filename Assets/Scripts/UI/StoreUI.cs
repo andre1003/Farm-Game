@@ -24,6 +24,7 @@ public class StoreUI : MonoBehaviour
 
     // Buy menu controller
     public bool isOnBuyMenu = true;
+    public bool filterPlants = true;
 
     // Amount selection
     public GameObject storeCanvas;
@@ -71,7 +72,7 @@ public class StoreUI : MonoBehaviour
         // If it is on buy menu, get store plants length
         if(isOnBuyMenu)
         {
-            length = store.storePlants.Length;
+            length = store.storeItems.Length;
         }
 
         // If not, get harversted plant lentgth
@@ -117,7 +118,7 @@ public class StoreUI : MonoBehaviour
             // If it is not on buy menu
             if(!isOnBuyMenu)
             {
-                nextPageButton.interactable = !((page + 1) * slots.Length >= store.storePlants.Length);
+                nextPageButton.interactable = !((page + 1) * slots.Length >= store.storeItems.Length);
             }
 
             // If it is on buy menu
@@ -187,7 +188,7 @@ public class StoreUI : MonoBehaviour
         if(!isOnBuyMenu)
         {
             page = 0;
-            nextPageButton.interactable = !((page + 1) * slots.Length >= store.storePlants.Length);
+            nextPageButton.interactable = !((page + 1) * slots.Length >= store.storeItems.Length);
             prevPageButton.interactable = false;
         }
 
@@ -197,17 +198,33 @@ public class StoreUI : MonoBehaviour
         // Set tab controller
         isOnBuyMenu = true;
 
+        // Get number of slots and define items list
         int slotsNumber = slots.Length;
+        List<Item> items = new List<Item>();
 
-        // Display at inventory
-        for(int i = 0, j = page * slotsNumber; i < slotsNumber; i++, j++)
+        // Loop store items, starting at the current page
+        for(int i = page * slotsNumber; i < store.storeItems.Length; i++)
         {
-            // If this index is valid for store plants inventory AND
-            // player have enought level for buying it, add to slot.
-            if(j < store.storePlants.Length &&
-                store.storePlants[j].levelRequired <= PlayerDataManager.instance.playerData.level)
+            // Get item
+            Item item = store.storeItems[i];
+
+            // If item required level is less or equal player's level
+            // AND Item type is equal to filter type
+            // THEN Add item to items list
+            if(item.levelRequired <= PlayerDataManager.instance.playerData.level &&
+                (item.GetType() == typeof(Plant)) == filterPlants)
             {
-                slots[i].AddPlant(store.storePlants[j]);
+                items.Add(item);
+            }
+        }
+
+        // Loop slots
+        for(int i = 0; i < slotsNumber; i++)
+        {
+            // If 'i' is a valid index for items list, add item to slot and continue
+            if(i < items.Count)
+            {
+                slots[i].AddItem(items[i]);
                 continue;
             }
 
@@ -254,7 +271,7 @@ public class StoreUI : MonoBehaviour
             // Add plant to sell slot
             if(j < plants.Count)
             {
-                slots[i].AddPlantToSell(plants[j], amounts[j]);
+                slots[i].AddItemToSell(plants[j], amounts[j]);
             }
 
             // Clear slot
@@ -292,6 +309,12 @@ public class StoreUI : MonoBehaviour
     /// <param name="isActive">Active status of amount selection menu.</param>
     public void AmountSelectionMenu(bool isActive)
     {
+        if(!isActive)
+        {
+            amountSelectionCanvas.SetActive(false);
+            return;
+        }
+
         // Set amount
         amount = 1;
         amountText.text = amount.ToString();
@@ -316,7 +339,7 @@ public class StoreUI : MonoBehaviour
         StringLocalizer.instance.Localize(tableName, key, buyOrSellButtonText);
 
         // Activate amount selection menu
-        amountSelectionCanvas.SetActive(isActive);
+        amountSelectionCanvas.SetActive(true);
         UpdateTotal();
     }
 
@@ -332,7 +355,7 @@ public class StoreUI : MonoBehaviour
         if(isOnBuyMenu)
         {
             // Get plant buy value and player money
-            float buyValue = Store.instance.GetSelectedPlant().buyValue;
+            float buyValue = Store.instance.GetSelectedItem().buyValue;
             float playerMoney = PlayerDataManager.instance.playerData.money;
 
             // If the total buy value is bigger than player money, remove one from amount
@@ -352,7 +375,7 @@ public class StoreUI : MonoBehaviour
             foreach(var inventorySlot in Inventory.instance.inventory.harvestedPlants)
             {
                 // If this is the selected plant, get the amount and break the loop
-                if((Plant)inventorySlot.item == Store.instance.GetSelectedPlant())
+                if((Plant)inventorySlot.item == Store.instance.GetSelectedItem())
                 {
                     amountOnInventory = inventorySlot.amount;
                     break;
@@ -396,14 +419,14 @@ public class StoreUI : MonoBehaviour
     private void UpdateTotal()
     {
         // If there is no selected plant, exit
-        Plant selectedPlant = Store.instance.GetSelectedPlant();
-        if(selectedPlant == null)
+        Item selectedItem = Store.instance.GetSelectedItem();
+        if(selectedItem == null)
         {
             return;
         }
 
         // Set total value
-        float total = selectedPlant.buyValue * amount;
+        float total = selectedItem.buyValue * amount;
         totalText.text = total.ToString("F2");
 
         // Refresh money text
@@ -441,7 +464,7 @@ public class StoreUI : MonoBehaviour
         // If it is on buy menu, get store plants length
         if(isOnBuyMenu)
         {
-            length = store.storePlants.Length;
+            length = store.storeItems.Length;
         }
 
         // If not, get harversted plant lentgth
@@ -481,6 +504,16 @@ public class StoreUI : MonoBehaviour
         nextPageButton.interactable = true;
 
         // Update menu
+        UpdateMenu();
+    }
+
+    /// <summary>
+    /// Set new value for plants filter controller.
+    /// </summary>
+    /// <param name="filterPlants">New value for plants filter controller.</param>
+    public void SetFilterPlants(bool filterPlants)
+    {
+        this.filterPlants = filterPlants;
         UpdateMenu();
     }
 }

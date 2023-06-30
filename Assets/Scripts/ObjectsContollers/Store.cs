@@ -31,19 +31,19 @@ public class Store : MonoBehaviour
     // Destination
     public Transform frontSpot;
 
-    // Store plants
-    public Plant[] storePlants;
+    // Store items
+    public Item[] storeItems;
 
 
     // Navigation mesh event
     private NavMeshAgent myAgent;
 
-    // Sold plants
-    private Dictionary<string, int> soldPlants = new Dictionary<string, int>();
+    // Sold items
+    private Dictionary<string, int> soldItems = new Dictionary<string, int>();
 
     // Items
     private bool newItems = true;
-    private Plant selectedPlant;
+    private Item selectedItem;
     private StoreSlot selectedSlot;
 
     // UI
@@ -202,32 +202,32 @@ public class Store : MonoBehaviour
     }
 
     /// <summary>
-    /// Add a plant to sold plants dictionary.
+    /// Add an item to sold items dictionary.
     /// </summary>
     /// <param name="name">Plant name, used as the dictionary key.</param>
     /// <param name="amount">Sold amount.</param>
-    public void AddSoldPlant(string name, int amount)
+    public void AddSoldItem(string name, int amount)
     {
         // Make sure the key is lower case
         name = name.ToLower();
 
-        // If this plant already exists in the dictionary, add the amount
-        if(soldPlants.ContainsKey(name))
+        // If this item already exists in the dictionary, add the amount
+        if(soldItems.ContainsKey(name))
         {
-            soldPlants[name] += amount;
+            soldItems[name] += amount;
         }
 
         // If the key is invalid, add it to dictionary
         else
         {
-            soldPlants.Add(name, amount);
+            soldItems.Add(name, amount);
         }
     }
 
     /// <summary>
-    /// Check if player sold a certain amount of a plant.
+    /// Check if player sold a certain amount of an item.
     /// </summary>
-    /// <param name="name">Plant name to check.</param>
+    /// <param name="name">Item name to check.</param>
     /// <param name="amount">Sold amount to check.</param>
     /// <returns>TRUE - If it did. FALSE - If it didn't.</returns>
     public bool HasSold(string name, int amount=1)
@@ -235,8 +235,8 @@ public class Store : MonoBehaviour
         // Make sure the key is lower case
         name = name.ToLower();
 
-        // If the plant has not been sold, return false
-        if(!soldPlants.ContainsKey(name))
+        // If the item has not been sold, return false
+        if(!soldItems.ContainsKey(name))
         {
             return false;
         }
@@ -247,17 +247,17 @@ public class Store : MonoBehaviour
             return true;
         }
 
-        // If the amount is valid, return if the amount of sold plant is bigger
+        // If the amount is valid, return if the amount of sold item is bigger
         // or equal to the given amount
-        return soldPlants[name] >= amount;
+        return soldItems[name] >= amount;
     }
 
     /// <summary>
-    /// Clear all sold plants.
+    /// Clear all sold items.
     /// </summary>
-    public void ClearSoldPlants()
+    public void ClearSoldItems()
     {
-        soldPlants.Clear();
+        soldItems.Clear();
     }
 
     /// <summary>
@@ -266,9 +266,9 @@ public class Store : MonoBehaviour
     public void CheckNewItems()
     {
         int playerLevel = PlayerDataManager.instance.playerData.level - 1;
-        foreach(Plant plant in storePlants)
+        foreach(Item item in storeItems)
         {
-            if(playerLevel == plant.levelRequired)
+            if(playerLevel == item.levelRequired)
             {
                 newItems = true;
                 return;
@@ -277,21 +277,21 @@ public class Store : MonoBehaviour
     }
 
     /// <summary>
-    /// Set the current selected plant.
+    /// Set the current selected item.
     /// </summary>
-    /// <param name="selectedPlant">New selected plant.</param>
-    public void SetSelectedPlant(Plant selectedPlant)
+    /// <param name="selectedItem">New selected item.</param>
+    public void SetSelectedItem(Item selectedItem)
     {
-        this.selectedPlant = selectedPlant;
+        this.selectedItem = selectedItem;
     }
 
     /// <summary>
-    /// Get the current selected plant.
+    /// Get the current selected item.
     /// </summary>
     /// <returns></returns>
-    public Plant GetSelectedPlant()
+    public Item GetSelectedItem()
     {
-        return selectedPlant;
+        return selectedItem;
     }
 
     /// <summary>
@@ -308,15 +308,15 @@ public class Store : MonoBehaviour
     /// </summary>
     private void Buy()
     {
-        // If there is no selected plant, exit
-        if(selectedPlant == null)
+        // If there is no selected item, exit
+        if(selectedItem == null)
         {
             return;
         }
 
         // Get the amount and buy it
         int amount = StoreUI.instance.GetSelectedAmount();
-        PlayerDataManager.instance.Buy(selectedPlant, amount);
+        PlayerDataManager.instance.Buy(selectedItem, amount);
     }
 
     /// <summary>
@@ -324,8 +324,8 @@ public class Store : MonoBehaviour
     /// </summary>
     private void Sell()
     {
-        // If there is no selected plant, exit
-        if(selectedPlant == null)
+        // If there is no selected item, exit
+        if(selectedItem == null)
         {
             return;
         }
@@ -333,12 +333,20 @@ public class Store : MonoBehaviour
         // Get amount
         int amount = StoreUI.instance.GetSelectedAmount();
 
-        // Calculate multiplier and sell plant
-        float multiplier = 2f / (selectedPlant.seasons.IndexOf(TimeManager.instance.season) + 1);
-        PlayerDataManager.instance.Sell(selectedPlant, amount, multiplier);
+        // Define multiplier
+        float multiplier = 1f;
 
-        // Add the sold plant to sold plants dictionary
-        AddSoldPlant(selectedPlant.name, amount);
+        // Calculate multiplier if the selected item is an item
+        if(selectedItem.GetType() == typeof(Plant))
+        {
+            multiplier = 2f / (((Plant)selectedItem).seasons.IndexOf(TimeManager.instance.season) + 1);
+        }
+        
+        // Sell item
+        PlayerDataManager.instance.Sell(selectedItem, amount, multiplier);
+
+        // Add the sold item to sold items dictionary
+        AddSoldItem(selectedItem.name, amount);
 
         // Update slot
         selectedSlot.SellAmount(amount);
@@ -362,6 +370,7 @@ public class Store : MonoBehaviour
         }
 
         // Refresh money text
+        StoreUI.instance.AmountSelectionMenu(false);
         StoreUI.instance.RefreshMoneyText();
     }
 }

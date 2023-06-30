@@ -4,11 +4,13 @@ using UnityEngine;
 public class ObjectsManager : MonoBehaviour
 {
     // Player spawn settings
+    [Header("Spawn")]
     public Transform player;
     public GameObject spawnSpot;
     public GameObject inventory;
 
     // Cursors
+    [Header("Cursors")]
     public Texture2D hoverCursor;
     public Texture2D buyCursor;
     public Texture2D craftCursor;
@@ -16,6 +18,11 @@ public class ObjectsManager : MonoBehaviour
 
     // Hot spot
     public Vector2 hotSpot = Vector2.zero;
+
+    // Audio
+    [Header("Audio")]
+    public AudioSource audioSource;
+    public AudioClip clickClip;
 
 
     // Hovering UI controller
@@ -30,6 +37,7 @@ public class ObjectsManager : MonoBehaviour
     void Awake()
     {
         Instantiate(player, spawnSpot.transform.position, Quaternion.Euler(0, 90, 0));
+        audioSource.clip = clickClip;
 
         if(instance == null)
         {
@@ -42,9 +50,14 @@ public class ObjectsManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // If player is hovering an UI, exit
+        // If player is hovering an UI
         if(isHoveringUI)
         {
+            // If player clicks the left button, play sound
+            if(Input.GetButtonDown("Fire1"))
+            {
+                audioSource.Play();
+            }
             return;
         }
 

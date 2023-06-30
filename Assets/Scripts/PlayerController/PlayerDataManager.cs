@@ -36,42 +36,60 @@ public class PlayerDataManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Method for buy a plant.
+    /// Method for buy an item.
     /// </summary>
-    /// <param name="plant">Plant reference.</param>
+    /// <param name="item">Item reference.</param>
     /// <param name="amount">Amount to buy.</param>
-    public void Buy(Plant plant, int amount)
+    public void Buy(Item item, int amount)
     {
         // If player does not has enought level, exit
-        if(plant.levelRequired > playerData.level)
+        if(item.levelRequired > playerData.level)
         {
             return;
         }
 
         // If player does not have money to buy, exit
-        if(plant.buyValue > playerData.money)
+        if(item.buyValue > playerData.money)
         {
             return;
         }
 
         // Add to inventory
-        Inventory.instance.Add(plant, amount, false);
-        playerData.money -= plant.buyValue;
+        if(item.GetType() == typeof(Plant))
+        {
+            Inventory.instance.Add((Plant)item, amount, false);
+        }
+        else
+        {
+            Inventory.instance.Add(item, amount);
+        }
+        
+        playerData.money -= item.buyValue;
     }
 
     /// <summary>
-    /// Sell a plant.
+    /// Sell an item.
     /// </summary>
-    /// <param name="plant">Plant reference.</param>
+    /// <param name="item">Item reference.</param>
     /// <param name="amount">Amount to sell.</param>
     /// <param name="multiplier">Price multiplier.</param>
-    public void Sell(Plant plant, int amount, float multiplier = 1f)
+    public void Sell(Item item, int amount, float multiplier = 1f)
     {
+        bool hasRemoved;
+        if(item.GetType() == typeof(Plant))
+        {
+            hasRemoved = Inventory.instance.Remove((Plant)item, amount, true);
+        }
+        else
+        {
+            hasRemoved = Inventory.instance.Remove(item, amount);
+        }
+
         // If successfully removed from player inventory
-        if(Inventory.instance.Remove(plant, amount, true))
+        if(hasRemoved)
         {
             // Add money and update HUD
-            playerData.money += plant.baseSellValue * multiplier;
+            playerData.money += item.baseSellValue * multiplier;
         }
     }
 

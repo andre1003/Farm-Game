@@ -46,6 +46,8 @@ public class ResetSaves : MonoBehaviour
     public void ResetInventory()
     {
         inventory.plants = defaultInventory.plants;
+        inventory.harvestedPlants = defaultInventory.harvestedPlants;
+        inventory.items = defaultInventory.items;
     }
 
     /// <summary>

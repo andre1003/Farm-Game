@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,7 +10,7 @@ public class InventorySlot : MonoBehaviour
     public Image amountImage;
 
     // Text
-    public Text text;
+    public TextMeshProUGUI text;
 
 
     // Plant
@@ -59,5 +60,24 @@ public class InventorySlot : MonoBehaviour
             HUDManager.instance.SetHUD(true);
             plantationZone.GetComponent<PlantationController>().Plant((Plant)item);
         }
+    }
+
+    /// <summary>
+    /// Hover slot.
+    /// </summary>
+    public void HoverSlot()
+    {
+        // Change mouse cursor
+        ObjectsManager.instance.HoverUI();
+        SlotInfoHandler.instance.CreateInfo(item, transform, transform.parent.parent);
+    }
+
+    /// <summary>
+    /// Stop hover slot.
+    /// </summary>
+    public void StopHoverSlot()
+    {
+        ObjectsManager.instance.StopHoverUI();
+        SlotInfoHandler.instance.DestroyInfo();
     }
 }

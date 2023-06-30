@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,40 +9,35 @@ public class StoreSlot : MonoBehaviour
     public Image icon;
 
     // Slot add-ons
-    public Image levelImage;
     public Image costImage;
 
     // Slot texts
-    public Text levelText;
-    public Text costText;
+    public TextMeshProUGUI costText;
 
 
     // Auxiliar variables
-    private Plant plant;
+    private Item item;
     public int amount = -1;
 
 
     /// <summary>
-    /// Add plant to slot.
+    /// Add item to slot.
     /// </summary>
-    /// <param name="plant">Plant reference.</param>
-    public void AddPlant(Plant plant)
+    /// <param name="item">Item reference.</param>
+    public void AddItem(Item item)
     {
         // Plant setup
-        this.plant = plant;
-        icon.sprite = plant.icon;
+        this.item = item;
+        icon.sprite = item.icon;
 
         // Enable add-ons
-        levelText.enabled = true;
         costText.enabled = true;
 
         // Texts setup
-        levelText.text = plant.levelRequired.ToString();
-        costText.text = plant.buyValue.ToString();
+        costText.text = item.buyValue.ToString("F2");
 
         // Enable icon, level and cost image
         icon.enabled = true;
-        levelImage.enabled = true;
         costImage.enabled = true;
     }
 
@@ -51,15 +47,13 @@ public class StoreSlot : MonoBehaviour
     public void ClearSlot()
     {
         // Clear plant
-        plant = null;
+        item = null;
         icon.sprite = null;
 
         // Disable images
-        levelImage.enabled = false;
         costImage.enabled = false;
 
         // Disable texts
-        levelText.enabled = false;
         costText.enabled = false;
 
         // Disable icon
@@ -67,31 +61,36 @@ public class StoreSlot : MonoBehaviour
     }
 
     /// <summary>
-    /// Add a plant to sell.
+    /// Add an item to sell.
     /// </summary>
-    /// <param name="plant">Plant reference.</param>
+    /// <param name="item">Item reference.</param>
     /// <param name="amount">Amount.</param>
-    public void AddPlantToSell(Plant plant, int amount)
+    public void AddItemToSell(Item item, int amount)
     {
         // Plant setup
-        this.plant = plant;
-        icon.sprite = plant.icon;
+        this.item = item;
+        icon.sprite = item.icon;
 
         // Enable add-ons
-        levelText.enabled = true;
         costText.enabled = true;
 
         // Display amount
         this.amount = amount;
-        levelText.text = amount.ToString();
 
         // Calculate and display sell value
-        float cost = plant.baseSellValue * (2f / (plant.seasons.IndexOf(TimeManager.instance.season) + 1));
-        costText.text = cost.ToString();
+        float cost;       
+        if(item.GetType() == typeof(Plant))
+        {
+            cost = item.baseSellValue * (2f / (((Plant)item).seasons.IndexOf(TimeManager.instance.season) + 1));
+        }
+        else
+        {
+            cost = item.baseSellValue;
+        }
+        costText.text = cost.ToString("F2");
 
         // Enable all images
         icon.enabled = true;
-        levelImage.enabled = true;
         costImage.enabled = true;
     }
 
@@ -113,7 +112,7 @@ public class StoreSlot : MonoBehaviour
         // Else, update the slot
         else
         {
-            AddPlantToSell(plant, this.amount);
+            AddItemToSell(item, this.amount);
         }
     }
 
@@ -122,11 +121,30 @@ public class StoreSlot : MonoBehaviour
     /// </summary>
     public void StoreActionHandler()
     {
-        if(plant != null)
+        if(item != null)
         {
-            Store.instance.SetSelectedPlant(plant);
+            Store.instance.SetSelectedItem(item);
             Store.instance.SetSelectedStoreSlot(this);
             StoreUI.instance.AmountSelectionMenu(true);
         }
+    }
+
+    /// <summary>
+    /// Hover slot.
+    /// </summary>
+    public void HoverSlot()
+    {
+        // Change mouse cursor
+        ObjectsManager.instance.HoverUI();
+        SlotInfoHandler.instance.CreateInfo(item, transform, transform.parent.parent);
+    }
+
+    /// <summary>
+    /// Stop hover slot.
+    /// </summary>
+    public void StopHoverSlot()
+    {
+        ObjectsManager.instance.StopHoverUI();
+        SlotInfoHandler.instance.DestroyInfo();
     }
 }

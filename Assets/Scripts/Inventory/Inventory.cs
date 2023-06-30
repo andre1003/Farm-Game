@@ -83,4 +83,25 @@ public class Inventory : MonoBehaviour
         // Return if the plant have been successfully removed to inventory or not
         return hasRemoved;
     }
+
+    /// <summary>
+    /// Remove certain amount of an item from inventory.
+    /// </summary>
+    /// <param name="item">Item reference.</param>
+    /// <param name="amount">Amount to remove.</param>
+    /// <returns>TRUE - Successfully removed. FALSE - Failed to add.</returns>
+    public bool Remove(Item item, int amount)
+    {
+        // Try to remove a given amount of a given item
+        bool hasRemoved = inventory.RemoveItem(item, amount);
+
+        // Call Item Change Callback if needed.
+        if(onItemChangeCallback != null)
+        {
+            onItemChangeCallback.Invoke();
+        }
+
+        // Return if the item have been successfully removed to inventory or not
+        return hasRemoved;
+    }
 }
