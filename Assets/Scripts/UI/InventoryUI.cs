@@ -69,8 +69,12 @@ public class InventoryUI : MonoBehaviour
         // Get canvas group
         canvasGroup = inventoryCanvas.GetComponent<CanvasGroup>();
 
+        // Reset page and tab
+        page = 0;
+        tab = 0;
+
         // Disable next page button, if needed
-        if(page * slots.Length >= GetSlots().Count)
+        if((page + 1) * slots.Length >= GetSlots().Count)
         {
             nextPageButton.interactable = false;
         }

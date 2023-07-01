@@ -39,7 +39,7 @@ public class SlotInfoHandler : MonoBehaviour
             DestroyInfo();
         }
 
-        Vector3 position = (slotTransform.position.y < 200f) ?
+        Vector3 position = (slotTransform.position.y < 300f) ?
             slotTransform.position + new Vector3(infoOffset.x, -1 * infoOffset.y, infoOffset.z)
             :
             slotTransform.position + infoOffset;
@@ -48,6 +48,7 @@ public class SlotInfoHandler : MonoBehaviour
         slotInfoObject = Instantiate(slotInfoPrefab, slotTransform.position, Quaternion.identity);
         slotInfoObject.transform.SetParent(parent);
         slotInfoObject.GetComponent<RectTransform>().position = position;
+        slotInfoObject.GetComponent<RectTransform>().localScale = new Vector3(1f, 1f, 1f);
         slotInfo = slotInfoObject.GetComponent<SlotInfo>();
         slotInfo.SetInfo(item);
     }

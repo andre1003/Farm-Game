@@ -1,18 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using UnityEngine.Localization;
 using UnityEngine;
-
+using UnityEngine.Localization.Components;
 
 public class SlotInfo : MonoBehaviour
 {
     // UI
     public TextMeshProUGUI nameText;
     public TextMeshProUGUI descriptionText;
+    public LocalizeStringEvent descriptionLocalizer;
     public CanvasGroup group;
 
     // Timer
     public float transitionTime = 0.25f;
+
+    // Item
+    public Item item;
 
 
     /// <summary>
@@ -23,9 +28,16 @@ public class SlotInfo : MonoBehaviour
     {
         if(item != null)
         {
+            // Set item reference
+            this.item = item;
+
             // Set name and description texts
             nameText.text = StringLocalizer.instance.Localize(item.nameLocalization, item.name);
-            descriptionText.text = StringLocalizer.instance.Localize(item.descriptionLocalization, item.name);
+
+            // Set table entry and refresh string
+            string entry = (item.GetType() == typeof(Plant)) ? "Plant Description" : "Item Description";
+            descriptionLocalizer.SetEntry(entry);
+            descriptionLocalizer.RefreshString();
         }
 
         // Update canvas opacity

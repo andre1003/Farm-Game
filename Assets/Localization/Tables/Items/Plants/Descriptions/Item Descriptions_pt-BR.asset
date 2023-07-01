@@ -16,16 +16,25 @@ MonoBehaviour:
     m_Code: pt-BR
   m_SharedData: {fileID: 11400000, guid: aa045d9d94d385f4d8c4532668e728f5, type: 2}
   m_Metadata:
-    m_Items: []
+    m_Items:
+    - rid: 2143166988621185040
   m_TableData:
-  - m_Id: 6007861248
-    m_Localized: "Essas s\xE3o sementes de ma\xE7\xE3."
+  - m_Id: 1587764451127296
+    m_Localized: "Essas s\xE3o sementes de {slotInfo.nameText.text}. O custo de compra
+      \xE9 {slotInfo.item.buyValue:F2} moedas.\r\n\r\nO valor de venda \xE9 de {slotInfo.item.baseSellValue:F2}."
     m_Metadata:
-      m_Items: []
-  - m_Id: 10940362752
-    m_Localized: "Essas s\xE3o sementes de banana."
+      m_Items:
+      - rid: 2143166988621185040
+  - m_Id: 1597257809440768
+    m_Localized: "Esse \xE9 o item {slotInfo.nameText.text}.\n\nO custo de compra
+      \xE9 {slotInfo.item.buyValue:F2} moedas.\r"
     m_Metadata:
-      m_Items: []
+      m_Items:
+      - rid: 2143166988621185040
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: 2143166988621185040
+      type: {class: SmartFormatTag, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_Entries: 00b0183810a4050000b05890b2ac0500

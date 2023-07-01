@@ -19,11 +19,87 @@ MonoBehaviour:
     m_Items: []
   m_TableData:
   - m_Id: 19773566976
-    m_Localized: Apple Seeds
+    m_Localized: Apple
     m_Metadata:
       m_Items: []
   - m_Id: 105060544512
-    m_Localized: Banana Seeds
+    m_Localized: Banana
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1590299115171840
+    m_Localized: Beans
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1590481634504704
+    m_Localized: Beetroot
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1590403528175616
+    m_Localized: BellPepper
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1590496742387712
+    m_Localized: Cabbage
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1590242634674176
+    m_Localized: Carrot
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1588601017643008
+    m_Localized: Corn
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1590334036946944
+    m_Localized: Cucumber
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1590464504967168
+    m_Localized: Eggplant
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1588579265982464
+    m_Localized: Garlic
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1588653027012608
+    m_Localized: Lettuce
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1590540832911360
+    m_Localized: Onion
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1590369646587904
+    m_Localized: Pumpkin
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1590511044964352
+    m_Localized: Spinach
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1590009112604672
+    m_Localized: Strawberry
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1589990951268352
+    m_Localized: Sugar Cane
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1590389812801536
+    m_Localized: Tomato
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1590437376208896
+    m_Localized: Watermelon
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1590527125925888
+    m_Localized: Winter Squash
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1590421836312576
+    m_Localized: Zucchini
     m_Metadata:
       m_Items: []
   references:

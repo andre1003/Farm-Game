@@ -106,8 +106,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameText: {fileID: 1791588288592212290}
   descriptionText: {fileID: 1791588287677989920}
+  descriptionLocalizer: {fileID: 7913236546764607435}
   group: {fileID: 2760980213368580408}
   transitionTime: 0.25
+  item: {fileID: 11400000, guid: 7e9f235a2fc20d749aaf3ec9871468a7, type: 2}
 --- !u!1 &1791588287677989926
 GameObject:
   m_ObjectHideFlags: 0
@@ -119,6 +121,7 @@ GameObject:
   - component: {fileID: 1791588287677989921}
   - component: {fileID: 1791588287677989923}
   - component: {fileID: 1791588287677989920}
+  - component: {fileID: 7913236546764607435}
   m_Layer: 5
   m_Name: DescriptionText
   m_TagString: Untagged
@@ -174,7 +177,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Description Text
+  m_text: No translation found for 'Description' in Item Names
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5a89834a741d61849b79e9c35dd1e2e6, type: 2}
   m_sharedMaterial: {fileID: 5501063363965272835, guid: 5a89834a741d61849b79e9c35dd1e2e6, type: 2}
@@ -208,7 +211,7 @@ MonoBehaviour:
   m_fontSizeMin: 5
   m_fontSizeMax: 10
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
+  m_HorizontalAlignment: 8
   m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -243,6 +246,53 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &7913236546764607435
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1791588287677989926}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56eb0353ae6e5124bb35b17aff880f16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_StringReference:
+    m_TableReference:
+      m_TableCollectionName: GUID:aa045d9d94d385f4d8c4532668e728f5
+    m_TableEntryReference:
+      m_KeyId: 1587764451127296
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables:
+    - name: slotInfo
+      variable:
+        rid: 2143166988621185037
+  m_FormatArguments: []
+  m_UpdateString:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1791588287677989920}
+        m_TargetAssemblyTypeName: TMPro.TMP_Text, Unity.TextMeshPro
+        m_MethodName: set_text
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  references:
+    version: 2
+    RefIds:
+    - rid: 2143166988621185037
+      type: {class: ObjectVariable, ns: UnityEngine.Localization.SmartFormat.PersistentVariables, asm: Unity.Localization}
+      data:
+        m_Value: {fileID: 1344168722654422551}
 --- !u!1 &1791588288592212288
 GameObject:
   m_ObjectHideFlags: 0

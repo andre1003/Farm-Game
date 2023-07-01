@@ -19,11 +19,87 @@ MonoBehaviour:
     m_Items: []
   m_TableData:
   - m_Id: 19773566976
-    m_Localized: "Sementes de Ma\xE7\xE3"
+    m_Localized: "Ma\xE7\xE3"
     m_Metadata:
       m_Items: []
   - m_Id: 105060544512
-    m_Localized: Sementes de Banana
+    m_Localized: Banana
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1590299115171840
+    m_Localized: "Feij\xE3o"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1590481634504704
+    m_Localized: Beterraba
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1590403528175616
+    m_Localized: "Piment\xE3o"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1590496742387712
+    m_Localized: Repolho
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1590242634674176
+    m_Localized: Carrot
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1588601017643008
+    m_Localized: Milho
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1590334036946944
+    m_Localized: Pepino
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1590464504967168
+    m_Localized: Berinjela
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1588579265982464
+    m_Localized: Alho
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1588653027012608
+    m_Localized: Alface
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1590540832911360
+    m_Localized: Cebola
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1590369646587904
+    m_Localized: "Ab\xF3bora"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1590511044964352
+    m_Localized: Espinafre
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1590009112604672
+    m_Localized: Morango
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1589990951268352
+    m_Localized: "Cana-de-A\xE7\xFAcar"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1590389812801536
+    m_Localized: Tomate
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1590437376208896
+    m_Localized: "Mel\xE2ncia"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1590527125925888
+    m_Localized: "Ab\xF3bora de Inverno"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1590421836312576
+    m_Localized: Abobrinha
     m_Metadata:
       m_Items: []
   references:

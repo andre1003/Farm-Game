@@ -15,12 +15,12 @@ MonoBehaviour:
   m_TableCollectionName: Item Descriptions
   m_TableCollectionNameGuidString: aa045d9d94d385f4d8c4532668e728f5
   m_Entries:
-  - m_Id: 6007861248
-    m_Key: Apple
+  - m_Id: 1587764451127296
+    m_Key: Plant Description
     m_Metadata:
       m_Items: []
-  - m_Id: 10940362752
-    m_Key: Banana
+  - m_Id: 1597257809440768
+    m_Key: Item Description
     m_Metadata:
       m_Items: []
   m_Metadata:
