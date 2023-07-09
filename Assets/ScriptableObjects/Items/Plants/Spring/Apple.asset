@@ -22,12 +22,11 @@ MonoBehaviour:
   buyValue: 7
   baseSellValue: 10
   levelRequired: 1
-  xp: 20
+  xp: 15
   icon: {fileID: 21300000, guid: f4bd4ed9db706214c9a5b58df8dea436, type: 3}
   timeToGrow: 5
   timeToRot: 15
-  life: 60
   maxHarvest: 15
   minHarvest: 8
-  seasons: 03000000000000000100000002000000
+  seasons: 01000000020000000300000000000000
   plantPrefab: {fileID: 0}

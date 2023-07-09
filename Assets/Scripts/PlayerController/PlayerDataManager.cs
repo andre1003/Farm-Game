@@ -114,9 +114,13 @@ public class PlayerDataManager : MonoBehaviour
         // Check for level up
         if(playerData.xp >= playerData.nextLvlXp)
         {
+            // Set XP and level
             playerData.xp -= playerData.nextLvlXp;
             playerData.level++;
-            playerData.nextLvlXp += 10;
+
+            // Get next level XP
+            float multiplier = GetNextLevelMultiplier(playerData.level);
+            playerData.nextLvlXp += Mathf.RoundToInt(playerData.nextLvlXp * multiplier);
 
             // Check for new items
             Store.instance.CheckNewItems();
@@ -126,6 +130,44 @@ public class PlayerDataManager : MonoBehaviour
         else if(playerData.xp < 0)
         {
             playerData.xp = 0;
+        }
+    }
+
+    /// <summary>
+    /// Get next level XP multiplier, based on current level.
+    /// </summary>
+    /// <param name="level">Current level.</param>
+    /// <returns>Next level XP multiplier.</returns>
+    private float GetNextLevelMultiplier(int level)
+    {
+        // Level is lesser or equal then 20
+        if(level <= 20)
+        {
+            return 0.5f;
+        }
+
+        // Level is lesser or equal then 30
+        else if(level <= 30)
+        {
+            return 0.2f;
+        }
+
+        // Level is lesser or equal then 40
+        else if(level <= 40)
+        {
+            return 0.15f;
+        }
+
+        // Level is lesser or equal then 50
+        else if(level <= 50)
+        {
+            return 0.1f;
+        }
+
+        // Level is bigger then 50
+        else
+        {
+            return 0.05f;
         }
     }
 

@@ -16,4 +16,4 @@ MonoBehaviour:
   day: 1
   daysToChangeSeason: 02000000020000000200000002000000
   baseClockSeconds: 0.5
-  season: 0
+  season: 1

@@ -12,7 +12,6 @@ public class Plant : Item
 
     // Life cycle
     [Header("Life Cycle")]
-    public int life;
     public int maxHarvest;
     public int minHarvest;
 

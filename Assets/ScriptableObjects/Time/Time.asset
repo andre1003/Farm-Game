@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9e25e760be008249b479d9eaa32e1f3, type: 3}
   m_Name: Time
   m_EditorClassIdentifier: 
-  hour: 12
+  hour: 10
   day: 1
   daysToChangeSeason: 0f0000000f0000000f0000000f000000
   baseClockSeconds: 10
-  season: 3
+  season: 1

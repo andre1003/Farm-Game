@@ -19,15 +19,14 @@ MonoBehaviour:
   descriptionLocalization:
     m_TableReference:
       m_TableCollectionName: GUID:aa045d9d94d385f4d8c4532668e728f5
-  buyValue: 0
-  baseSellValue: 0
-  levelRequired: 0
-  xp: 0
+  buyValue: 30.4
+  baseSellValue: 31.6
+  levelRequired: 3
+  xp: 35
   icon: {fileID: 21300000, guid: 7ec880e14c3d807468915d31b073715d, type: 3}
-  timeToGrow: 0
-  timeToRot: 0
-  life: 0
-  maxHarvest: 0
-  minHarvest: 0
-  seasons: 
+  timeToGrow: 24
+  timeToRot: 24
+  maxHarvest: 4
+  minHarvest: 2
+  seasons: 00000000010000000200000003000000
   plantPrefab: {fileID: 0}

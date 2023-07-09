@@ -102,6 +102,18 @@ MonoBehaviour:
     m_Localized: Zucchini
     m_Metadata:
       m_Items: []
+  - m_Id: 1855766266425344
+    m_Localized: Potato
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1857323154321408
+    m_Localized: Brussels Sprouts
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1857798868086784
+    m_Localized: Radish
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
