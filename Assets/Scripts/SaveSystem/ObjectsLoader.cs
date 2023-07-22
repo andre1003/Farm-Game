@@ -10,7 +10,7 @@ public class ObjectsLoader : MonoBehaviour
 
 
     // Awake method
-    void Awake()
+    void Start()
     {
         // Load saved plantation zones
         LoadPlantationZones();
@@ -47,7 +47,7 @@ public class ObjectsLoader : MonoBehaviour
             // Setup plant, if there was any
             if(plant[i] != null)
             {
-                controller.Plant(plant[i]);
+                controller.LoadPlants(plant[i]);
             }
         }
     }

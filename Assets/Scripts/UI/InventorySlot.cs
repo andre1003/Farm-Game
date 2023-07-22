@@ -53,13 +53,23 @@ public class InventorySlot : MonoBehaviour
     /// </summary>
     public void Plant()
     {
+        // Get plantation zone
         GameObject plantationZone = InGameSaves.GetPlantationZone();
         if(item != null && plantationZone != null && InventoryUI.instance.GetTab() == 0)
         {
             InventoryUI.instance.SetUI(false);
             HUDManager.instance.SetHUD(true);
-            plantationZone.GetComponent<PlantationController>().Plant((Plant)item);
+
+            // Set temporary plant on player movement controller and get plantation controller
+            MovementController.instance.SetTempPlant((Plant)item);
+            PlantationController controller = plantationZone.GetComponent<PlantationController>();
+
+            // Move player to front spot to plant
+            MovementController.instance.SendTo(controller.front.position, controller.gameObject.transform);
         }
+
+        // Stop hovering slot UI
+        StopHoverSlot();
     }
 
     /// <summary>

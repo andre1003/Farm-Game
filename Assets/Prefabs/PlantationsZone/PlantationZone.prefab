@@ -145,7 +145,10 @@ MonoBehaviour:
   - {fileID: 5996218796191731995}
   - {fileID: 231243454998256710}
   - {fileID: 2952629554676682138}
+  grownParticleSystem: {fileID: 5084668633941115915, guid: ec6cdf99cd99b4e41bc512023ff3f326, type: 3}
   time: -1
+  initialDay: 0
+  initialHour: 0
 --- !u!114 &-9076032803118601929
 MonoBehaviour:
   m_ObjectHideFlags: 0

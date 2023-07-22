@@ -29,4 +29,7 @@ MonoBehaviour:
   maxHarvest: 5
   minHarvest: 5
   seasons: 01000000020000000300000000000000
-  plantPrefab: {fileID: 0}
+  smallPlantPrefab: {fileID: 4169262588667830747, guid: 2003991c96d79de46af3cf59fede2cdb, type: 3}
+  mediumPlantPrefab: {fileID: 8671639040183835532, guid: 6b803231481a17a4b80cc86bf5ad261a, type: 3}
+  grownPlantPrefab: {fileID: 737087409021997754, guid: c86cbb3e578b01342a60cc0e0f8eb802, type: 3}
+  rottenPlantPrefab: {fileID: 1710737446203995544, guid: 1b56f376dec1c76428ce09372423ce8f, type: 3}

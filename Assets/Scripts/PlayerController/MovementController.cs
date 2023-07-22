@@ -2,6 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.EventSystems;
+using static UnityEditor.Progress;
 
 
 public class MovementController : MonoBehaviour
@@ -38,6 +39,8 @@ public class MovementController : MonoBehaviour
 
     // Look at
     private Transform lookAt;
+
+    private Plant tempPlant;
 
 
     // Start method
@@ -160,9 +163,10 @@ public class MovementController : MonoBehaviour
             // Set is planting to false
             isPlanting = false;
 
-            // Play Plant animation
+            // Play Plant animation and plant the temporary plant
             //animator.speed = 2f;
             animator.Play("Plant");
+            InGameSaves.GetPlantationZone().GetComponent<PlantationController>().Plant(tempPlant);
 
             // Wait for character to plant and change busy status again
             StartCoroutine(Wait(plantLength + standUpLength));
@@ -198,6 +202,7 @@ public class MovementController : MonoBehaviour
     {
         yield return new WaitForSeconds(seconds);
         InGameSaves.ChangeIsBusy();
+        tempPlant = null;
     }
 
     /// <summary>
@@ -275,5 +280,10 @@ public class MovementController : MonoBehaviour
     public float GetPlantLength()
     {
         return plantLength;
+    }
+
+    public void SetTempPlant(Plant plant)
+    {
+        tempPlant = plant;
     }
 }

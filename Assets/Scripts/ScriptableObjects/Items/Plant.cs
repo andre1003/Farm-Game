@@ -21,7 +21,10 @@ public class Plant : Item
 
     // Prefab
     [Header("Prefab")]
-    public Transform plantPrefab;
+    public Transform smallPlantPrefab;
+    public Transform mediumPlantPrefab;
+    public Transform grownPlantPrefab;
+    public Transform rottenPlantPrefab;
 
     // Most common plants for each station:
     // https://www.valeshop.com.br/site/?p=6320

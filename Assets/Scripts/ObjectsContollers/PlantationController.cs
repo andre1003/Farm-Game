@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public class PlantationController : MonoBehaviour
@@ -24,6 +25,9 @@ public class PlantationController : MonoBehaviour
     // Transforms
     public Transform front;
     public List<Transform> spawns;
+
+    // Particles
+    public Transform grownParticleSystem;
 
     // Time counter
     public int time = -1;
@@ -70,13 +74,6 @@ public class PlantationController : MonoBehaviour
                 // Set XP
                 PlayerDataManager.instance.SetXp(plant.xp);
 
-                try
-                {
-                    // Move player to front spot to plant
-                    MovementController.instance.SendTo(front.position, gameObject.transform);
-                }
-                catch { }
-
                 // Add the platnt to zones variable
                 zones.SetPlant(transform.position, plant);
             }
@@ -84,7 +81,7 @@ public class PlantationController : MonoBehaviour
             // Set plant to planted plant and spawn the objects
             planted = plant;
             interval = MovementController.instance.GetPlantLength() / spawns.Count;
-            SpawnPlants(plant.plantPrefab, 0);
+            SpawnPlants(plant.smallPlantPrefab, 0);
 
             // Setup initial plant day
             if(initialDay == 0)
@@ -92,7 +89,6 @@ public class PlantationController : MonoBehaviour
                 initialDay = TimeManager.instance.day;
                 initialHour = TimeManager.instance.hour;
                 id = zones.AddTime(initialDay, initialHour, id);
-                //Debug.Log("Planted in day: " + initialDay);
             }
         }
     }
@@ -120,16 +116,17 @@ public class PlantationController : MonoBehaviour
             // If time is between grow and rot, player can harvest
             if(time >= planted.timeToGrow && time < planted.timeToRot && !isReadyToHarvest)
             {
-                Debug.Log("Ready to harvest!");
                 isReadyToHarvest = true;
                 isRotten = false;
+                ChangePlantPrefab(2);
+                PlayParticles();
             }
             // Else, if time is bigger or equal to time to rot, player can no longer harvest
             else if(time >= planted.timeToRot && isReadyToHarvest)
             {
-                Debug.Log("Rotten!");
                 isReadyToHarvest = false;
                 isRotten = true;
+                ChangePlantPrefab(3);
 
                 // If have passe timeToRot + 10, remove XP and destroy the plants
                 if(time >= planted.timeToRot + 10)
@@ -140,6 +137,102 @@ public class PlantationController : MonoBehaviour
             }
         }
     }
+
+    private void PlayParticles()
+    {
+        if(grownParticleSystem != null)
+        {
+            Vector3 position = transform.position + new Vector3(0f, 2f, 0f);
+            Instantiate(grownParticleSystem, position, Quaternion.identity, transform);
+        }
+    }
+
+    /// <summary>
+    /// Change plant prefab based on status.
+    /// <para>1. Medium;</para>
+    /// <para>2. Grown;</para>
+    /// <para>3. Rotten;</para>
+    /// <para>Default. Small;</para>
+    /// </summary>
+    /// <param name="status">Plant status.</param>
+    private void ChangePlantPrefab(int status)
+    {
+        // Get corresponding prefab
+        Transform prefab;
+        switch(status)
+        {
+            case 1: // Medium
+                prefab = planted.mediumPlantPrefab;
+                break;
+
+            case 2: // Grown
+                prefab = planted.grownPlantPrefab;
+                break;
+
+            case 3: // Rotten
+                prefab = planted.rottenPlantPrefab;
+                break;
+
+            default: // Small
+                prefab = planted.smallPlantPrefab;
+                break;
+        }
+
+        // Change plants prefab
+        int length = spawned.Count;
+
+        // Loop spawned plants to clear
+        foreach(var spawn in spawned)
+        {
+            Destroy(spawn.gameObject);
+        }
+
+        spawned.Clear();
+
+        for(int i = 0; i < length; i++)
+        {
+            Spawn(prefab, i);
+        }
+    }
+
+    public void LoadPlants(Plant plant)
+    {
+        planted = plant;
+
+        if(planted == null)
+        {
+            return;
+        }
+
+        Transform prefab = plant.smallPlantPrefab;
+
+        // Add time. The formula is:
+        // ((Current Day - Planting Day) * 24) + (Current Hour - Planting Hour)
+        time = ((TimeManager.instance.day - initialDay) * 24) + (TimeManager.instance.hour - initialHour);
+
+        // If time is between grow and rot, player can harvest
+        if(time >= planted.timeToGrow && time < planted.timeToRot)
+        {
+            isReadyToHarvest = true;
+            isRotten = false;
+            prefab = plant.grownPlantPrefab;
+            PlayParticles();
+        }
+        // Else, if time is bigger or equal to time to rot, player can no longer harvest
+        else if(time >= planted.timeToRot)
+        {
+            isReadyToHarvest = false;
+            isRotten = true;
+            prefab = plant.rottenPlantPrefab;
+        }
+
+        spawned = new List<Transform>();
+        for(int i = 0; i < spawns.Count; i++)
+        {
+            Spawn(prefab, i);
+        }
+    }
+
 
     /// <summary>
     /// Set plantation zone ID.
